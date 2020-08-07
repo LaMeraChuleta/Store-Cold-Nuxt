@@ -1,11 +1,10 @@
 <template>
   <div>
-    <header class="bg-white border border-black ">
+    <header class="bg-white border border-black">
       <div class="flex flex-auto sm:text-xs">
-
-        <router-link class="sm:ml-2 justify-center flex-auto w-1/4 inline-flex" to="/cassette">        
+        <router-link class="sm:ml-2 justify-center flex-auto w-1/4 inline-flex" to="/cassette">
           <img class="sm:mr-1 mr-3 p-1" width="40" height="40" src="~/assets/icon/tape.png" />
-          <div class="text-black sm:hidden pt-2 font-mono">Cassettes</div>        
+          <div class="text-black sm:hidden pt-2 font-mono">Cassettes</div>
         </router-link>
         <router-link class="sm:ml-2 w-1/4 justify-center inline-flex" to="/">
           <img class="sm:mr-1 mr-3 p-1" width="40" height="40" src="~/assets/icon/cd.png" />
@@ -27,8 +26,8 @@
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {};
-  }
+  },
 };
 </script>

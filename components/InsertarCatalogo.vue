@@ -1,7 +1,11 @@
 <template>
   <div>
-    <form class="w-full max-w-lg flex flex-col mt-10">
-      <div class="inline-flex -mx-3 mb-6">
+    <form @submit="enviarForm" class="w-full max-w-lg flex flex-col mt-8 sm:p-5">
+      <h1
+        class="text-center mb-10 text-lg block uppercase tracking-wide text-gray-700 font-bold"
+      >Agregar Nuevos Productos al Catalogo</h1>
+
+      <div class="inline-flex -mx-3 mb-3">
         <div class="w-full md:w-1/2 px-3 md:mb-0">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -30,7 +34,7 @@
         </div>
       </div>
 
-      <div class="inline-flex -mx-3 mb-6">
+      <div class="inline-flex -mx-3 mb-3">
         <div class="w-full px-3 mb-6 md:mb-0">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2"
@@ -78,7 +82,7 @@
         </div>
       </div>
 
-      <div class="inline-flex -mx-3 mb-6">
+      <div class="inline-flex -mx-3 mb-3">
         <div class="w-full px-3 mb-6 md:mb-0">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2"
@@ -112,7 +116,7 @@
         </div>
       </div>
 
-      <div class="inline-flex -mx-3 mb-6">
+      <div class="inline-flex -mx-3 mb-3">
         <div class="w-full px-3 mb-6 md:mb-0">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2"
@@ -162,7 +166,8 @@
         </div>
         <div class="w-full md:w-1/2 px-3">
           <button
-          class="appearance-none block w-full text-gray-700 border rounded py-3 px-1 mb-3 leading-tight focus:outline-none focus:bg-white mt-6 border-green-600"
+            type="submit"
+            class="appearance-none block w-full text-gray-700 border rounded py-3 px-1 mb-3 leading-tight focus:outline-none focus:bg-white mt-6 border-green-600"
           >Agregar Disco</button>
         </div>
       </div>
@@ -173,34 +178,28 @@
 <script>
 export default {
   name: "InsertarCatalogo",
-  data: function(){
-    return{
-      
-      imagenes: []
-    }
+  data: function () {
+    return {
+      imagenes: [],
+    };
   },
   methods: {
     enviarForm: function () {
       alert("hola mundo!");
     },
-    recibirImagenes: function(e){
-
+    recibirImagenes: function (e) {
       var files = e.target.files || e.dataTransfer.files;
-      console.log(files)
-      if (!files.length)
-        return;
-      else{
-
-        for(let item of files){
-          
+      console.log(files);
+      if (!files.length) return;
+      else {
+        for (let item of files) {
           this.crearImage(item);
-        }                
-      }      
+        }
+      }
     },
     crearImage(file) {
-
       var image = new Image();
-      var reader = new FileReader();      
+      var reader = new FileReader();
 
       reader.onload = (e) => {
         this.imagenes.push(e.target.result);
@@ -210,5 +209,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

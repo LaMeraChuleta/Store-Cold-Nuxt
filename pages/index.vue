@@ -4,13 +4,11 @@
       <img src="~/assets/img/Carusel1.jpg" />
     </div>
     <div
-      class="border-black border-r-0 border-l-0 border-4 text-center md:text-blue-500  text-black font-mono text-4xl mt-2 sm:text-2xl max-w-6xl mx-auto"
+      class="border-black border-r-0 border-l-0 border-4 text-center md:text-blue-500 text-black font-mono text-4xl mt-2 sm:text-2xl max-w-6xl mx-auto"
     >
       <p class="pt-1 pb-1">Cambios</p>
     </div>
-    <div
-      class="flex flex-auto flex-grow sm:flex-col md:flex-row max-w-6xl mx-auto mb-20"
-    >
+    <div class="flex flex-auto flex-grow sm:flex-col md:flex-row max-w-6xl mx-auto mb-20">
       <div
         class="rounded-sm shadow-sm xl:w-1/4 lg:w-1/4 sm:w-auto"
         v-for="(item, index) in arrayCambios"
@@ -21,20 +19,18 @@
     </div>
 
     <div
-      class="border-black border-r-0 border-l-0 border-4 text-center md:text-blue-500  text-black font-mono text-4xl mt-10 sm:text-2xl max-w-6xl mx-auto"
+      class="border-black border-r-0 border-l-0 border-4 text-center md:text-blue-500 text-black font-mono text-4xl mt-10 sm:text-2xl max-w-6xl mx-auto"
     >
       <p class="pt-1 pb-1">Ventas</p>
     </div>
-    <div
-      class="flex flex-auto flex-grow sm:flex-col md:flex-row max-w-6xl mx-auto mb-20"
-    >
+    <div class="flex flex-auto flex-grow sm:flex-col md:flex-row max-w-6xl mx-auto mb-20">
       <div
         class="rounded-sm shadow-sm xl:w-1/4 lg:w-1/4 sm:w-auto"
         v-for="(item, index) in arrayVentas"
         :key="index"
       >
         <cardInfo :infoCard="item"></cardInfo>
-      </div>
+      </div>      
     </div>
   </div>
 </template>
@@ -44,9 +40,9 @@ import cardInfo from "~/components/CardInfoDisco.vue";
 
 export default {
   components: {
-    cardInfo
+    cardInfo,
   },
-  data: function() {
+  data: function () {
     return {
       arrayVentas: [
         {
@@ -56,7 +52,7 @@ export default {
           artista: "Pink Floyd",
           titulo: "Atomic Heart Mother",
           formatoType: "Cd",
-          precio: 190
+          precio: 190,
         },
         {
           id: 2,
@@ -65,7 +61,7 @@ export default {
           artista: "Dulce",
           titulo: "Lobo",
           formatoType: "Vinyl",
-          precio: 290
+          precio: 290,
         },
         {
           id: 3,
@@ -74,7 +70,7 @@ export default {
           artista: "The Beatles",
           titulo: "Sgt. Pepers and Lonel....",
           formatoType: "Cassette",
-          precio: 170
+          precio: 170,
         },
         {
           id: 4,
@@ -83,8 +79,8 @@ export default {
           artista: "Sebastian Bach",
           titulo: "Recopilaciones",
           formatoType: "Vinyl",
-          precio: 120
-        }
+          precio: 120,
+        },
       ],
       arrayCambios: [
         {
@@ -94,7 +90,7 @@ export default {
           artista: "Pink Floyd",
           titulo: "Atomic Heart Mother",
           formatoType: "Cd",
-          precio: 190
+          precio: 190,
         },
         {
           id: 6,
@@ -103,7 +99,7 @@ export default {
           artista: "Dulce",
           titulo: "Lobo",
           formatoType: "Vinyl",
-          precio: 290
+          precio: 290,
         },
         {
           id: 7,
@@ -112,7 +108,7 @@ export default {
           artista: "The Beatles",
           titulo: "Sgt. Pepers and Lonel....",
           formatoType: "Cassette",
-          precio: 170
+          precio: 170,
         },
         {
           id: 8,
@@ -121,11 +117,11 @@ export default {
           artista: "Sebastian Bach",
           titulo: "Recopilaciones",
           formatoType: "Vinyl",
-          precio: 120
-        }
-      ]
+          precio: 120,
+        },
+      ],
     };
   },
-  mounted: function() {}
+  mounted: function () {},
 };
 </script>
