@@ -14,6 +14,12 @@ export default {
 
     name: 'crudCatalogo',
 
+    async asyncData({ $axios }) {
+
+        let test = await $axios.$get('/api/test')
+        
+    },
+
     components: {
         InsertarCatalogo
     }

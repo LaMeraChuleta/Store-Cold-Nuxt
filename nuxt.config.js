@@ -57,11 +57,16 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
   ],
+  serverMiddleware:[
+
+    { path:'/api', handler: '~/api/index.js'}
+  ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    baseURL: 'http://localhost:3000',
   },
   /*
   ** Build configuration

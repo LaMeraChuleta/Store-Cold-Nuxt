@@ -20,9 +20,14 @@ async function start () {
     await builder.build()
   }
 
+  console.log(nuxt)
   // Give nuxt middleware to express
   app.use(nuxt.render)
+  
+  app.get('/prueba',function(req,res) {
 
+    res.send('Hello Wordl')
+  })
   // Listen the server
   app.listen(port, host)
   consola.ready({
