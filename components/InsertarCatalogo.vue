@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit="enviarForm" class="w-full max-w-lg flex flex-col mt-8 sm:p-5">
+    <form class="w-full max-w-lg flex flex-col mt-8 sm:p-5">
       <h1
         class="text-center mb-10 text-lg block uppercase tracking-wide text-gray-700 font-bold"
       >Agregar Nuevos Productos al Catalogo</h1>
@@ -12,6 +12,7 @@
             for="titulo"
           >Titulo</label>
           <input
+            v-model="newItemCatalogo.titulo"
             class="appearance-none block w-full text-gray-700 border rounded py-2 px-1 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="titulo"
             type="text"
@@ -22,14 +23,21 @@
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="artista"
           >Artista</label>
-          <select
-            v-model="id_artista"
-            class="appearance-none block w-full text-xs text-gray-700 border border-gray-200 rounded py-3 px-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="artista"
-          >
-            <option>Seleccionar</option>
-            <option v-for="value in artistas" :key="value.id" :value="value.id">{{ value.nombre }}</option>                        
-          </select>
+          <input
+            v-model="textartista"
+            class="appearance-none block w-full text-gray-700 border rounded py-2 px-1 mb-3 leading-tight focus:outline-none focus:bg-white"
+            list="artistas"
+            name="artistas"
+            type="text"
+          />
+          <datalist id="artistas">
+            <option
+              v-for="value in artistas"
+              :key="value.id"
+              :value="value.id"
+              class="appearance-none w-full text-xs text-gray-700 border border-gray-200 rounded py-3 px-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            >{{ value.nombre }}</option>
+          </datalist>
         </div>
       </div>
 
@@ -39,13 +47,21 @@
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2"
             for="genero"
           >Genero</label>
-          <select
-            class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="genero"
-          >
-            <option>Seleccionar</option>
-            <option v-for="value in generos" :key="value.id" :value="value.id">{{ value.nombre }}</option>   
-          </select>
+          <input
+            v-model="textgenero"
+            class="appearance-none block w-full text-gray-700 border rounded py-2 px-1 mb-3 leading-tight focus:outline-none focus:bg-white"
+            list="genero"
+            name="genero"
+            type="text"
+          />
+          <datalist id="genero">
+            <option
+              v-for="value in generos"
+              :key="value.id"
+              :value="value.id"
+              class="appearance-none w-full text-xs text-gray-700 border border-gray-200 rounded py-3 px-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            >{{ value.nombre }}</option>
+          </datalist>
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
           <label
@@ -53,11 +69,12 @@
             for="formato"
           >Formato</label>
           <select
+            v-model="newItemCatalogo.idFormato"
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="formato"
           >
-            <option>Seleccionar</option>
-            <option v-for="value in formatos" :key="value.id" :value="value.id">{{ value.nombre }}</option>   
+            <option value="">Seleccionar</option>
+            <option v-for="value in formatos" :key="value.id" :value="value.id">{{ value.nombre }}</option>
           </select>
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
@@ -66,11 +83,16 @@
             for="presentacion"
           >Presentacion</label>
           <select
+            v-model="newItemCatalogo.idPresentacion"
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="presentacion"
           >
-            <option>Seleccionar</option>
-            <option v-for="value in presentaciones" :key="value.id" :value="value.id">{{ value.nombre }}</option>
+            <option value="">Seleccionar</option>
+            <option
+              v-for="value in presentaciones"
+              :key="value.id"
+              :value="value.id"
+            >{{ value.nombre }}</option>
           </select>
         </div>
       </div>
@@ -82,9 +104,19 @@
             for="origen"
           >Origen</label>
           <input
+            v-model="newItemCatalogo.origen"
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="origen"
+            list="origen"
+            name="origen"
+            type="text"
           />
+          <datalist id="origen">
+              <option value="Mexico" key="1"></option>
+              <option value="EUA"></option>
+              <option value="Canada"></option>  
+              <option value="Holanda"></option>
+              <option value="Alemania"></option>
+          </datalist>
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
           <label
@@ -92,6 +124,7 @@
             for="sello"
           >Sello</label>
           <input
+            v-model="newItemCatalogo.sello"
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="sello"
           />
@@ -102,6 +135,7 @@
             for="año"
           >Año</label>
           <input
+            v-model="newItemCatalogo.año"
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="año"
             type="text"
@@ -116,8 +150,10 @@
             for="estadoPortada"
           >Estado Portada</label>
           <input
+            v-model.number="newItemCatalogo.estadoPortada"
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="estadoPortada"
+            
           />
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
@@ -126,8 +162,10 @@
             for="estadoDisco"
           >Estado Disco</label>
           <input
+            v-model.number="newItemCatalogo.estadoDisco"
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="estadoDisco"
+            
           />
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
@@ -136,6 +174,7 @@
             for="precio"
           >Precio</label>
           <input
+            v-model.number="newItemCatalogo.precio"
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="precio"
             type="text"
@@ -174,31 +213,58 @@ export default {
   props: {
     artistas: {
       type: Array,
-      required: true
+      required: true,
     },
     generos: {
       type: Array,
-      required: true
+      required: true,
     },
     formatos: {
       type: Array,
-      required: true
+      required: true,
     },
     presentaciones: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   data: function () {
     return {
+      newItemCatalogo: {
+        titulo: "",
+        idArtista: "",
+        idGenero: "",
+        idFormato: "",
+        idPresentacion: "",
+        origen: "",
+        sello: "",
+        año: "",
+        estadoPortada: "",
+        estadoDisco: "",
+        precio: "",
+      },
       imagenes: [],
-      id_artista: '' 
+      textartista: "",
+      textgenero: "",
     };
   },
-  methods: {
-    enviarForm: function () {
-      alert("hola mundo!");
+  watch: {
+    textartista: function (newArtista, oldArtista) {
+      if (/^\d+$/.test(newArtista)) {
+        let artista = this.artistas.find((artista) => artista.id == newArtista);
+        this.textartista = artista.nombre;
+        this.newItemCatalogo.idArtista = artista.id;
+      }
     },
+    textgenero: function (newGenero, oldGenero) {
+      if (/^\d+$/.test(newGenero)) {
+        let genero = this.generos.find((genero) => genero.id == newGenero);
+        this.textgenero = genero.nombre;
+        this.newItemCatalogo.idGenero = genero.id;
+      }
+    },
+  },
+  methods: {
     recibirImagenes: function (e) {
       var files = e.target.files || e.dataTransfer.files;
       console.log(files);
@@ -212,7 +278,6 @@ export default {
     crearImage(file) {
       var image = new Image();
       var reader = new FileReader();
-
       reader.onload = (e) => {
         this.imagenes.push(e.target.result);
       };
