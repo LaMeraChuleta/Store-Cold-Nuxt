@@ -20,16 +20,15 @@
         <div class="w-full md:w-1/2 px-3">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="persona"
-          >Personaje</label>
+            for="artista"
+          >Artista</label>
           <select
+            v-model="id_artista"
             class="appearance-none block w-full text-xs text-gray-700 border border-gray-200 rounded py-3 px-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="persona"
+            id="artista"
           >
             <option>Seleccionar</option>
-            <option>New Mexico</option>
-            <option>Missouri</option>
-            <option>Texas</option>
+            <option v-for="value in artistas" :key="value.id" :value="value.id">{{ value.nombre }}</option>                        
           </select>
         </div>
       </div>
@@ -45,9 +44,7 @@
             id="genero"
           >
             <option>Seleccionar</option>
-            <option>New Mexico</option>
-            <option>Missouri</option>
-            <option>Texas</option>
+            <option v-for="value in generos" :key="value.id" :value="value.id">{{ value.nombre }}</option>   
           </select>
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
@@ -60,9 +57,7 @@
             id="formato"
           >
             <option>Seleccionar</option>
-            <option>New Mexico</option>
-            <option>Missouri</option>
-            <option>Texas</option>
+            <option v-for="value in formatos" :key="value.id" :value="value.id">{{ value.nombre }}</option>   
           </select>
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
@@ -75,9 +70,7 @@
             id="presentacion"
           >
             <option>Seleccionar</option>
-            <option>New Mexico</option>
-            <option>Missouri</option>
-            <option>Texas</option>
+            <option v-for="value in presentaciones" :key="value.id" :value="value.id">{{ value.nombre }}</option>
           </select>
         </div>
       </div>
@@ -178,9 +171,28 @@
 <script>
 export default {
   name: "InsertarCatalogo",
+  props: {
+    artistas: {
+      type: Array,
+      required: true
+    },
+    generos: {
+      type: Array,
+      required: true
+    },
+    formatos: {
+      type: Array,
+      required: true
+    },
+    presentaciones: {
+      type: Array,
+      required: true
+    }
+  },
   data: function () {
     return {
       imagenes: [],
+      id_artista: '' 
     };
   },
   methods: {
