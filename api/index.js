@@ -1,14 +1,19 @@
 const express = require('express')
 const bodyparser = require('body-parser')
 
+
+
 const app = express()
 
 const test = require('./routes/test.js')
 
-app.use(bodyparser.json() );       // to support JSON-encoded bodies
+app.use(bodyparser.json({ limit: '100mb'}) );       // to support JSON-encoded bodies
 app.use(bodyparser.urlencoded({     // to support URL-encoded bodies
-  extended: true
+  limit: '50mb', 
+  extended: true, 
+  parameterLimit: 50000,
 }))
+
 app.use(test)
 
 module.exports = app

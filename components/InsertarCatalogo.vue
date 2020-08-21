@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form class="w-full max-w-lg flex flex-col mt-8 sm:p-5">
+    <div class="w-full max-w-lg flex flex-col mt-8 sm:p-5">
       <h1
         class="text-center mb-10 text-lg block uppercase tracking-wide text-gray-700 font-bold"
       >Agregar Nuevos Productos al Catalogo</h1>
@@ -198,12 +198,12 @@
         </div>
         <div class="w-full md:w-1/2 px-3">
           <button
-            type="submit"
+          @click="subirServidor"
             class="appearance-none block w-full text-gray-700 border rounded py-3 px-1 mb-3 leading-tight focus:outline-none focus:bg-white mt-6 border-green-600"
           >Agregar Disco</button>
         </div>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -267,7 +267,6 @@ export default {
   methods: {
     recibirImagenes: function (e) {
       var files = e.target.files || e.dataTransfer.files;
-      console.log(files);
       if (!files.length) return;
       else {
         for (let item of files) {
@@ -283,6 +282,12 @@ export default {
       };
       reader.readAsDataURL(file);
     },
+    subirServidor: async function(){
+
+      console.log(this.imagenes)
+      let res = await this.$axios.$post('/api/upload',this.imagenes)
+      
+    }
   },
 };
 </script>
