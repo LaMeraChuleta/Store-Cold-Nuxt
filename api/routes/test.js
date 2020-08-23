@@ -113,39 +113,17 @@ router.post('/presentacion',(req,res) => {
 //RecibirImagenes
 router.post('/upload', (req, res) =>{
 
-  
-  //let base64String = req.body[1].replace(/^data:image\/\w+;base64,/, '');
-  //console.log(base64String[0].split(',')[1])
-
-  // let dataURI = base64String[0].replace(/^data:/, '');
- 
-
-  // const type = dataURI.match(/image\/[^;]+/);
-  // const base64 = dataURI.replace(/^[^,]+,/, '');
-  // const arrayBuffer = new ArrayBuffer(base64.length);
-  // const typedArray = new Uint8Array(arrayBuffer);
-
-  // for (let i = 0; i < base64.length; i++) {
-  //     typedArray[i] = base64.charCodeAt(i);
-  // }
-  // console.log(type[0])
-  // console.log(arrayBuffer)
-  // console.log(typedArray)
-  //blobd(base64String[0].split(',')[1],base64String[0].split(',')[0])
   try{
 
+    let imagenes = req.body.img
+    guardar(imagenes, {
+      artista: req.body.artista,
+      titulo: req.body.newItem.titulo,
+      year: req.body.newItem.año
+    }) 
+    console.log('listo!')
+    res.end('Ok') 
   
-  let base64String = req.body
-  guardar(base64String[0].split(',')[1])
-  require("fs").writeFile("ou.txt", base64String[0].split(',')[1], 
-    function(err, data) {
-      if (err) {
-          console.log('err', err);
-      }
-      console.log('success')
-      res.json(req.body)
-    }
-  )
   }
   catch(err){
     console.log(err)

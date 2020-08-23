@@ -278,14 +278,21 @@ export default {
       var image = new Image();
       var reader = new FileReader();
       reader.onload = (e) => {
-        this.imagenes.push(e.target.result);
+        console.log('ahora te veo')
+        console.log(e.target.result.split(',')[0])
+        console.log(e.target.result.split(',')[1])
+        this.imagenes.push(e.target.result.split(',')[1]);
       };
       reader.readAsDataURL(file);
     },
     subirServidor: async function(){
 
-      console.log(this.imagenes)
-      let res = await this.$axios.$post('/api/upload',this.imagenes)
+      
+      let res = await this.$axios.$post('/api/upload',{
+          newItem: this.newItemCatalogo,
+          artista: this.textartista,
+          img: this.imagenes
+      })
       
     }
   },
