@@ -10,14 +10,25 @@ use image::jpeg;
 use image::load_from_memory;
 use image::imageops::FilterType;
 use image::GenericImageView;
+//BIBLIOTECA GENERAR INFO PATH
+
+mod infopath;
 
 fn guardar(mut cx: FunctionContext) -> JsResult<JsString> {
 
 
-    let objeto_id = cx.argument::<JsObject>(1)?.as_value(&mut cx);
-
     let vecbase64: Handle<JsArray> = cx.argument(0)?;
     let vecbase64: Vec<Handle<JsValue>> = vecbase64.to_vec(&mut cx)?;
+
+    let objeto_id = cx.argument::<JsObject>(1)?.as_value(&mut cx);
+    let nuevoinfo = infopath
+        ::InfoPath
+        ::nuevo_info(
+            objeto_id, 
+            &mut cx
+        );
+    let ruta_dest = nuevoinfo.generar_ruta();
+    
     //CONVIERTE BASE64 A BLOB 
     let vecblob: Vec<Blob> = vecbase64
         .iter()
@@ -33,7 +44,7 @@ fn guardar(mut cx: FunctionContext) -> JsResult<JsString> {
     vecblob
         .iter()
         .for_each(|blob| {
-            let mut ruta_dest = PathBuf::from("C:/StoreCold/HOLA.jpeg"); 
+            let ruta_dest = PathBuf::from("C:/StoreCold/HOLA.jpeg"); 
             let imgIn = load_from_memory(blob.as_ref()).unwrap();
             imgIn.save(ruta_dest).unwrap();
         });
