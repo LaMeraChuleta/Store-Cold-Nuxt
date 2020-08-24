@@ -11,7 +11,6 @@ use image::load_from_memory;
 use image::imageops::FilterType;
 use image::GenericImageView;
 //BIBLIOTECA GENERAR INFO PATH
-
 mod infopath;
 
 fn guardar(mut cx: FunctionContext) -> JsResult<JsString> {
