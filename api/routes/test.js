@@ -116,21 +116,19 @@ router.post('/upload', (req, res) =>{
   try{
 
     let imagenes = req.body.img
-    guardar(imagenes, {
+    let ruta = guardar(imagenes, {
       artista: req.body.artista,
       titulo: req.body.newItem.titulo,
       year: req.body.newItem.año
     }) 
     console.log('listo!')
+    console.log(ruta)
     res.end('Ok') 
   
   }
   catch(err){
     console.log(err)
   }
-
-  
-
 })
 
 module.exports = router
