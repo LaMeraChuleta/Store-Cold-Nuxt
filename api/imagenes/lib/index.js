@@ -3,7 +3,7 @@ var addon = require('../native');
 const {
 
     hello,
-    guardar
+    generar_ruta_id
 } = addon
 
 module.exports = addon

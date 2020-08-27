@@ -41,11 +41,11 @@ impl InfoPath {
            year
         }   
     }
-    pub fn generar_ruta(&self) -> std::path::PathBuf {  
+    pub fn generar_ruta(&self) -> (std::path::PathBuf, String) {  
 
         let id = InfoPath::generar_id(&self);
         let ruta = InfoPath::buscar_dir(&self, &id);
-        ruta
+        (ruta, id)
     }
     fn buscar_dir(&self, id: &String) -> std::path::PathBuf {
 

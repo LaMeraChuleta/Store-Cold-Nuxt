@@ -13,19 +13,19 @@ use image::load_from_memory;
 //BIBLIOTECA GENERAR INFO PATH
 mod infopath;
 
-fn guardar(mut cx: FunctionContext) -> JsResult<JsString> {
+fn generar_ruta_id(mut cx: FunctionContext) -> JsResult<JsObject> {
 
     let vecbase64: Handle<JsArray> = cx.argument(0)?;
     let vecbase64: Vec<Handle<JsValue>> = vecbase64.to_vec(&mut cx)?;
-
     let objeto_id = cx.argument::<JsObject>(1)?.as_value(&mut cx);
+    //Retorna tupla (PathBufer, ID)
     let nuevoinfo = infopath
         ::InfoPath
         ::nuevo_info(
             objeto_id, 
             &mut cx
         );
-    let ruta_dest = nuevoinfo.generar_ruta();
+    let info_destino = nuevoinfo.generar_ruta();
     //CONVIERTE BASE64 A BLOB 
     let vecblob: Vec<Blob> = vecbase64
         .iter()
@@ -43,7 +43,7 @@ fn guardar(mut cx: FunctionContext) -> JsResult<JsString> {
         .iter()
         .for_each(|blob| {
 
-            let mut _ruta_dest = PathBuf::from(&ruta_dest); 
+            let mut _ruta_dest = PathBuf::from(&info_destino.0); 
             let mut _nombre_foto = String::from(nuevoinfo.titulo
                 .split_whitespace()
                 .collect::<String>());
@@ -56,7 +56,19 @@ fn guardar(mut cx: FunctionContext) -> JsResult<JsString> {
             img_in.save(_ruta_dest).unwrap();
             incrementable += 1;
         });
-    Ok(cx.string(ruta_dest.to_str().unwrap()))
+    
+    //Crear objeto JS
+    let ruta_id_object = JsObject::new(&mut cx);
+    let id = cx.string(info_destino.1);
+    let ruta = cx.string(info_destino.0
+        .to_str()
+        .unwrap()
+    );
+    ruta_id_object.set(&mut cx, "id", id).unwrap();
+    ruta_id_object.set(&mut cx, "ruta", ruta).unwrap();
+    
+
+    Ok(ruta_id_object)
 }
 
 fn hello(mut cx: FunctionContext) -> JsResult<JsString> {
@@ -67,6 +79,6 @@ fn hello(mut cx: FunctionContext) -> JsResult<JsString> {
 register_module!(mut cx, { 
     
     cx.export_function("hello", hello)?; 
-    cx.export_function("guardar",guardar)?; 
+    cx.export_function("generar_ruta_id",generar_ruta_id)?; 
     Ok(())
 });

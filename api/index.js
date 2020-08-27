@@ -4,8 +4,11 @@ const bodyparser = require('body-parser')
 
 
 const app = express()
-
-const test = require('./routes/test.js')
+const artistas = require('./routes/artistas.js')
+const generos = require('./routes/generos.js')
+const formato = require('./routes/formato.js')
+const presentacion = require('./routes/presentacion.js')
+const catalogodiscos = require('./routes/catalogodiscos.js')
 
 app.use(bodyparser.json({ limit: '100mb'}) );       // to support JSON-encoded bodies
 app.use(bodyparser.urlencoded({     // to support URL-encoded bodies
@@ -14,8 +17,11 @@ app.use(bodyparser.urlencoded({     // to support URL-encoded bodies
   parameterLimit: 50000,
 }))
 
-app.use(test)
-
+app.use(artistas)
+app.use(generos)
+app.use(formato)
+app.use(presentacion)
+app.use(catalogodiscos)
 module.exports = app
 
 if(require.main === module){

@@ -69,11 +69,12 @@
             for="formato"
           >Formato</label>
           <select
+            @change="presentacion_cascada"
             v-model="newItemCatalogo.idFormato"
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="formato"
           >
-            <option value="">Seleccionar</option>
+            <option value>Seleccionar</option>
             <option v-for="value in formatos" :key="value.id" :value="value.id">{{ value.nombre }}</option>
           </select>
         </div>
@@ -87,9 +88,9 @@
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="presentacion"
           >
-            <option value="">Seleccionar</option>
+            <option value>Seleccionar</option>
             <option
-              v-for="value in presentaciones"
+              v-for="value in filtro_presentacion"
               :key="value.id"
               :value="value.id"
             >{{ value.nombre }}</option>
@@ -111,11 +112,11 @@
             type="text"
           />
           <datalist id="origen">
-              <option value="Mexico" key="1"></option>
-              <option value="EUA"></option>
-              <option value="Canada"></option>  
-              <option value="Holanda"></option>
-              <option value="Alemania"></option>
+            <option value="Mexico" key="1"></option>
+            <option value="EUA"></option>
+            <option value="Canada"></option>
+            <option value="Holanda"></option>
+            <option value="Alemania"></option>
           </datalist>
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
@@ -153,7 +154,6 @@
             v-model.number="newItemCatalogo.estadoPortada"
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="estadoPortada"
-            
           />
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
@@ -165,7 +165,6 @@
             v-model.number="newItemCatalogo.estadoDisco"
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="estadoDisco"
-            
           />
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
@@ -198,7 +197,7 @@
         </div>
         <div class="w-full md:w-1/2 px-3">
           <button
-          @click="subirServidor"
+            @click="subirServidor"
             class="appearance-none block w-full text-gray-700 border rounded py-3 px-1 mb-3 leading-tight focus:outline-none focus:bg-white mt-6 border-green-600"
           >Agregar Disco</button>
         </div>
@@ -246,6 +245,7 @@ export default {
       imagenes: [],
       textartista: "",
       textgenero: "",
+      filtro_presentacion: [],
     };
   },
   watch: {
@@ -265,6 +265,12 @@ export default {
     },
   },
   methods: {
+    presentacion_cascada: function () {
+      this.filtro_presentacion = this.presentaciones.filter(
+        (presentacion) =>
+          presentacion.id_formato == this.newItemCatalogo.idFormato
+      );
+    },
     recibirImagenes: function (e) {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
@@ -278,23 +284,30 @@ export default {
       var image = new Image();
       var reader = new FileReader();
       reader.onload = (e) => {
-        console.log('ahora te veo')
-        console.log(e.target.result.split(',')[0])
-        console.log(e.target.result.split(',')[1])
-        this.imagenes.push(e.target.result.split(',')[1]);
+        this.imagenes.push(e.target.result.split(",")[1]);
       };
       reader.readAsDataURL(file);
     },
-    subirServidor: async function(){
-
-      
-      let res = await this.$axios.$post('/api/upload',{
-          newItem: this.newItemCatalogo,
+    subirServidor: function () {
+      this.$axios
+        .$post("/api/catalogodiscos", {
+          infoCatalogo: this.newItemCatalogo,
           artista: this.textartista,
-          img: this.imagenes
-      })
-      
-    }
+          img: this.imagenes,
+        })
+        .then((data) => {
+          
+          this.imagenes = [];
+          this.filtro_presentacion = []
+          let _newItemCatalogo = this.newItemCatalogo;
+          Object.keys(_newItemCatalogo).forEach(function (prop) {
+            _newItemCatalogo[prop] = "";
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 };
 </script>
