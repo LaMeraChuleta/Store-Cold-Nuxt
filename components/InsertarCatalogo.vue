@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="w-full max-w-lg flex flex-col mt-8 sm:p-5">
+    <div class="w-full max-w-lg flex flex-col mt-3 sm:mt-0 sm:p-5 border p-6">
       <h1
         class="text-center mb-10 text-lg block uppercase tracking-wide text-gray-700 font-bold"
       >Agregar Nuevos Productos al Catalogo</h1>
@@ -296,9 +296,8 @@ export default {
           img: this.imagenes,
         })
         .then((data) => {
-          
           this.imagenes = [];
-          this.filtro_presentacion = []
+          this.filtro_presentacion = [];
           let _newItemCatalogo = this.newItemCatalogo;
           Object.keys(_newItemCatalogo).forEach(function (prop) {
             _newItemCatalogo[prop] = "";
