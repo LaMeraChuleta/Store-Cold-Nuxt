@@ -1,19 +1,22 @@
 <template>
   <div>
       <div class="flex  sm:h-32 max-w-6xl mx-auto justify-evenly">
-        <MiniCatalogos>
-
+        <MiniCatalogos
+          :formatos="formatos"
+        >
         </MiniCatalogos>
+
         <InsertarCatalogo 
           :artistas="artistas" 
           :generos="generos" 
           :formatos="formatos"
           :presentaciones="presentaciones">
         </InsertarCatalogo>
-          <MiniCatalogos>
 
-        </MiniCatalogos>
-    
+        <VisualizarImagenes>
+        </VisualizarImagenes>
+
+ 
       </div>      
   </div>
 </template>
@@ -22,6 +25,7 @@
 
 import InsertarCatalogo from '~/components/InsertarCatalogo.vue'
 import MiniCatalogos from '~/components/MiniCatalogos.vue'
+import VisualizarImagenes from '~/components/VisualizarImgenes.vue'
 
 export default {
 
@@ -48,9 +52,11 @@ export default {
          } 
     },
     components: {
+        VisualizarImagenes,
         InsertarCatalogo,
         MiniCatalogos
-    }
+    },
+
 
 }
 </script>

@@ -26,7 +26,7 @@ function Presentacion() {
         return new Promise((resolve, reject) => {
             pooldb.getConnection()
             .then(conn => {
-                conn. query("INSERT INTO presentacion (id_formato, nombre) VALUES(?,?)", Object.values(presentacion))
+                conn. query("INSERT INTO presentacion (nombre, id_formato) VALUES(?,?)", Object.values(presentacion))
                 .then(rows => {
                     resolve(rows)
                 })

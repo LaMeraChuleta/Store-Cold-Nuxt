@@ -24,6 +24,7 @@ function Catalogo() {
     }
     this.insertar_catalogo = function(nuevo_catalogo){
 
+        //MODULO NATIVO RUST
         let ruta_id = generar_ruta_id(nuevo_catalogo.img, {
             "artista": nuevo_catalogo.artista,
             "titulo": nuevo_catalogo.infoCatalogo.titulo,
