@@ -4,10 +4,7 @@
       <h1
         class="text-center mb-10 text-lg block uppercase tracking-wide text-gray-700 font-bold"
       >Mini Catalogos</h1>
-      <BarraMiniCatalogo 
-        :pais="pais" 
-        :tipo="'artista'"
-      >
+      <BarraMiniCatalogo :pais="pais" :tipo="'artista'">
         <template slot="slot_down">
           <div class="w-full md:w-1/2 px-3">
             <label
@@ -23,34 +20,23 @@
           </div>
         </template>
       </BarraMiniCatalogo>
-      <BarraMiniCatalogo 
-        :tipo="'genero'"
-      ></BarraMiniCatalogo>
-      <BarraMiniCatalogo 
-        :tipo="'formato'"
-      ></BarraMiniCatalogo>
-      <BarraMiniCatalogo 
-        :id_formato="id_formato" 
-        :tipo="'presentacion'"
-      >
+      <BarraMiniCatalogo :tipo="'genero'"></BarraMiniCatalogo>
+      <BarraMiniCatalogo :tipo="'formato'"></BarraMiniCatalogo>
+      <BarraMiniCatalogo :id_formato="id_formato" :tipo="'presentacion'">
         <template slot="slot_up">
           <div class="w-full md:w-1/2 px-3 mb-2 mt-3">
-             <label
+            <label
               class="block uppercase tracking-wide text-gray-700 text-xs font-normal mb-2"
               for="artista"
             >Formato</label>
             <select
-            v-model="id_formato"
-            class="appearance-none block w-full text-gray-700 border rounded py-2 px-1 mb-1 leading-tight focus:outline-none focus:bg-white text-sm"
-            id="formato"
-          >
-            <option value>Seleccionar</option>
-            <option
-              v-for="value in formatos"
-              :key="value.id"
-              :value="value.id"
-            >{{ value.nombre }}</option>
-          </select>
+              v-model="id_formato"
+              class="appearance-none block w-full text-gray-700 border rounded py-2 px-1 mb-1 leading-tight focus:outline-none focus:bg-white text-sm"
+              id="formato"
+            >
+              <option value>Seleccionar</option>
+              <option v-for="value in formatos" :key="value.id" :value="value.id">{{ value.nombre }}</option>
+            </select>
           </div>
         </template>
       </BarraMiniCatalogo>
@@ -59,27 +45,24 @@
 </template>
 
 <script>
-
-import BarraMiniCatalogo from '../components/BarraMiniCatalogo.vue'
+import BarraMiniCatalogo from "../components/BarraMiniCatalogo.vue";
 
 export default {
-
   name: "MiniCatalogos",
   props: {
     formatos: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   data: function () {
     return {
-
-        id_formato: 0,
-        pais: '',
+      id_formato: 0,
+      pais: "",
     };
   },
   components: {
-    BarraMiniCatalogo
+    BarraMiniCatalogo,
   },
 };
 </script>

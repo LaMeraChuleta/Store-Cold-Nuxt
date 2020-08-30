@@ -181,7 +181,7 @@
         </div>
       </div>
 
-      <div class="inline-flex -mx-3 ">
+      <div class="inline-flex -mx-3">
         <div class="w-full md:w-1/2 px-3 md:mb-0">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -207,6 +207,9 @@
 </template>
 
 <script>
+
+
+
 export default {
   name: "InsertarCatalogo",
   props: {
@@ -248,6 +251,12 @@ export default {
       filtro_presentacion: [],
     };
   },
+  created: function(){
+
+    this.$nuxt.$on('quitar', index => {
+        this.insetar_imagenes(index)
+    })   
+  },
   watch: {
     textartista: function (newArtista, oldArtista) {
       if (/^\d+$/.test(newArtista)) {
@@ -265,6 +274,10 @@ export default {
     },
   },
   methods: {
+    insetar_imagenes: function(index){
+      this.imagenes.splice(index, 1)
+      this.$emit("visualizar_img", this.imagenes);
+    },
     presentacion_cascada: function () {
       this.filtro_presentacion = this.presentaciones.filter(
         (presentacion) =>
@@ -303,6 +316,7 @@ export default {
         })
         .then((data) => {
           this.imagenes = [];
+          this.$emit("visualizar_img", this.imagenes);
           this.filtro_presentacion = [];
           let _newItemCatalogo = this.newItemCatalogo;
           Object.keys(_newItemCatalogo).forEach(function (prop) {

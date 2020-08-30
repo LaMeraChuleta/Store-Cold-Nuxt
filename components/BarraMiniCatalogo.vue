@@ -3,7 +3,7 @@
     <div class="-mx-3 border border-gray-400 rounded-md mb-3">
       <div class="w-full border border-gray-400 rounded-md h-12 text-gray-700 px-8">
         <div class="flex justify-between p-1 mt-1">
-          <span class="capitalize">Agregar {{ tipo }}</span>
+          <span class="capitalize text-sm">Agregar {{ tipo }}</span>
           <button
             @click="ver == true ? ver = false : ver = true"
             class="appearance-none block border rounded-full focus:outline-none focus:bg-white border-gray-600 mt-1 ml-10 w-6"
@@ -91,27 +91,26 @@ export default {
   },
   methods: {
     insertar_catalogo: function () {
-
       let object_insertar = {
-        "nombre": this.nombre
+        nombre: this.nombre,
+      };
+      if (this.tipo == "artista") {
+        object_insertar.pais = this.pais;
       }
-      if(this.tipo == 'artista'){
-          object_insertar.pais = this.pais
+      if (this.tipo == "presentacion") {
+        object_insertar.id_formato = this.id_formato;
       }
-      if(this.tipo == 'presentacion'){
-          object_insertar.id_formato = this.id_formato
-      }
-      console.log(object_insertar)
-      this.$axios.post(`/api/${this.tipo}`, object_insertar)
-        .then(data => {
-          this.nombre = ''
+      console.log(object_insertar);
+      this.$axios
+        .post(`/api/${this.tipo}`, object_insertar)
+        .then((data) => {
+          this.nombre = "";
           location.reload();
-          console.log(data)
+          console.log(data);
         })
-        .catch(err => {
-          console.log(err)
-        }
-      )
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };

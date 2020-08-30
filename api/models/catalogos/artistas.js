@@ -1,5 +1,3 @@
-
-
 function Artistas() {
     //Constructor
     const pooldb = require('../../mariadb/conexion.js')
