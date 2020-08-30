@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="w-full h-screen max-w-lg flex flex-col mt-3 border p-5 ">
+    <div class="w-full h-72 max-w-lg flex flex-col mt-3 sm:mt-0 border p-5 sm:h-auto">
       <h1
         class="text-center mb-10 text-lg block uppercase tracking-wide text-gray-700 font-bold"
       >Mini Catalogos</h1>

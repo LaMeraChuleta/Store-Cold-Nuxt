@@ -1,6 +1,6 @@
 <template>
   <div>
-      <div class="flex  sm:h-32 max-w-6xl mx-auto justify-evenly">
+      <div class="flex max-w-6xl mx-auto justify-evenly sm:flex-col">
         <MiniCatalogos
           :formatos="formatos"
         >
