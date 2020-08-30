@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="w-full max-w-lg flex flex-col mt-3 sm:mt-0 sm:p-5 border p-6">
+    <div class="w-full h-screen max-w-lg flex flex-col mt-3 sm:mt-0 sm:p-5 border p-6">
       <h1
         class="text-center mb-10 text-lg block uppercase tracking-wide text-gray-700 font-bold"
       >Agregar Nuevos Productos al Catalogo</h1>
@@ -181,7 +181,7 @@
         </div>
       </div>
 
-      <div class="inline-flex -mx-3 mb-6">
+      <div class="inline-flex -mx-3 ">
         <div class="w-full md:w-1/2 px-3 md:mb-0">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -272,23 +272,29 @@ export default {
       );
     },
     recibirImagenes: function (e) {
+      this.imagenes = [];
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       else {
         for (let item of files) {
           this.crearImage(item);
         }
+        this.$emit("visualizar_img", this.imagenes);
       }
     },
     crearImage(file) {
       var image = new Image();
       var reader = new FileReader();
+      let imagen = "";
       reader.onload = (e) => {
-        this.imagenes.push(e.target.result.split(",")[1]);
+        this.imagenes.push(e.target.result);
       };
       reader.readAsDataURL(file);
     },
     subirServidor: function () {
+      this.imagenes = this.imagenes.map(function (value) {
+        return value.split(",")[1];
+      });
       this.$axios
         .$post("/api/catalogodiscos", {
           infoCatalogo: this.newItemCatalogo,

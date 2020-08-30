@@ -7,13 +7,16 @@
         </MiniCatalogos>
 
         <InsertarCatalogo 
+          @visualizar_img="visualizar_img"
           :artistas="artistas" 
           :generos="generos" 
           :formatos="formatos"
           :presentaciones="presentaciones">
         </InsertarCatalogo>
 
-        <VisualizarImagenes>
+        <VisualizarImagenes
+          :img="copia_imagenes"
+        >
         </VisualizarImagenes>
 
  
@@ -34,6 +37,7 @@ export default {
 
       return {
 
+          copia_imagenes: [],
           message: ''
       }
     },
@@ -56,6 +60,12 @@ export default {
         InsertarCatalogo,
         MiniCatalogos
     },
+    methods: {
+
+      visualizar_img: function(item){
+        this.copia_imagenes = item
+      }
+    }
 
 
 }

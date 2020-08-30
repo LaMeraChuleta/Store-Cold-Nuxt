@@ -1,20 +1,25 @@
  <template>
   <div>
-    <div class="-mx-3 border border-gray-400 rounded-md mb-3 mt-3">
-      <div class="w-full rounded-md h-12 text-gray-700 px-8">
-        <h1>Visualizar Imagenes</h1>
+    <div class="w-full max-w-lg flex flex-col mt-3 border h-screen">
+       <h1
+        class="text-center mt-6 text-lg block uppercase tracking-wide text-gray-700 font-bold"
+      >Imagenes</h1>
+    <div class=" overflow-y-auto appearance-none p-5">
+      <div class=" inline-block rounded-md w-64 m-1">
         <div v-for="(item, key) in img" :key="key">
-            <img :src="item" />
+          <div class="border border-purple-700 object-contain mb-4 mr-3">
+            <img class="w-full" :src="item" />
+            
+          </div>
+        </div>
         </div>
       </div>
     </div>
+    
   </div>
 </template>
 
 <script>
-
-
-
 
 export default {
 
