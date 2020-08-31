@@ -6,18 +6,16 @@ import classCatalogo from '../models/catalogodiscos.js'
 
 const router = Router()
 
-router.get('/clases', (req,res) => {
+router.get('/catalogodiscos', (req,res) => {
 
-  let instancia_artistas = classArtista.getInstance()
-  instancia_artistas.obtener_todos()
+  let instancia_catalogo = classCatalogo.getInstance()
+  instancia_catalogo.obtener_todos()
     .then(data => {
-
-      instancia_artistas.get_mensaje()
-       res.status(200).json(data)
-    
+      instancia_catalogo.get_mensaje()
+      res.status(200).json(data)
     })
     .catch(err => {
-    
+      res.status(500).json('error')  
     })
 })
 

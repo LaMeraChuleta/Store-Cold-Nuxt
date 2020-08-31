@@ -2,6 +2,9 @@ use neon::prelude::*;
 //STD
 use std::path::PathBuf;
 use std::str::FromStr;
+
+use std::fs;
+use std::io::prelude::*;
 use std::vec::Vec;
 //BASE64 A BLOB
 use blob::Blob;
@@ -42,7 +45,6 @@ fn generar_ruta_id(mut cx: FunctionContext) -> JsResult<JsObject> {
     vecblob
         .iter()
         .for_each(|blob| {
-
             let mut _ruta_dest = PathBuf::from(&info_destino.0); 
             let mut _nombre_foto = String::from(nuevoinfo.titulo
                 .split_whitespace()
@@ -72,6 +74,29 @@ fn generar_ruta_id(mut cx: FunctionContext) -> JsResult<JsObject> {
 }
 
 fn hello(mut cx: FunctionContext) -> JsResult<JsString> {
+
+    let ruta_dir = cx.argument::<JsString>(0)?.value();
+    let ruta_dir = PathBuf::from_str(&ruta_dir).unwrap();
+
+    if ruta_dir.is_dir(){
+        for file_img in fs::read_dir(ruta_dir).unwrap() {
+
+            match file_img {
+                Ok(dir_img) => {
+
+                    
+                    let mut vec_img = Vec::new();
+                    let mut imagen = fs::File::open(dir_img.path()).unwrap();
+                    
+                    imagen.read_to_end(&mut vec_img).unwrap();
+
+                    //println!("{:?}", vec_img);
+                    
+                },
+                Err(err) => println!("{:?}",err)
+            }
+        }
+    }
 
     Ok(cx.string("hello node"))
 }
