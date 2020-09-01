@@ -2,7 +2,7 @@ var addon = require('../native');
 
 const {
 
-    hello,
+    generar_array_base64,
     generar_ruta_id
 } = addon
 

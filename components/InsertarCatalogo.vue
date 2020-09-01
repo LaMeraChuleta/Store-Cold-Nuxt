@@ -254,7 +254,7 @@ export default {
   created: function(){
 
     this.$nuxt.$on('quitar', index => {
-        this.insetar_imagenes(index)
+        this.quitar_imagenes(index)
     })   
   },
   watch: {
@@ -274,7 +274,7 @@ export default {
     },
   },
   methods: {
-    insetar_imagenes: function(index){
+    quitar_imagenes: function(index){
       this.imagenes.splice(index, 1)
       this.$emit("visualizar_img", this.imagenes);
     },

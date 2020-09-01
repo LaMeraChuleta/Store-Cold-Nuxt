@@ -8,6 +8,7 @@ use std::io::prelude::*;
 use std::vec::Vec;
 //BASE64 A BLOB
 use blob::Blob;
+use blob::Standard;
 //CALIDAD DE IMAGEN
 //use image::jpeg;
 use image::load_from_memory;
@@ -73,37 +74,43 @@ fn generar_ruta_id(mut cx: FunctionContext) -> JsResult<JsObject> {
     Ok(ruta_id_object)
 }
 
-fn hello(mut cx: FunctionContext) -> JsResult<JsString> {
+fn generar_array_base64(mut cx: FunctionContext) -> JsResult<JsArray> {
 
     let ruta_dir = cx.argument::<JsString>(0)?.value();
     let ruta_dir = PathBuf::from_str(&ruta_dir).unwrap();
 
+    let mut vec_base64: Vec<String> = Vec::new();
+
     if ruta_dir.is_dir(){
         for file_img in fs::read_dir(ruta_dir).unwrap() {
-
+            
+            println!("Inicie");
             match file_img {
                 Ok(dir_img) => {
-
                     
                     let mut vec_img = Vec::new();
                     let mut imagen = fs::File::open(dir_img.path()).unwrap();
-                    
                     imagen.read_to_end(&mut vec_img).unwrap();
-
-                    //println!("{:?}", vec_img);
-                    
+                    let blob_img = Blob::<Standard>::from_vec(vec_img);
+                    vec_base64.push(blob_img.encode_base64());
                 },
                 Err(err) => println!("{:?}",err)
             }
         }
     }
 
-    Ok(cx.string("hello node"))
+    let js_array_base64 = JsArray::new(&mut cx, vec_base64.len() as u32);
+    // Iterate over the Rust Vec and map each value in the Vec to the JS array
+    for (i, obj) in vec_base64.iter().enumerate() {
+        let js_string = cx.string(obj);
+        js_array_base64.set(&mut cx, i as u32, js_string).unwrap();
+    }
+    Ok(js_array_base64)
 }
 
 register_module!(mut cx, { 
     
-    cx.export_function("hello", hello)?; 
+    cx.export_function("generar_array_base64", generar_array_base64)?; 
     cx.export_function("generar_ruta_id",generar_ruta_id)?; 
     Ok(())
 });

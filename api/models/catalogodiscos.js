@@ -1,7 +1,7 @@
 function Catalogo() {
     //Constructor
     const pooldb = require('../mariadb/conexion')
-    const { generar_ruta_id, hello } = require('../imagenes/lib/index.js')
+    const { generar_ruta_id, generar_array_base64 } = require('../imagenes/lib/index.js')
     let mensaje = "hola encapsulado"
 
     this.obtener_todos = function() {
@@ -26,18 +26,17 @@ function Catalogo() {
                         JOIN artistas ON catalogo.id_artista = artistas.id 
                         JOIN generos ON catalogo.id_genero = generos.id
                         JOIN formato ON catalogo.id_formato = formato.id
-                        JOIN presentacion ON catalogo.id_presentacion = presentacion.id
-                        LIMIT 1
+                        JOIN presentacion ON catalogo.id_presentacion = presentacion.id                        
                     `)
                     .then(rows => {
                       delete rows['meta']
                         
                        rows.forEach(item => {
 
-                           item.nuevo_attr = hello(item.dir_imagenes)
+                           item.img_base64 = generar_array_base64(item.dir_imagenes)
                        })  
 
-                      resolve(rows)
+                      resolve(rows[1].img_base64[0])
                   })
                   conn.release()
                 })
