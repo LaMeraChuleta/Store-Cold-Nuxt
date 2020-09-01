@@ -14,6 +14,7 @@ function Catalogo() {
                             catalogo.nombre,
                             artistas.nombre AS artista,
                             generos.nombre AS genero,
+                            formato.nombre AS formato,
                             presentacion.nombre AS presentacion,
                             catalogo.origen,
                             catalogo.sello,
@@ -30,13 +31,10 @@ function Catalogo() {
                     `)
                     .then(rows => {
                       delete rows['meta']
-                        
                        rows.forEach(item => {
-
                            item.img_base64 = generar_array_base64(item.dir_imagenes)
                        })  
-
-                      resolve(rows[1].img_base64[0])
+                      resolve(rows)
                   })
                   conn.release()
                 })

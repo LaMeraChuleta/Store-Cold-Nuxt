@@ -1,7 +1,7 @@
 <template>
   <div class="pt-3 pr-3 pl-3">
     <img
-      :src="require(`@/assets/img/${ infoCard.urlImage }`)"
+      :src="`data:image/jpeg;base64,${infoCard.img_base64[0]}`"
       @mouseover="upImg = true"
       @mouseout="upImg = false"
       @click="irPaginaDetalle"
@@ -9,11 +9,11 @@
       :class="{'p-1': upImg}"
     />
     <p class="text-gray-900 font-extrabold font-mono text-left text-lg">{{ infoCard.artista}}</p>
-    <p class="text-gray-900 font-mono text-left text-sm">{{ infoCard.titulo }}</p>
+    <p class="text-gray-900 font-mono text-left text-sm">{{ infoCard.nombre }}</p>
     <p
       :class="colorFormato"
       class="text-gray-900 font-mono text-left text-sm rounded-lg w-40"
-    >Formato: {{ infoCard.formatoType }}</p>
+    >Formato: {{ infoCard.formato }}</p>
     <p class="text-gray-900 font-mono text-left text-sm">$ {{ infoCard.precio }}</p>
   </div>
 </template>
@@ -34,11 +34,11 @@ export default {
   computed: {
     colorFormato: function () {
       if (this.infoCard != {}) {
-        if (this.infoCard.formatoType === "Cd")
+        if (this.infoCard.formato === "Cd")
           return { "bg-yellow-400": true };
-        if (this.infoCard.formatoType === "Cassette")
+        if (this.infoCard.formato === "Cassette")
           return { "bg-blue-400": true };
-        if (this.infoCard.formatoType === "Vinyl")
+        if (this.infoCard.formato === "Vinyl")
           return { "bg-red-400": true };
       }
     },

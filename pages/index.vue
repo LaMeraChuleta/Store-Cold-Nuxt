@@ -11,18 +11,19 @@
     <div class="flex flex-auto flex-grow sm:flex-col md:flex-row max-w-6xl mx-auto mb-20">
       <div
         class="rounded-sm shadow-sm xl:w-1/4 lg:w-1/4 sm:w-auto"
-        v-for="(item, index) in arrayCambios"
+        v-for="(item, index) in catalogo_discos"
         :key="index"
       >
         <cardInfo :infoCard="item"></cardInfo>
       </div>
     </div>
 
-    <div
+    <!-- <div
       class="border-black border-r-0 border-l-0 border-4 text-center md:text-blue-500 text-black font-mono text-4xl mt-10 sm:text-2xl max-w-6xl mx-auto"
     >
       <p class="pt-1 pb-1">Ventas</p>
     </div>
+    
     <div class="flex flex-auto flex-grow sm:flex-col md:flex-row max-w-6xl mx-auto mb-20">
       <div
         class="rounded-sm shadow-sm xl:w-1/4 lg:w-1/4 sm:w-auto"
@@ -31,7 +32,7 @@
       >
         <cardInfo :infoCard="item"></cardInfo>
       </div>      
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -122,6 +123,11 @@ export default {
       ],
     };
   },
-  mounted: function () {},
+  async asyncData({ $axios}) {
+
+      let catalogo_discos = await $axios.$get("/api/catalogodiscos");
+
+      return { catalogo_discos }
+  },
 };
 </script>
