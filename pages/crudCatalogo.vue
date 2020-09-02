@@ -47,6 +47,7 @@ export default {
   },
   methods: {
     visualizar_img: function (item) {
+      console.log('page crud')
       this.copia_imagenes = item;
     },
   },

@@ -207,9 +207,6 @@
 </template>
 
 <script>
-
-
-
 export default {
   name: "InsertarCatalogo",
   props: {
@@ -251,11 +248,13 @@ export default {
       filtro_presentacion: [],
     };
   },
-  created: function(){
-
-    this.$nuxt.$on('quitar', index => {
-        this.quitar_imagenes(index)
-    })   
+  created: function () {
+    this.$nuxt.$on("quitar", (index) => {
+      this.quitar_imagenes(index);
+    });
+    this.$nuxt.$on("actualizar", (index_cambio, index_recibir) => {
+      this.actualizar_imagenes(index_cambio, index_recibir);
+    });
   },
   watch: {
     textartista: function (newArtista, oldArtista) {
@@ -274,8 +273,16 @@ export default {
     },
   },
   methods: {
-    quitar_imagenes: function(index){
-      this.imagenes.splice(index, 1)
+    actualizar_imagenes: function (index_cambio, index_recibir) {
+      let _img_cambio = this.imagenes[index_cambio];
+      let _img_recibir = this.imagenes[index_recibir];
+      this.imagenes[index_recibir] = _img_cambio;
+      this.imagenes[index_cambio] = _img_recibir;
+      this.imagenes = this.imagenes.slice(0, this.imagenes.length);
+      this.$emit("visualizar_img", this.imagenes);
+    },
+    quitar_imagenes: function (index) {
+      this.imagenes.splice(index, 1);
       this.$emit("visualizar_img", this.imagenes);
     },
     presentacion_cascada: function () {
