@@ -49,12 +49,6 @@ import BarraMiniCatalogo from "../components/BarraMiniCatalogo.vue";
 
 export default {
   name: "MiniCatalogos",
-  props: {
-    formatos: {
-      type: Array,
-      required: true,
-    },
-  },
   data: function () {
     return {
       id_formato: 0,
@@ -64,6 +58,15 @@ export default {
   components: {
     BarraMiniCatalogo,
   },
+  computed:{
+
+    formatos: function(){
+
+      return this.$store.getters['catalogos/GET_FORMATOS']
+     
+
+    }
+  }
 };
 </script>
 

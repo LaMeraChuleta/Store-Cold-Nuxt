@@ -207,26 +207,11 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "InsertarCatalogo",
-  props: {
-    artistas: {
-      type: Array,
-      required: true,
-    },
-    generos: {
-      type: Array,
-      required: true,
-    },
-    formatos: {
-      type: Array,
-      required: true,
-    },
-    presentaciones: {
-      type: Array,
-      required: true,
-    },
-  },
+
   data: function () {
     return {
       newItemCatalogo: {
@@ -256,6 +241,14 @@ export default {
       this.actualizar_imagenes(index_cambio, index_recibir);
     });
   },
+  computed: {
+    ...mapGetters({
+      artistas: "catalogos/GET_ARTISTAS",
+      generos: "catalogos/GET_GENEROS",
+      formatos: "catalogos/GET_FORMATOS",
+      presentaciones: "catalogos/GET_PRESENTACIONES",
+    }),
+  },
   watch: {
     textartista: function (newArtista, oldArtista) {
       if (/^\d+$/.test(newArtista)) {
@@ -279,11 +272,13 @@ export default {
       this.imagenes[index_recibir] = _img_cambio;
       this.imagenes[index_cambio] = _img_recibir;
       this.imagenes = this.imagenes.slice(0, this.imagenes.length);
-      this.$emit("visualizar_img", this.imagenes);
+      //this.$emit("visualizar_img", this.imagenes);
+      this.$nuxt.$emit("visualizar_img", this.imagenes)
     },
     quitar_imagenes: function (index) {
       this.imagenes.splice(index, 1);
-      this.$emit("visualizar_img", this.imagenes);
+      //this.$emit("visualizar_img", this.imagenes);
+      this.$nuxt.$emit("visualizar_img", this.imagenes)
     },
     presentacion_cascada: function () {
       this.filtro_presentacion = this.presentaciones.filter(
@@ -299,7 +294,8 @@ export default {
         for (let item of files) {
           this.crearImage(item);
         }
-        this.$emit("visualizar_img", this.imagenes);
+        //this.$emit("visualizar_img", this.imagenes);
+        this.$nuxt.$emit("visualizar_img", this.imagenes)
       }
     },
     crearImage(file) {

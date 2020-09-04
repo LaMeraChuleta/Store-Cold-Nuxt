@@ -10,7 +10,7 @@
             @drop="onDrop($event, key)"
             @dragover.prevent
             @dragenter.prevent
-            v-for="(item, key) in img"
+            v-for="(item, key) in imagenes"
             :key="key"
           >
             <div
@@ -49,18 +49,19 @@
 
 <script>
 export default {
-  props: {
-    img: {
-      type: Array,
-      required: true,
-    },
-  },
+
   data: function () {
     return {
       index_moviendo: "",
+      imagenes: []
     };
   },
-  computed: {},
+  created: function(){
+
+    this.$nuxt.$on("visualizar_img", (array_imgenes) => { 
+        this.imagenes = array_imgenes
+    })
+  },
   methods: {
     quitar_imagen: function (value) {
       this.$nuxt.$emit("quitar", value);
