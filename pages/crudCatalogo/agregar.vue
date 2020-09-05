@@ -1,21 +1,17 @@
 <template>
     <div>
-      <InsertarCatalogo
-
-  
-      ></InsertarCatalogo>
+      <InsertarCatalogo></InsertarCatalogo>
     </div>
 </template>
 
 <script>
-import InsertarCatalogo from "~/components/InsertarCatalogo.vue";
+import InsertarCatalogo from "~/components/crudCatalogo/InsertarCatalogo.vue";
 
 export default {
 
     components: {
         InsertarCatalogo
     },
-
     
 }
 </script>

@@ -40,94 +40,25 @@
 import cardInfo from "~/components/CardInfoDisco.vue";
 
 export default {
+
+  middleware: 'catalogoProductos',
   components: {
     cardInfo,
   },
   data: function () {
     return {
-      arrayVentas: [
-        {
-          id: 1,
-          type: "VENTA",
-          urlImage: "PinkFloyd.jpg",
-          artista: "Pink Floyd",
-          titulo: "Atomic Heart Mother",
-          formatoType: "Cd",
-          precio: 190,
-        },
-        {
-          id: 2,
-          type: "VENTA",
-          urlImage: "DulceLobo.jpg",
-          artista: "Dulce",
-          titulo: "Lobo",
-          formatoType: "Vinyl",
-          precio: 290,
-        },
-        {
-          id: 3,
-          type: "VENTA",
-          urlImage: "SgtPepers.jpg",
-          artista: "The Beatles",
-          titulo: "Sgt. Pepers and Lonel....",
-          formatoType: "Cassette",
-          precio: 170,
-        },
-        {
-          id: 4,
-          type: "VENTA",
-          urlImage: "Bach.jpg",
-          artista: "Sebastian Bach",
-          titulo: "Recopilaciones",
-          formatoType: "Vinyl",
-          precio: 120,
-        },
-      ],
-      arrayCambios: [
-        {
-          id: 5,
-          type: "CAMBIO",
-          urlImage: "Comedia.jpg",
-          artista: "Pink Floyd",
-          titulo: "Atomic Heart Mother",
-          formatoType: "Cd",
-          precio: 190,
-        },
-        {
-          id: 6,
-          type: "CAMBIO",
-          urlImage: "ElTesoro.jpg",
-          artista: "Dulce",
-          titulo: "Lobo",
-          formatoType: "Vinyl",
-          precio: 290,
-        },
-        {
-          id: 7,
-          type: "CAMBIO",
-          urlImage: "Secretos.jpg",
-          artista: "The Beatles",
-          titulo: "Sgt. Pepers and Lonel....",
-          formatoType: "Cassette",
-          precio: 170,
-        },
-        {
-          id: 8,
-          type: "CAMBIO",
-          urlImage: "TheB52.jpg",
-          artista: "Sebastian Bach",
-          titulo: "Recopilaciones",
-          formatoType: "Vinyl",
-          precio: 120,
-        },
-      ],
+      
+ 
+      
     };
   },
-  async asyncData({ $axios}) {
+  computed: {
+     
+     catalogo_discos: function(){
 
-      let catalogo_discos = await $axios.$get("/api/catalogodiscos");
+       return this.$store.state.catalogoProductos.array_catalogo_productos
+     } 
 
-      return { catalogo_discos }
-  },
+  }
 };
 </script>

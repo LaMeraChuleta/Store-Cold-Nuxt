@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import BarraMiniCatalogo from "../components/BarraMiniCatalogo.vue";
+import BarraMiniCatalogo from "~/components/crudCatalogo/BarraMiniCatalogo.vue";
 
 export default {
   name: "MiniCatalogos",

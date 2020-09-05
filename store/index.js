@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import catalogos from './catalogos.js'
+import catalogoProductos from './catalogoProductos.js'
 
 
 const createStore = () => {
@@ -8,7 +9,8 @@ const createStore = () => {
         namespaced: true,
         modules: {
             
-            'catalogos': catalogos
+            'catalogos': catalogos,
+            'catalogoProductos': catalogoProductos
         }
     })
 }

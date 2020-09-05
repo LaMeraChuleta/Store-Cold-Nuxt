@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import MiniCatalogos from "~/components/MiniCatalogos.vue";
-import VisualizarImagenes from "~/components/VisualizarImgenes.vue";
+import MiniCatalogos from "~/components/crudCatalogo/MiniCatalogos.vue";
+import VisualizarImagenes from "~/components/crudCatalogo/VisualizarImgenes.vue";
 
 export default {
   name: "crudCatalogo",
@@ -21,6 +21,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

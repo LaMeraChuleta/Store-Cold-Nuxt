@@ -11,7 +11,6 @@ router.get('/catalogodiscos', (req,res) => {
   let instancia_catalogo = classCatalogo.getInstance()
   instancia_catalogo.obtener_todos()
     .then(data => {
-      instancia_catalogo.get_mensaje()
       res.status(200).json(data)
     })
     .catch(err => {

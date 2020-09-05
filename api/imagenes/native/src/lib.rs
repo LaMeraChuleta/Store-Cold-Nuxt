@@ -84,7 +84,7 @@ fn generar_array_base64(mut cx: FunctionContext) -> JsResult<JsArray> {
     if ruta_dir.is_dir(){
         for file_img in fs::read_dir(ruta_dir).unwrap() {
             
-            println!("Inicie");
+            
             match file_img {
                 Ok(dir_img) => {
                     
