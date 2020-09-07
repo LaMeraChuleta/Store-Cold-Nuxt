@@ -29,18 +29,24 @@
         :class="navIsOpen ? 'block' : 'hidden'"
         class="px-5 pb-2 bg-white text-center border border-black"
       >
+      <router-link to="/crudCatalogo/agregar">
         <a
           href="#"
           class="block font-mono border border-black text-black text-lg hover:text-yellow-500 rounded pb-1"
-        >Comprar</a>
+        >Agregar</a>
+      </router-link>
+      <router-link to="/crudCatalogo/buscar">
         <a
           href="#"
           class="block font-mono border border-black text-black text-lg hover:text-yellow-500 rounded pb-1"
-        >Cambiar</a>
+        >Buscar</a>
+      </router-link>
+      <router-link to="/">
         <a
           href="#"
           class="block font-mono border border-black text-black text-lg hover:text-yellow-500 rounded pb-1"
         >Blog</a>
+      </router-link>
       </div>
     </header>
   </div>

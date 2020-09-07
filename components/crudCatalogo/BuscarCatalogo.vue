@@ -1,13 +1,15 @@
 <template>
   <div>
     <div class="w-full h-72 flex flex-col mt-3 sm:mt-0 border p-5 sm:h-auto">
-      <h1 class="text-center mb-10 text-lg block uppercase tracking-wide text-gray-700 font-bold">Buscar en el catalogo</h1>
+      <h1
+        class="text-center mb-10 text-lg block uppercase tracking-wide text-gray-700 font-bold"
+      >Buscar en el catalogo</h1>
       <div class="mb-5 inline-flex">
-          <input type="text" class="border w-full rounded-full">
-          <button class="w-10">+</button>
+        <input type="text" class="border w-full rounded-full" />
+        <button class="w-10">+</button>
       </div>
       <div class>
-        <table class="">
+        <table class>
           <thead class="text-gray-700 text-xs">
             <tr class="border h-10">
               <th>Titulo</th>
@@ -18,13 +20,18 @@
             </tr>
           </thead>
           <tbody class="text-gray-700 text-xs">
-            <tr v-for="(item, key) in catalogo_productos" :key="key" class="hover:bg-gray-200 focus:bg-gray-200 cursor-pointer" @click="enviar_imagenes(key)">
+            <tr
+              v-for="(item, key) in catalogo_productos"
+              :key="key"
+              class="hover:bg-gray-200 focus:bg-gray-200 cursor-pointer"
+              @click="enviar_imagenes(key)"
+            >
               <th class="border h-12 w-32">{{ item.nombre }}</th>
               <th class="border h-12 w-32">{{ item.artista }}</th>
               <th class="border h-12 w-20">{{ item.origen }}</th>
               <th class="border h-12 w-16">{{ item.año }}</th>
               <th class="border h-12 w-20">
-                <button class="w-4 hover:text-gray-600">
+                <button @click="editar_catalogo(item.id)" class="w-4 hover:text-gray-600">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -65,23 +72,30 @@
 
 <script>
 export default {
-
   methods: {
+    enviar_imagenes: function (index) {
+      let imagenes = this.catalogo_productos[index].img_base64.map(function (
+        base64
+      ) {
+        return `data:image/jpeg;base64,${base64}`;
+      });
 
-      enviar_imagenes: function(index){
-
-        let imagenes = this.catalogo_productos[index].img_base64
-          .map(function(base64){
-            return `data:image/jpeg;base64,${base64}`
-        })
-        
-        this.$nuxt.$emit("visualizar_img",imagenes)
-        
-      }
+      this.$nuxt.$emit("visualizar_img", imagenes);
+    },
+    editar_catalogo: function (id) {
+      console.log(id);
+      this.$router.push({
+        name: "crudCatalogo-editar-id",
+        params: { id },
+      });
+    },
   },
   computed: {
     catalogo_productos: function () {
-      return this.$store.state.catalogoProductos.array_catalogo_productos;
+      return this.$store.state.catalogoProductos.array_catalogo_productos.slice(
+        0,
+        8
+      );
     },
   },
 };

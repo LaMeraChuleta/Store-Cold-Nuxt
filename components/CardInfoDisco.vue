@@ -8,13 +8,13 @@
       class="rounded-lg cursor-pointer"
       :class="{'p-1': upImg}"
     />
-    <p class="text-gray-900 font-extrabold font-mono text-left text-lg">{{ infoCard.artista}}</p>
-    <p class="text-gray-900 font-mono text-left text-sm">{{ infoCard.nombre }}</p>
+    <p class="text-gray-900 font-extrabold  text-left text-md">{{ infoCard.artista}}</p>
+    <p class="text-gray-900 text-left text-sm">{{ infoCard.nombre }}</p>
     <p
       :class="colorFormato"
-      class="text-gray-900 font-mono text-left text-sm rounded-lg w-40"
+      class="text-gray-900  text-left text-sm rounded-lg w-40"
     >Formato: {{ infoCard.formato }}</p>
-    <p class="text-gray-900 font-mono text-left text-sm">$ {{ infoCard.precio }}</p>
+    <p class="text-gray-900  text-left text-sm">$ {{ infoCard.precio }}</p>
   </div>
 </template>
 
@@ -34,7 +34,7 @@ export default {
   computed: {
     colorFormato: function () {
       if (this.infoCard != {}) {
-        if (this.infoCard.formato === "Cd")
+        if (this.infoCard.formato === "CD")
           return { "bg-yellow-400": true };
         if (this.infoCard.formato === "Cassette")
           return { "bg-blue-400": true };

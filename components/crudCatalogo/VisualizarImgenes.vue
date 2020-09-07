@@ -49,22 +49,20 @@
 
 <script>
 export default {
-
   data: function () {
     return {
       index_moviendo: "",
-      imagenes: []
+      imagenes: [],
     };
   },
-  created: function(){
-
-    this.$nuxt.$on("visualizar_img", (array_imgenes) => { 
-        this.imagenes = array_imgenes
-    })
+  created: function () {
+    this.$nuxt.$on("visualizar_img", (array_imgenes) => {
+      this.imagenes = array_imgenes;
+    });
   },
   methods: {
     quitar_imagen: function (value) {
-      this.$nuxt.$emit("quitar", value);
+      this.$nuxt.$emit("quitar_imagenes", value);
     },
     startDrag: function (evt, index) {
       evt.dataTransfer.dropEffect = "move";
@@ -73,7 +71,7 @@ export default {
     },
     onDrop(evt, index) {
       if (this.imagen_moviendo != index) {
-        this.$nuxt.$emit("actualizar", this.index_moviendo, index);
+        this.$nuxt.$emit("actualizar_imagenes", this.index_moviendo, index);
         this.index_moviendo = "";
       }
     },

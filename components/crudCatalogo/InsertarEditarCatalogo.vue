@@ -196,10 +196,7 @@
           />
         </div>
         <div class="w-full md:w-1/2 px-3">
-          <button
-            @click="subirServidor"
-            class="appearance-none block w-full text-gray-700 border rounded py-3 px-1 mb-3 leading-tight focus:outline-none focus:bg-white mt-6 border-green-600"
-          >Agregar Disco</button>
+          <slot></slot>
         </div>
       </div>
     </div>
@@ -234,11 +231,17 @@ export default {
     };
   },
   created: function () {
-    this.$nuxt.$on("quitar", (index) => {
+    this.$nuxt.$on("quitar_imagenes", (index) => {
       this.quitar_imagenes(index);
     });
-    this.$nuxt.$on("actualizar", (index_cambio, index_recibir) => {
+    this.$nuxt.$on("actualizar_imagenes", (index_cambio, index_recibir) => {
       this.actualizar_imagenes(index_cambio, index_recibir);
+    });
+    this.$nuxt.$on("agregar_catalogo", () => {
+      this.subirServidor();
+    });
+    this.$nuxt.$on("editar_catalogo", () => {
+      this.subirServidor();
     });
   },
   computed: {
@@ -273,12 +276,12 @@ export default {
       this.imagenes[index_cambio] = _img_recibir;
       this.imagenes = this.imagenes.slice(0, this.imagenes.length);
       //this.$emit("visualizar_img", this.imagenes);
-      this.$nuxt.$emit("visualizar_img", this.imagenes)
+      this.$nuxt.$emit("visualizar_img", this.imagenes);
     },
     quitar_imagenes: function (index) {
       this.imagenes.splice(index, 1);
       //this.$emit("visualizar_img", this.imagenes);
-      this.$nuxt.$emit("visualizar_img", this.imagenes)
+      this.$nuxt.$emit("visualizar_img", this.imagenes);
     },
     presentacion_cascada: function () {
       this.filtro_presentacion = this.presentaciones.filter(
@@ -295,7 +298,7 @@ export default {
           this.crearImage(item);
         }
         //this.$emit("visualizar_img", this.imagenes);
-        this.$nuxt.$emit("visualizar_img", this.imagenes)
+        this.$nuxt.$emit("visualizar_img", this.imagenes);
       }
     },
     crearImage(file) {
@@ -319,12 +322,13 @@ export default {
         })
         .then((data) => {
           this.imagenes = [];
-          this.$emit("visualizar_img", this.imagenes);
+          this.$nuxt.$emit("visualizar_img", this.imagenes);
           this.filtro_presentacion = [];
           let _newItemCatalogo = this.newItemCatalogo;
           Object.keys(_newItemCatalogo).forEach(function (prop) {
             _newItemCatalogo[prop] = "";
           });
+          this.newItemCatalogo = _newItemCatalogo;
         })
         .catch((err) => {
           console.log(err);
