@@ -208,7 +208,13 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "InsertarCatalogo",
-
+  props: {
+    info_catalogo_editar: {
+      type: Object,
+      required: false,
+      default: () => {},
+    },
+  },
   data: function () {
     return {
       newItemCatalogo: {
@@ -241,8 +247,22 @@ export default {
       this.subirServidor();
     });
     this.$nuxt.$on("editar_catalogo", () => {
-      this.subirServidor();
+      console.log("editar en el servidor");
     });
+  },
+  mounted: function () {
+    if (JSON.stringify(this.info_catalogo_editar) != {}) {
+      this.newItemCatalogo = { ...this.info_catalogo_editar.general };
+      this.textartista = this.info_catalogo_editar.catalogos.artista;
+      this.textgenero = this.info_catalogo_editar.catalogos.genero;
+      this.newItemCatalogo.idFormato = this.info_catalogo_editar.catalogos.formato;
+      this.presentacion_cascada();
+      this.newItemCatalogo.idPresentacion = this.info_catalogo_editar.catalogos.presentacion;
+      this.imagenes = this.info_catalogo_editar.imagenes
+    }
+  },
+  destroyed: function(){
+      this.$nuxt.$emit("visualizar_img", []);
   },
   computed: {
     ...mapGetters({
@@ -255,6 +275,7 @@ export default {
   watch: {
     textartista: function (newArtista, oldArtista) {
       if (/^\d+$/.test(newArtista)) {
+        console.log("hola");
         let artista = this.artistas.find((artista) => artista.id == newArtista);
         this.textartista = artista.nombre;
         this.newItemCatalogo.idArtista = artista.id;
@@ -275,12 +296,10 @@ export default {
       this.imagenes[index_recibir] = _img_cambio;
       this.imagenes[index_cambio] = _img_recibir;
       this.imagenes = this.imagenes.slice(0, this.imagenes.length);
-      //this.$emit("visualizar_img", this.imagenes);
       this.$nuxt.$emit("visualizar_img", this.imagenes);
     },
     quitar_imagenes: function (index) {
       this.imagenes.splice(index, 1);
-      //this.$emit("visualizar_img", this.imagenes);
       this.$nuxt.$emit("visualizar_img", this.imagenes);
     },
     presentacion_cascada: function () {
@@ -297,7 +316,6 @@ export default {
         for (let item of files) {
           this.crearImage(item);
         }
-        //this.$emit("visualizar_img", this.imagenes);
         this.$nuxt.$emit("visualizar_img", this.imagenes);
       }
     },

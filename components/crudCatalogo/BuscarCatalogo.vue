@@ -79,7 +79,6 @@ export default {
       ) {
         return `data:image/jpeg;base64,${base64}`;
       });
-
       this.$nuxt.$emit("visualizar_img", imagenes);
     },
     editar_catalogo: function (id) {

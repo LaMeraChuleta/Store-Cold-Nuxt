@@ -9,33 +9,13 @@ const getters = {
         return JSON.stringify(state.array_catalogo_productos) == '[]'
         ? true
         : false
+    },
+    GET_CATALOGO_ID:(state,getters) => (id) =>  { 
+        return getters.CATALOGOS_VACIOS 
+        ? [] 
+        : state.array_catalogo_productos.find(item => item.id === id) 
     }
-    // GET_ARTISTAS: function(state,getters) { 
-    //     return getters.CATALOGOS_VACIOS 
-    //     ? [] 
-    //     : state.array_catalogos.artista 
-    // },
-    // GET_GENEROS: function(state,getters) {
 
-    //     if(!getters.CATALOGOS_VACIOS){
-    //         return state.array_catalogos.genero
-    //     }
-    //     return []
-    // },
-    // GET_FORMATOS: function(state,getters) {
-
-    //     if(!getters.CATALOGOS_VACIOS){
-    //         return state.array_catalogos.formato
-    //     }
-    //     return []
-    // },
-    // GET_PRESENTACIONES: function(state,getters) {
-
-    //     if(!getters.CATALOGOS_VACIOS){
-    //         return state.array_catalogos.presentacion
-    //     }
-    //     return []
-    // }  
 }
 const mutations = {
 

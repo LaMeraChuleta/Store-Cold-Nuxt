@@ -58,15 +58,11 @@ export default {
   components: {
     BarraMiniCatalogo,
   },
-  computed:{
-
-    formatos: function(){
-
-      return this.$store.getters['catalogos/GET_FORMATOS']
-     
-
-    }
-  }
+  computed: {
+    formatos: function () {
+      return this.$store.getters["catalogos/GET_FORMATOS"];
+    },
+  },
 };
 </script>
 
