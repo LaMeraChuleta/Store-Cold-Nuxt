@@ -5,26 +5,26 @@ const router = Router()
 
 router.get('/presentacion', (req, res) => {
 
-    let instancia_presentacion = classPresentacion.getInstance()
-    instancia_presentacion.obtener_todos()
-    .then(data => { 
+  let instancia_presentacion = classPresentacion.getInstance()
+  instancia_presentacion.obtener_todos()
+    .then(data => {
       res.status(200).json(data)
     })
     .catch(error => {
-  
-      res.status(500).json('error')  
+
+      res.status(500).json('error')
     })
 })
-router.post('/presentacion',(req,res) => {
-  
+router.post('/presentacion', (req, res) => {
+
   let instancia_presentacion = classPresentacion.getInstance()
   instancia_presentacion.insertar_presentacion(req.body)
-  .then(data => { 
-    res.status(200).json(data)
-  })
-  .catch(error => {
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(error => {
 
-    res.status(500).json('error')  
-  })
+      res.status(500).json('error')
+    })
 })
 module.exports = router

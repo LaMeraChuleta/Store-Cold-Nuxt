@@ -4,9 +4,9 @@ function Catalogo() {
     const { generar_ruta_id, generar_array_base64 } = require('../imagenes/lib/index.js')
     let mensaje = "hola encapsulado"
 
-    this.obtener_todos = function() {
+    this.obtener_todos = function () {
 
-        return new Promise((resolve,reject) =>{
+        return new Promise((resolve, reject) => {
             pooldb.getConnection()
                 .then(conn => {
                     conn.query(`
@@ -29,22 +29,23 @@ function Catalogo() {
                         JOIN formato ON catalogo.id_formato = formato.id
                         JOIN presentacion ON catalogo.id_presentacion = presentacion.id                        
                     `)
-                    .then(rows => {
-                      delete rows['meta']
-                       rows.forEach(item => {
-                           item.img_base64 = generar_array_base64(item.dir_imagenes)
-                       })  
-                      resolve(rows)
-                  })
-                  conn.release()
+                        .then(rows => {
+                            delete rows['meta']
+                            rows.forEach(item => {
+                                //Modulo Nativo Rust
+                                item.img_base64 = generar_array_base64(item.dir_imagenes)
+                            })
+                            resolve(rows)
+                        })
+                    conn.release()
                 })
-            .catch(err => {
-              reject('error')
-              console.log("No se conecto: " + err);
-            })
+                .catch(err => {
+                    reject('error')
+                    console.log("No se conecto: " + err);
+                })
         })
     }
-    this.insertar_catalogo = function(nuevo_catalogo){
+    this.insertar_catalogo = function (nuevo_catalogo) {
 
         //MODULO NATIVO RUST
         let ruta_id = generar_ruta_id(nuevo_catalogo.img, {
@@ -56,8 +57,8 @@ function Catalogo() {
 
         return new Promise((resolve, reject) => {
             pooldb.getConnection()
-            .then(conn => {
-                conn.query(`
+                .then(conn => {
+                    conn.query(`
                     INSERT INTO catalogo 
                         (id, 
                         dir_imagenes,
@@ -73,19 +74,19 @@ function Catalogo() {
                         estado_disco, 
                         precio) 
                     VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-                    Object.values(datos_insertar))
-                .then(rows => {
-                    resolve(rows)
+                        Object.values(datos_insertar))
+                        .then(rows => {
+                            resolve(rows)
+                        })
+                    conn.release()
                 })
-                conn.release()
-            })
-            .catch(error => {
-                reject(error)
-                console.log('error' + error)
-            })
-        }) 
+                .catch(error => {
+                    reject(error)
+                    console.log('error' + error)
+                })
+        })
     }
-    this.get_mensaje = function(){
+    this.get_mensaje = function () {
         console.log(mensaje)
     }
     //METODOS PRIVADOS
@@ -95,7 +96,7 @@ function Catalogo() {
 let Instacia_Catalogo = (function () {
 
     let instancia;
- 
+
     function crear() {
         var catalogo = new Catalogo();
         return catalogo;
