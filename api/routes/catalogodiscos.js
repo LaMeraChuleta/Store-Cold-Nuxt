@@ -17,9 +17,7 @@ router.get('/catalogodiscos', (req, res) => {
 })
 //RecibirImagenes
 router.post('/catalogodiscos', (req, res) => {
-
   try {
-
     let instancia_catalogo = classCatalogo.getInstance()
     instancia_catalogo.insertar_catalogo(req.body)
       .then(data => {
@@ -35,8 +33,21 @@ router.post('/catalogodiscos', (req, res) => {
   }
 })
 
-router.post('catalogodiscos', (req, res) => {
-
+router.put('/catalogodiscos', (req, res) => {
+  try {
+    let instancia_catalogo = classCatalogo.getInstance()
+    instancia_catalogo.editar_catalogo(req.body.id, req.body.nuevoCatalogo, req.body.imagenes, req.body.dir_imagenes)
+      .then(data => {
+        console.log(data)
+        res.status(200).json(data)
+      })
+      .catch(err => {
+        res.status(500).json('error')
+      })
+  }
+  catch (err) {
+    console.log(err)
+  }
 })
 
 module.exports = router

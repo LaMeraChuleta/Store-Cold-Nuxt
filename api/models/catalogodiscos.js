@@ -86,11 +86,43 @@ function Catalogo() {
                 })
         })
     }
+    this.editar_catalogo = function (id, nuevoCatalogo, imagenes, dir_imagen) {
+
+        return new Promise((resolve, reject) => {
+            pooldb.getConnection()
+                .then(conn => {
+                    conn.query(`
+                        UPDATE catalogo 
+                        SET  nombre = ?,
+                             id_artista = ?,
+                             id_genero = ?,
+                             id_formato = ?,
+                             id_presentacion = ?,
+                             origen = ?,
+                             sello = ?,
+                             año = ?,
+                             estado_portada = ?,
+                             estado_disco = ?,
+                             precio = ?,
+                             dir_imagenes = ?
+                        WHERE id = ?                    
+                    `, Object.values({ ...nuevoCatalogo, dir_imagen, id }))
+                        .then(rows => {
+                            delete rows['meta']
+                            resolve(rows)
+                        })
+                    conn.release()
+                })
+                .catch(err => {
+                    reject('error')
+                    console.log("No se conecto: " + err);
+                })
+        })
+    }
+    //METODOS PRIVADOS
     this.get_mensaje = function () {
         console.log(mensaje)
     }
-    //METODOS PRIVADOS
-
 }
 
 let Instacia_Catalogo = (function () {

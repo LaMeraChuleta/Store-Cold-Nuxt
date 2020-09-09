@@ -207,7 +207,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "InsertarCatalogo",
+  name: "InsertarEditarCatalogo",
   props: {
     info_catalogo_editar: {
       type: Object,
@@ -247,7 +247,7 @@ export default {
       this.subirServidor();
     });
     this.$nuxt.$on("editar_catalogo", () => {
-      console.log("editar en el servidor");
+      this.editarCatalogo();
     });
   },
   mounted: function () {
@@ -258,11 +258,11 @@ export default {
       this.newItemCatalogo.idFormato = this.info_catalogo_editar.catalogos.formato;
       this.presentacion_cascada();
       this.newItemCatalogo.idPresentacion = this.info_catalogo_editar.catalogos.presentacion;
-      this.imagenes = this.info_catalogo_editar.imagenes
+      this.imagenes = this.info_catalogo_editar.imagenes;
     }
   },
-  destroyed: function(){
-      this.$nuxt.$emit("visualizar_img", []);
+  destroyed: function () {
+    this.$nuxt.$emit("visualizar_img", []);
   },
   computed: {
     ...mapGetters({
@@ -309,7 +309,9 @@ export default {
       );
     },
     recibirImagenes: function (e) {
-      this.imagenes = [];
+      JSON.stringify(this.info_catalogo_editar) == "{}"
+        ? (this.imagenes = [])
+        : (this.imagenes = this.imagenes);
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       else {
@@ -327,6 +329,34 @@ export default {
         this.imagenes.push(e.target.result);
       };
       reader.readAsDataURL(file);
+    },
+    editarCatalogo: function () {
+      this.imagenes = this.imagenes.map(function (value) {
+        return value.split(",")[1];
+      });
+      console.log(this.info_catalogo_editar.general.id);
+      this.$axios
+        .put("api/catalogodiscos", {
+          id: this.$route.params.id,
+          nuevoCatalogo: this.newItemCatalogo,
+          imagenes: this.imagenes,
+          dir_imagenes: this.info_catalogo_editar.dir_imagenes,
+        })
+        .then((data) => {
+          this.imagenes = [];
+          this.$nuxt.$emit("visualizar_img", this.imagenes);
+          this.filtro_presentacion = [];
+          let _newItemCatalogo = this.newItemCatalogo;
+          Object.keys(_newItemCatalogo).forEach(function (prop) {
+            _newItemCatalogo[prop] = "";
+          });
+          this.textartista = "";
+          this.textgenero = "";
+          this.newItemCatalogo = _newItemCatalogo;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     subirServidor: function () {
       this.imagenes = this.imagenes.map(function (value) {
@@ -346,6 +376,8 @@ export default {
           Object.keys(_newItemCatalogo).forEach(function (prop) {
             _newItemCatalogo[prop] = "";
           });
+          this.textartista = "";
+          this.textgenero = "";
           this.newItemCatalogo = _newItemCatalogo;
         })
         .catch((err) => {

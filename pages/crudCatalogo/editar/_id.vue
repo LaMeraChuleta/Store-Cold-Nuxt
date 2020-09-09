@@ -56,7 +56,8 @@ export default {
         formato: id_formato,
         presentacion: id_presentacion,
       },
-      imagenes: imagenes
+      imagenes: imagenes,
+      dir_imagenes: catalogo_item.dir_imagenes
       
     };
 
