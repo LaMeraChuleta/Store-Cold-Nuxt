@@ -14,7 +14,7 @@ import VisualizarImagenes from "~/components/crudCatalogo/VisualizarImgenes.vue"
 
 export default {
   name: "crudCatalogo",
-  middleware: 'catalogos',
+  middleware: ["catalogoProductos", "catalogos"],
   components: {
     VisualizarImagenes,
     MiniCatalogos,

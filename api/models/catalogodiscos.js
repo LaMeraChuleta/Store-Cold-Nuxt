@@ -1,7 +1,7 @@
 function Catalogo() {
     //Constructor
     const pooldb = require('../mariadb/conexion')
-    const { generar_ruta_id, generar_array_base64 } = require('../imagenes/lib/index.js')
+    const { generar_ruta_id, generar_array_base64, editar_dir_imagenes } = require('../imagenes/lib/index.js')
     let mensaje = "hola encapsulado"
 
     this.obtener_todos = function () {
@@ -108,7 +108,7 @@ function Catalogo() {
                         WHERE id = ?                    
                     `, Object.values({ ...nuevoCatalogo, dir_imagen, id }))
                         .then(rows => {
-                            delete rows['meta']
+                            console.log(editar_dir_imagenes(dir_imagen, imagenes, nuevoCatalogo.titulo))
                             resolve(rows)
                         })
                     conn.release()

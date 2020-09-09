@@ -7,7 +7,7 @@
 <script>
 import BuscarCatalogo from "~/components/crudCatalogo/BuscarCatalogo.vue";
 export default {
-  middleware: "catalogoProductos",
+  middleware: ["catalogoProductos", "catalogos"],
   components: {
     BuscarCatalogo,
   },

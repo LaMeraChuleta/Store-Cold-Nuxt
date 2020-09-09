@@ -1,6 +1,6 @@
 <template>
   <div>
-    <InsertarCatalogo :info_catalogo_editar="newItemCatalogo">
+    <InsertarCatalogo :catalogo_editar="newItemCatalogo">
       <button
         @click="editar_catalogo"
         class="appearance-none block w-full text-gray-700 border rounded py-3 px-1 mb-3 leading-tight focus:outline-none focus:bg-white mt-6 border-yellow-600"
@@ -16,6 +16,7 @@ export default {
   components: {
     InsertarCatalogo,
   },
+  middleware: ["catalogoProductos", "catalogos"],
   asyncData({ params, store }) {
     let catalogo_item = store.getters["catalogoProductos/GET_CATALOGO_ID"](
       params.id

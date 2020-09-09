@@ -16,6 +16,7 @@ export default {
   components: {
     InsertarCatalogo,
   },
+  middleware: ["catalogoProductos", "catalogos"],
   methods: {
     subirServidor: function () {
       this.$nuxt.$emit("agregar_catalogo");

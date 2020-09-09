@@ -209,7 +209,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "InsertarEditarCatalogo",
   props: {
-    info_catalogo_editar: {
+    catalogo_editar: {
       type: Object,
       required: false,
       default: () => {},
@@ -251,14 +251,15 @@ export default {
     });
   },
   mounted: function () {
-    if (JSON.stringify(this.info_catalogo_editar) != {}) {
-      this.newItemCatalogo = { ...this.info_catalogo_editar.general };
-      this.textartista = this.info_catalogo_editar.catalogos.artista;
-      this.textgenero = this.info_catalogo_editar.catalogos.genero;
-      this.newItemCatalogo.idFormato = this.info_catalogo_editar.catalogos.formato;
+    if (JSON.stringify(this.catalogo_editar) != {}) {
+      this.newItemCatalogo = { ...this.catalogo_editar.general };
+      this.textartista = this.catalogo_editar.catalogos.artista;
+      this.textgenero = this.catalogo_editar.catalogos.genero;
+      this.newItemCatalogo.idFormato = this.catalogo_editar.catalogos.formato;
       this.presentacion_cascada();
-      this.newItemCatalogo.idPresentacion = this.info_catalogo_editar.catalogos.presentacion;
-      this.imagenes = this.info_catalogo_editar.imagenes;
+      this.newItemCatalogo.idPresentacion = this.catalogo_editar.catalogos.presentacion;
+      this.imagenes = this.catalogo_editar.imagenes;
+      this.$nuxt.$emit("visualizar_img", this.imagenes);
     }
   },
   destroyed: function () {
@@ -274,8 +275,7 @@ export default {
   },
   watch: {
     textartista: function (newArtista, oldArtista) {
-      if (/^\d+$/.test(newArtista)) {
-        console.log("hola");
+      if (/^\d+$/.test(newArtista)) {        
         let artista = this.artistas.find((artista) => artista.id == newArtista);
         this.textartista = artista.nombre;
         this.newItemCatalogo.idArtista = artista.id;
@@ -309,7 +309,7 @@ export default {
       );
     },
     recibirImagenes: function (e) {
-      JSON.stringify(this.info_catalogo_editar) == "{}"
+      JSON.stringify(this.catalogo_editar) == "{}"
         ? (this.imagenes = [])
         : (this.imagenes = this.imagenes);
       var files = e.target.files || e.dataTransfer.files;
@@ -334,25 +334,15 @@ export default {
       this.imagenes = this.imagenes.map(function (value) {
         return value.split(",")[1];
       });
-      console.log(this.info_catalogo_editar.general.id);
       this.$axios
         .put("api/catalogodiscos", {
           id: this.$route.params.id,
           nuevoCatalogo: this.newItemCatalogo,
           imagenes: this.imagenes,
-          dir_imagenes: this.info_catalogo_editar.dir_imagenes,
+          dir_imagenes: this.catalogo_editar.dir_imagenes,
         })
         .then((data) => {
-          this.imagenes = [];
-          this.$nuxt.$emit("visualizar_img", this.imagenes);
-          this.filtro_presentacion = [];
-          let _newItemCatalogo = this.newItemCatalogo;
-          Object.keys(_newItemCatalogo).forEach(function (prop) {
-            _newItemCatalogo[prop] = "";
-          });
-          this.textartista = "";
-          this.textgenero = "";
-          this.newItemCatalogo = _newItemCatalogo;
+          this.limpiar_campos();
         })
         .catch((error) => {
           console.log(error);
@@ -369,20 +359,23 @@ export default {
           img: this.imagenes,
         })
         .then((data) => {
-          this.imagenes = [];
-          this.$nuxt.$emit("visualizar_img", this.imagenes);
-          this.filtro_presentacion = [];
-          let _newItemCatalogo = this.newItemCatalogo;
-          Object.keys(_newItemCatalogo).forEach(function (prop) {
-            _newItemCatalogo[prop] = "";
-          });
-          this.textartista = "";
-          this.textgenero = "";
-          this.newItemCatalogo = _newItemCatalogo;
+          this.limpiar_campos();
         })
         .catch((err) => {
           console.log(err);
         });
+    },
+    limpiar_campos: function () {
+      this.imagenes = [];
+      this.$nuxt.$emit("visualizar_img", this.imagenes);
+      this.filtro_presentacion = [];
+      let _newItemCatalogo = this.newItemCatalogo;
+      Object.keys(_newItemCatalogo).forEach(function (prop) {
+        _newItemCatalogo[prop] = "";
+      });
+      this.textartista = "";
+      this.textgenero = "";
+      this.newItemCatalogo = _newItemCatalogo;
     },
   },
 };

@@ -82,7 +82,6 @@ export default {
       this.$nuxt.$emit("visualizar_img", imagenes);
     },
     editar_catalogo: function (id) {
-      console.log(id);
       this.$router.push({
         name: "crudCatalogo-editar-id",
         params: { id },
