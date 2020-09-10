@@ -2,7 +2,6 @@ use neon::prelude::*;
 //STD
 use std::path::PathBuf;
 use std::str::FromStr;
-
 use std::fs;
 use std::io::prelude::*;
 use std::vec::Vec;
@@ -15,7 +14,8 @@ use image::load_from_memory;
 //use image::imageops::FilterType;
 //use image::GenericImageView;
 //BIBLIOTECA GENERAR INFO PATH
-mod infopath;
+mod  infopath;
+
 
 fn generar_ruta_id(mut cx: FunctionContext) -> JsResult<JsObject> {
 
@@ -76,15 +76,12 @@ fn generar_array_base64(mut cx: FunctionContext) -> JsResult<JsArray> {
 
     let ruta_dir = cx.argument::<JsString>(0)?.value();
     let ruta_dir = PathBuf::from_str(&ruta_dir).unwrap();
-
     let mut vec_base64: Vec<String> = Vec::new();
 
     if ruta_dir.is_dir(){
         for file_img in fs::read_dir(ruta_dir).unwrap() {
-            
             match file_img {
                 Ok(dir_img) => {
-                    
                     let mut vec_img = Vec::new();
                     let mut imagen = fs::File::open(dir_img.path()).unwrap();
                     imagen.read_to_end(&mut vec_img).unwrap();
@@ -95,13 +92,27 @@ fn generar_array_base64(mut cx: FunctionContext) -> JsResult<JsArray> {
             }
         }
     }
+
     let js_array_base64 = JsArray::new(&mut cx, vec_base64.len() as u32);
-    // Iterate over the Rust Vec and map each value in the Vec to the JS array
+
     for (i, obj) in vec_base64.iter().enumerate() {
         let js_string = cx.string(obj);
         js_array_base64.set(&mut cx, i as u32, js_string).unwrap();
     }
     Ok(js_array_base64)
+}
+
+fn generar_array_base64_async(mut cx: FunctionContext) -> JsResult<JsUndefined> {
+
+
+    let ruta_dir = cx.argument::<JsString>(0)?.value();
+    let ruta_dir = PathBuf::from_str(&ruta_dir).unwrap();
+    let cb = cx.argument::<JsFunction>(1)?;
+
+    let task = infopath::Base64ConvertTask { dir_name: ruta_dir };
+    task.schedule(cb);
+
+    Ok(cx.undefined())
 }
 fn editar_dir_imagenes(mut cx: FunctionContext) -> JsResult<JsBoolean> {
 
@@ -119,10 +130,7 @@ fn editar_dir_imagenes(mut cx: FunctionContext) -> JsResult<JsBoolean> {
         for file_img in fs::read_dir(&ruta_dir).unwrap() {
             
             match file_img {
-                Ok(dir_img) => {
-                    //let mut vec_img = Vec::new();
-                    fs::remove_file(dir_img.path()).unwrap();
-                },
+                Ok(dir_img) => fs::remove_file(dir_img.path()).unwrap(),
                 Err(err) => println!("{:?}",err)
             }
         }
@@ -165,5 +173,6 @@ register_module!(mut cx, {
     cx.export_function("generar_array_base64", generar_array_base64)?; 
     cx.export_function("generar_ruta_id",generar_ruta_id)?; 
     cx.export_function("editar_dir_imagenes",editar_dir_imagenes)?; 
+    cx.export_function("generar_array_base64_async",generar_array_base64_async)?;
     Ok(())
 });

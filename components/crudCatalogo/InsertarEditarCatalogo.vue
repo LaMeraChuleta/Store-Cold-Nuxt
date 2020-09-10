@@ -251,7 +251,8 @@ export default {
     });
   },
   mounted: function () {
-    if (JSON.stringify(this.catalogo_editar) != {}) {
+    
+    if (JSON.stringify(this.catalogo_editar) != undefined) {
       this.newItemCatalogo = { ...this.catalogo_editar.general };
       this.textartista = this.catalogo_editar.catalogos.artista;
       this.textgenero = this.catalogo_editar.catalogos.genero;
@@ -309,9 +310,7 @@ export default {
       );
     },
     recibirImagenes: function (e) {
-      JSON.stringify(this.catalogo_editar) == "{}"
-        ? (this.imagenes = [])
-        : (this.imagenes = this.imagenes);
+
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       else {

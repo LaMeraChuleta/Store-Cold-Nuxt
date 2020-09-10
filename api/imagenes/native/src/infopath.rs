@@ -7,6 +7,12 @@ use std::iter;
 use rand::{ Rng, thread_rng };
 use rand::distributions::Alphanumeric;
 
+use std::vec::Vec;
+use std::fs;
+use std::io::prelude::*;
+use blob::Blob;
+use blob::Standard;
+
 pub struct InfoPath {
     artista: String,
     pub titulo: String,
@@ -147,5 +153,49 @@ impl InfoPath {
     }
 }
     
-   
-    
+pub struct Base64ConvertTask {
+
+   pub dir_name: PathBuf
+}
+
+impl Task for Base64ConvertTask {
+
+    type Output = Vec<String>;
+    type Error = String;
+    type JsEvent = JsArray;
+
+    fn perform(&self) -> Result<Self::Output, Self::Error> {
+
+        let mut vec_base64: Vec<String> = Vec::new();
+
+        if self.dir_name.is_dir(){
+            for file_img in fs::read_dir(&self.dir_name).unwrap() {
+                match file_img {
+                    Ok(dir_img) => {
+                        let mut vec_img = Vec::new();
+                        let mut imagen = fs::File::open(dir_img.path()).unwrap();
+                        imagen.read_to_end(&mut vec_img).unwrap();
+                        let blob_img = Blob::<Standard>::from_vec(vec_img);
+                        vec_base64.push(blob_img.encode_base64());
+                    },
+                    Err(err) => println!("{:?}",err)
+                }
+            }
+        }
+        Ok(vec_base64)
+    }
+    fn complete(self, mut cx: TaskContext, result: std::result::Result<Self::Output, Self::Error>) -> JsResult<Self::JsEvent> {
+
+
+        let vec_base64 = result.unwrap();
+        let js_array_base64 = JsArray::new(&mut cx, vec_base64.len() as u32);
+
+        for (i, obj) in vec_base64.iter().enumerate() {
+            let js_string = cx.string(obj);
+            js_array_base64.set(&mut cx, i as u32, js_string).unwrap();
+        }
+        Ok(js_array_base64)
+    }
+
+
+}
