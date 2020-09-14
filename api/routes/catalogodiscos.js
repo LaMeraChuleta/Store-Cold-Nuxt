@@ -37,9 +37,8 @@ router.put('/catalogodiscos', (req, res) => {
   try {
     let instancia_catalogo = classCatalogo.getInstance()
     instancia_catalogo.editar_catalogo(req.body.id, req.body.nuevoCatalogo, req.body.imagenes, req.body.dir_imagenes)
-      .then(data => {
-        console.log(data)
-        res.status(200).json(algo, data)
+      .then(data => {      
+        res.status(200).json(data)
       })
       .catch(err => {
         res.status(500).json('error')

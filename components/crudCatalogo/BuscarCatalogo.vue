@@ -5,8 +5,24 @@
         class="text-center mb-10 text-lg block uppercase tracking-wide text-gray-700 font-bold"
       >Buscar en el catalogo</h1>
       <div class="mb-5 inline-flex">
-        <input type="text" class="border w-full rounded-full" />
-        <button class="w-10">+</button>
+        <input v-model="busqueda" type="text" class="border w-full rounded-full" />
+        <button 
+            @click="buscar_catalogo"
+            class="w-5 m-1 ml-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </button>
       </div>
       <div class>
         <table class>
@@ -72,6 +88,11 @@
 
 <script>
 export default {
+  data: function () {
+    return {
+      busqueda: "",
+    };
+  },
   methods: {
     enviar_imagenes: function (index) {
       let imagenes = this.catalogo_productos[index].img_base64.map(function (
@@ -87,6 +108,9 @@ export default {
         params: { id },
       });
     },
+    buscar_catalogo: function(){
+
+    }
   },
   computed: {
     catalogo_productos: function () {

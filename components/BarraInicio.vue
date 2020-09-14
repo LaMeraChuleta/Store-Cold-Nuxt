@@ -8,17 +8,37 @@
         <div class="ml-8 mr-3 sm:hidden">
           <Buscador></Buscador>
         </div>
-        <div>
-          <button class="inline-flex stroke-current text-white m-4">
-            <img width="40" height="40" src="../assets/icon/Carrito.png" />
+        <div class="flex justify-center">
+          <button class="inline-flex w-10 text-gray-800 m-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+              />
+            </svg>
             <span class="text-red-800 text-2xl">{{ 1 }}</span>
           </button>
-          <button
-            @click="navIsOpen = !navIsOpen"
-            type="button"
-            class="inline text-white stroke-current m-4"
-          >
-            <img class="mb-1" width="30" height="30" src="../assets/icon/Menu.png" />
+          <button @click="navIsOpen = !navIsOpen" type="button" class="inline w-8 m-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
           </button>
         </div>
       </div>
@@ -29,24 +49,24 @@
         :class="navIsOpen ? 'block' : 'hidden'"
         class="px-5 pb-2 bg-white text-center border border-black"
       >
-      <router-link to="/crudCatalogo/agregar">
-        <a
-          href="#"
-          class="block font-mono border border-black text-black text-lg hover:text-yellow-500 rounded pb-1"
-        >Agregar</a>
-      </router-link>
-      <router-link to="/crudCatalogo/buscar">
-        <a
-          href="#"
-          class="block font-mono border border-black text-black text-lg hover:text-yellow-500 rounded pb-1"
-        >Buscar</a>
-      </router-link>
-      <router-link to="/">
-        <a
-          href="#"
-          class="block font-mono border border-black text-black text-lg hover:text-yellow-500 rounded pb-1"
-        >Blog</a>
-      </router-link>
+        <router-link to="/crudCatalogo/agregar">
+          <a
+            href="#"
+            class="block font-mono border border-black text-black text-lg hover:text-yellow-500 rounded pb-1"
+          >Agregar</a>
+        </router-link>
+        <router-link to="/crudCatalogo/buscar">
+          <a
+            href="#"
+            class="block font-mono border border-black text-black text-lg hover:text-yellow-500 rounded pb-1"
+          >Buscar</a>
+        </router-link>
+        <router-link to="/">
+          <a
+            href="#"
+            class="block font-mono border border-black text-black text-lg hover:text-yellow-500 rounded pb-1"
+          >Blog</a>
+        </router-link>
       </div>
     </header>
   </div>
