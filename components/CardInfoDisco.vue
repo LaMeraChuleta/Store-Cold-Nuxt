@@ -46,7 +46,7 @@ export default {
   methods: {
     irPaginaDetalle: function () {
       this.$router.push({
-        path: `/${this.infoCard.formatoType}/detalles/${this.infoCard.id}`,
+        path: `/${this.infoCard.formato}/detalles/${this.infoCard.id}`,
       });
     },
   },

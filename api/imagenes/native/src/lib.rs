@@ -124,8 +124,6 @@ fn editar_dir_imagenes(mut cx: FunctionContext) -> JsResult<JsBoolean> {
 
     let titulo_disco = cx.argument::<JsString>(2)?.value();
 
-    println!("{}",titulo_disco);
-
     if ruta_dir.is_dir(){
         for file_img in fs::read_dir(&ruta_dir).unwrap() {
             

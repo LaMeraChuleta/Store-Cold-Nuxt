@@ -30,19 +30,19 @@ function Catalogo() {
                         JOIN artistas ON catalogo.id_artista = artistas.id 
                         JOIN generos ON catalogo.id_genero = generos.id
                         JOIN formato ON catalogo.id_formato = formato.id
-                        JOIN presentacion ON catalogo.id_presentacion = presentacion.id  
-                        LIMIT 1                  
+                        JOIN presentacion ON catalogo.id_presentacion = presentacion.id    
+                                                
                 `)
-                .then(rows => {
-                    delete rows['meta']
-                    rows.forEach(item => {
-                        // generar_array_base64_async(item.dir_imagenes, (err, result) => {
-                        //     console.log(result)
-                        // })
-                        item.img_base64 = generar_array_base64(item.dir_imagenes)
-                    })
-                    resolve(rows)
-                })
+                        .then(rows => {
+                            delete rows['meta']
+                            rows.forEach(item => {
+                                // generar_array_base64_async(item.dir_imagenes, (err, result) => {
+                                //     console.log(result)
+                                // })
+                                item.img_base64 = generar_array_base64(item.dir_imagenes)
+                            })
+                            resolve(rows)
+                        })
                     conn.release()
                 })
                 .catch(err => {
@@ -127,9 +127,14 @@ function Catalogo() {
     }
     //METODOS PRIVADOS
     this.get_mensaje = function () {
-        console.log(mensaje)
+
+        console.log('primera funcion')
     }
 
+    this.set_mensaje = function () {
+
+        console.log('segunda funcion')
+    }
 }
 
 let Instacia_Catalogo = (function () {
