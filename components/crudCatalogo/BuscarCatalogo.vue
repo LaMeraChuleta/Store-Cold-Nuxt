@@ -5,10 +5,13 @@
         class="text-center mb-10 text-lg block uppercase tracking-wide text-gray-700 font-bold"
       >Buscar en el catalogo</h1>
       <div class="mb-5 inline-flex">
-        <input v-model="busqueda" type="text" class="border w-full rounded-full" />
-        <button 
-            @click="buscar_catalogo"
-            class="w-5 m-1 ml-3">
+        <input
+          @keyup.enter="buscar_catalogo"
+          v-model="busqueda"
+          type="text"
+          class="border w-full rounded-full px-4"
+        />
+        <button @click="buscar_catalogo" class="w-5 m-1 ml-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -37,7 +40,7 @@
           </thead>
           <tbody class="text-gray-700 text-xs">
             <tr
-              v-for="(item, key) in catalogo_productos"
+              v-for="(item, key) in catalogo_productos_slice"
               :key="key"
               class="hover:bg-gray-200 focus:bg-gray-200 cursor-pointer"
               @click="enviar_imagenes(key)"
@@ -87,6 +90,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data: function () {
     return {
@@ -95,7 +99,7 @@ export default {
   },
   methods: {
     enviar_imagenes: function (index) {
-      let imagenes = this.catalogo_productos[index].img_base64.map(function (
+      let imagenes = this.array_catalogo_productos[index].img_base64.map(function (
         base64
       ) {
         return `data:image/jpeg;base64,${base64}`;
@@ -108,16 +112,21 @@ export default {
         params: { id },
       });
     },
-    buscar_catalogo: function(){
-
-    }
+    buscar_catalogo: function () {
+      let result = [];
+      this.array_catalogo_productos.forEach((element) => {
+        if (element.nombre.includes(this.busqueda)) result.push(element);
+      });
+      
+      console.log(result);
+    },
   },
   computed: {
-    catalogo_productos: function () {
-      return this.$store.state.catalogoProductos.array_catalogo_productos.slice(
-        0,
-        8
-      );
+    ...mapState("catalogoProductos", {
+      array_catalogo_productos: (state) => state.array_catalogo_productos,
+    }),
+    catalogo_productos_slice: function () {
+      return this.array_catalogo_productos.slice(0, 9);
     },
   },
 };
