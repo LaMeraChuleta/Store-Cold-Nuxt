@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="bg-white border border-black">
+    <header class="bg-white border">
       <div class="flex flex-auto sm:text-xs">
         <router-link class="sm:ml-2 justify-center flex-auto w-1/4 inline-flex" to="/cassette">
           <img class="sm:mr-1 mr-3 p-1" width="40" height="40" src="~/assets/icon/tape.png" />

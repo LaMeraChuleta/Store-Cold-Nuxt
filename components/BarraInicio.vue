@@ -1,11 +1,11 @@
 <template>
   <div>
-    <header class="bg-white border border-black">
+    <header class="bg-white border">
       <div class="flex items-center px-4 py-3 h-16 sm:h-12 justify-between">
         <router-link to="/">
           <div class="text-black font-mono text-4xl">Inicio</div>
         </router-link>
-        <div class="ml-8 mr-3 sm:hidden">
+        <div class="sm:hidden">
           <Buscador></Buscador>
         </div>
         <div class="flex justify-center">
@@ -25,7 +25,11 @@
             </svg>
             <span class="text-red-800 text-2xl">{{ 1 }}</span>
           </button>
-          <button @click="navIsOpen = !navIsOpen" type="button" class="inline w-8 m-2">
+          <button
+            @click="navIsOpen = !navIsOpen"
+            type="button"
+            class="inline w-8 m-2"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -42,30 +46,34 @@
           </button>
         </div>
       </div>
-      <div class="sm:block hidden">
+      <div class="sm:block hidden sm:pl-2 sm:pr-2">
         <Buscador></Buscador>
       </div>
       <div
+        @click="navIsOpen = false"
         :class="navIsOpen ? 'block' : 'hidden'"
-        class="px-5 pb-2 bg-white text-center border border-black"
+        class="bg-white text-center border"
       >
         <router-link to="/crudCatalogo/agregar">
           <a
             href="#"
-            class="block font-mono border border-black text-black text-lg hover:text-yellow-500 rounded pb-1"
-          >Agregar</a>
+            class="block w-full font-mono borde text-lg hover:text-gray-800 rounded"
+            >Agregar</a
+          >
         </router-link>
         <router-link to="/crudCatalogo/buscar">
           <a
             href="#"
-            class="block font-mono border border-black text-black text-lg hover:text-yellow-500 rounded pb-1"
-          >Buscar</a>
+            class="block font-mono border text-lg hover:text-gray-800 rounded pb-1"
+            >Buscar</a
+          >
         </router-link>
         <router-link to="/">
           <a
             href="#"
-            class="block font-mono border border-black text-black text-lg hover:text-yellow-500 rounded pb-1"
-          >Blog</a>
+            class="block font-mono border text-lg hover:text-gray-800 rounded pb-1"
+            >Blog</a
+          >
         </router-link>
       </div>
     </header>

@@ -115,7 +115,9 @@ export default {
     buscar_catalogo: function () {
       let result = [];
       this.array_catalogo_productos.forEach((element) => {
-        if (element.nombre.includes(this.busqueda)) result.push(element);
+        if (element.nombre.includes(this.busqueda)) {
+           result.push(element);
+        }
       });
       
       console.log(result);
