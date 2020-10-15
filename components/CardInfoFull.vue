@@ -19,16 +19,15 @@
         <div class="xl:w-2/3 lg:w-2/3 flex lg:flex-auto flex-col sm:inline-block">
           <div class="flex lg:flex-row sm:flex-col">
             <div class="xl:w-1/2 lg:w-1/2 ml-8 mt-8">
-              <p class="m-1 text-6xl font-extrabold">{{ objectDatos.titulo }}</p>
-              <p class="m-1 mb-3 text-lg font-mono">{{ objectDatos.artista }}</p>
+              <p class="m-1 text-4xl font-extrabold">{{ objectDatos.nombre }}</p>
+              <p class="m-1 mb-3 text-lg font-mono">Artista: {{ objectDatos.artista }}</p>
               <p class="m-1 text-lg">Sello: {{ objectDatos.sello }}</p>
               <p class="m-1 text-lg">Formato: {{ objectDatos.formato }}</p>
               <p class="m-1 text-lg">Formato: {{ objectDatos.presentacion }}</p>
               <p class="m-1 text-lg">Pais: {{ objectDatos.origen }}</p>
               <p class="m-1 text-lg">Genero: {{ objectDatos.genero }}</p>
               <p class="m-1 text-lg">Precio: $ {{ objectDatos.precio }}</p>
-              <button
-                
+              <button  
                 :disabled="addButon"
                 class="sm:mt-2 mt-8 px-12 py-4 hover:bg-gray-800 rounded-lg text-white bg-gray-900"
               >Add To Card</button>

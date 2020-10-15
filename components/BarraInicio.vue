@@ -8,7 +8,7 @@
         <div class="sm:hidden">
           <Buscador></Buscador>
         </div>
-        <div class="flex justify-center">
+        <div class="flex justify-center ">
           <button class="inline-flex w-10 text-gray-800 m-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -57,21 +57,21 @@
         <router-link to="/crudCatalogo/agregar">
           <a
             href="#"
-            class="block w-full font-mono borde text-lg hover:text-gray-800 rounded"
+            class="block w-full borde text-lg hover:text-gray-800 rounded"
             >Agregar</a
           >
         </router-link>
         <router-link to="/crudCatalogo/buscar">
           <a
             href="#"
-            class="block font-mono border text-lg hover:text-gray-800 rounded pb-1"
+            class="block border text-lg hover:text-gray-800 rounded pb-1"
             >Buscar</a
           >
         </router-link>
         <router-link to="/">
           <a
             href="#"
-            class="block font-mono border text-lg hover:text-gray-800 rounded pb-1"
+            class="block border text-lg hover:text-gray-800 rounded pb-1"
             >Blog</a
           >
         </router-link>

@@ -36,10 +36,9 @@ function Catalogo() {
                         .then(rows => {
                             delete rows['meta']
                             rows.forEach(item => {
-                                // generar_array_base64_async(item.dir_imagenes, (err, result) => {
-                                //     console.log(result)
-                                // })
-                                item.img_base64 = generar_array_base64(item.dir_imagenes)
+                                item.img_path = item.artista.replace(/\s/g, '') + '\\' +
+                                    item.id + '\\' +
+                                    item.nombre.replace(/\s/g, '')
                             })
                             resolve(rows)
                         })
@@ -53,8 +52,8 @@ function Catalogo() {
     }
     this.insertar_catalogo = function (nuevo_catalogo) {
 
-        //MODULO NATIVO RUST
-        let ruta_id = generar_ruta_id(nuevo_catalogo.img, {
+        // //MODULO NATIVO RUST
+        let ruta_id = generar_ruta_id({
             "artista": nuevo_catalogo.artista,
             "titulo": nuevo_catalogo.infoCatalogo.titulo,
             "year": nuevo_catalogo.infoCatalogo.año
@@ -93,7 +92,7 @@ function Catalogo() {
         })
     }
     this.editar_catalogo = function (id, nuevoCatalogo, imagenes, dir_imagen) {
-
+        console.log({ ...nuevoCatalogo, dir_imagen, id })
         return new Promise((resolve, reject) => {
             pooldb.getConnection()
                 .then(conn => {
@@ -126,11 +125,6 @@ function Catalogo() {
         })
     }
     //METODOS PRIVADOS
-    this.get_mensaje = function () {
-
-        console.log('primera funcion')
-    }
-
     this.set_mensaje = function () {
 
         console.log('segunda funcion')
@@ -140,7 +134,6 @@ function Catalogo() {
 let Instacia_Catalogo = (function () {
 
     let instancia;
-
     function crear() {
         var catalogo = new Catalogo();
         return catalogo;

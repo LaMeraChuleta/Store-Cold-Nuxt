@@ -1,16 +1,21 @@
 <template>
   <div>
-    <div class="w-full h-72 sm:h-auto max-w-lg flex flex-col mt-3 sm:mt-0 sm:p-5 border p-6">
+    <div
+      class="w-full h-72 sm:h-auto max-w-lg flex flex-col mt-3 sm:mt-0 sm:p-5 border p-6"
+    >
       <h1
         class="text-center mb-10 text-lg block uppercase tracking-wide text-gray-700 font-bold"
-      >Agregar Nuevos Productos al Catalogo</h1>
+      >
+        Agregar Nuevos Productos al Catalogo
+      </h1>
 
       <div class="inline-flex -mx-3 mb-3">
         <div class="w-full md:w-1/2 px-3 md:mb-0">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="titulo"
-          >Titulo</label>
+            >Titulo</label
+          >
           <input
             v-model="newItemCatalogo.titulo"
             class="appearance-none block w-full text-gray-700 border rounded py-2 px-1 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -22,7 +27,8 @@
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="artista"
-          >Artista</label>
+            >Artista</label
+          >
           <input
             v-model="textartista"
             class="appearance-none block w-full text-gray-700 border rounded py-2 px-1 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -36,7 +42,9 @@
               :key="value.id"
               :value="value.id"
               class="appearance-none w-full text-xs text-gray-700 border border-gray-200 rounded py-3 px-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            >{{ value.nombre }}</option>
+            >
+              {{ value.nombre }}
+            </option>
           </datalist>
         </div>
       </div>
@@ -46,7 +54,8 @@
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2"
             for="genero"
-          >Genero</label>
+            >Genero</label
+          >
           <input
             v-model="textgenero"
             class="appearance-none block w-full text-gray-700 border rounded py-2 px-1 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -60,14 +69,17 @@
               :key="value.id"
               :value="value.id"
               class="appearance-none w-full text-xs text-gray-700 border border-gray-200 rounded py-3 px-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            >{{ value.nombre }}</option>
+            >
+              {{ value.nombre }}
+            </option>
           </datalist>
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2"
             for="formato"
-          >Formato</label>
+            >Formato</label
+          >
           <select
             @change="presentacion_cascada"
             v-model="newItemCatalogo.idFormato"
@@ -75,14 +87,17 @@
             id="formato"
           >
             <option value>Seleccionar</option>
-            <option v-for="value in formatos" :key="value.id" :value="value.id">{{ value.nombre }}</option>
+            <option v-for="value in formatos" :key="value.id" :value="value.id">
+              {{ value.nombre }}
+            </option>
           </select>
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bl-2"
             for="presentacion"
-          >Presentacion</label>
+            >Presentacion</label
+          >
           <select
             v-model="newItemCatalogo.idPresentacion"
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -93,7 +108,9 @@
               v-for="value in filtro_presentacion"
               :key="value.id"
               :value="value.id"
-            >{{ value.nombre }}</option>
+            >
+              {{ value.nombre }}
+            </option>
           </select>
         </div>
       </div>
@@ -103,7 +120,8 @@
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2"
             for="origen"
-          >Origen</label>
+            >Origen</label
+          >
           <input
             v-model="newItemCatalogo.origen"
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -123,7 +141,8 @@
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2"
             for="sello"
-          >Sello</label>
+            >Sello</label
+          >
           <input
             v-model="newItemCatalogo.sello"
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -134,7 +153,8 @@
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bl-2"
             for="año"
-          >Año</label>
+            >Año</label
+          >
           <input
             v-model="newItemCatalogo.año"
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -149,7 +169,8 @@
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2"
             for="estadoPortada"
-          >Estado Portada</label>
+            >Estado Portada</label
+          >
           <input
             v-model.number="newItemCatalogo.estadoPortada"
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -160,7 +181,8 @@
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2"
             for="estadoDisco"
-          >Estado Disco</label>
+            >Estado Disco</label
+          >
           <input
             v-model.number="newItemCatalogo.estadoDisco"
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -171,7 +193,8 @@
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bl-2"
             for="precio"
-          >Precio</label>
+            >Precio</label
+          >
           <input
             v-model.number="newItemCatalogo.precio"
             class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -186,7 +209,8 @@
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="fotos"
-          >Fotos</label>
+            >Fotos</label
+          >
           <input
             @change="recibirImagenes"
             class="appearance-none block w-full text-gray-700 border rounded py-2 px-1 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -251,8 +275,8 @@ export default {
     });
   },
   mounted: function () {
-    
     if (JSON.stringify(this.catalogo_editar) != undefined) {
+      console.log("edicion");
       this.newItemCatalogo = { ...this.catalogo_editar.general };
       this.textartista = this.catalogo_editar.catalogos.artista;
       this.textgenero = this.catalogo_editar.catalogos.genero;
@@ -276,7 +300,7 @@ export default {
   },
   watch: {
     textartista: function (newArtista, oldArtista) {
-      if (/^\d+$/.test(newArtista)) {        
+      if (/^\d+$/.test(newArtista)) {
         let artista = this.artistas.find((artista) => artista.id == newArtista);
         this.textartista = artista.nombre;
         this.newItemCatalogo.idArtista = artista.id;
@@ -310,11 +334,12 @@ export default {
       );
     },
     recibirImagenes: function (e) {
-
+      console.log('Primera Parte')
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       else {
         for (let item of files) {
+          console.log(files)
           this.crearImage(item);
         }
         this.$nuxt.$emit("visualizar_img", this.imagenes);
@@ -342,6 +367,7 @@ export default {
         })
         .then((data) => {
           this.limpiar_campos();
+          this.$router.push("/crudCatalogo/buscar");
         })
         .catch((error) => {
           console.log(error);

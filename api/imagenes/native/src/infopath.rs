@@ -58,7 +58,7 @@ impl InfoPath {
         let mut  path = PathBuf::new();
         path.push(r"C:\");
         path.push("StoreCold");
-        path.push(   self.artista
+        path.push(self.artista
             .split_whitespace()
             .collect::<String>());
         path.push(id);

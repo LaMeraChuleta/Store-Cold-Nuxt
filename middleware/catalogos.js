@@ -2,7 +2,6 @@ export default async function({ $axios, store }) {
     
     if(store.getters['catalogos/CATALOGOS_VACIOS']){
         
-        console.log('store buscando catalogos')
         const array_catalogo = [
             'artista', 
             'genero', 

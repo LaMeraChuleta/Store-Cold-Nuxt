@@ -1,7 +1,7 @@
 <template>
   <div class="pt-3 pr-3 pl-3">
     <img
-      :src="`data:image/jpeg;base64,${infoCard.img_base64[0]}`"
+      :src="`http://127.0.0.1:8080/imagen/${infoCard.img_path}1.jpeg`"
       @mouseover="upImg = true"
       @mouseout="upImg = false"
       @click="irPaginaDetalle"
@@ -29,6 +29,7 @@ export default {
   data: function () {
     return {
       upImg: false,
+
     };
   },
   computed: {
@@ -49,6 +50,7 @@ export default {
         path: `/${this.infoCard.formato}/detalles/${this.infoCard.id}`,
       });
     },
-  },
+ 
+  }
 };
 </script>
