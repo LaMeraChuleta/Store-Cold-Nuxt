@@ -336,12 +336,23 @@ export default {
     recibirImagenes: function (e) {
       console.log('Primera Parte')
       var files = e.target.files || e.dataTransfer.files;
+      let arrya_files = []
       if (!files.length) return;
       else {
         for (let item of files) {
-          console.log(files)
+          arrya_files.push(item)
           this.crearImage(item);
         }
+        console.log(arrya_files[0])
+        var formData = new FormData();
+        formData.append("file", arrya_files[0]);
+        this.$axios.$post("http://127.0.0.1:8080/", formData, {'Content-Type': 'multipart/form-data' })
+          .then((data) => {
+            console.log(data)
+          })
+          .catch((err) => {
+            console.log(err);
+          });
         this.$nuxt.$emit("visualizar_img", this.imagenes);
       }
     },
@@ -353,6 +364,8 @@ export default {
         this.imagenes.push(e.target.result);
       };
       reader.readAsDataURL(file);
+     
+
     },
     editarCatalogo: function () {
       this.imagenes = this.imagenes.map(function (value) {
