@@ -81,7 +81,7 @@ function Catalogo() {
                     VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)`,
                         Object.values(datos_insertar))
                         .then(rows => {
-                            resolve(ruta_id)
+                            resolve(ruta_id.ruta)
                         })
                     conn.release()
                 })

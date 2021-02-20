@@ -9,25 +9,20 @@ use actix_web::Error;
 use actix_multipart::Multipart;
 use actix_cors::Cors;
 use actix_web::http::header;
-
+use serde::Deserialize;
 const RUTA: &str = r"C:\StoreCold\";
-
-
 use futures::{StreamExt, TryStreamExt};
-
-async fn save_file(mut payload: Multipart) -> Result<HttpResponse, Error> {
+async fn save_file(mut payload: Multipart, _path: web::Json<InfoRuta>) -> Result<HttpResponse, Error> {
     // iterate over multipart stream
-    println!("Cargando ...");
+    //println!("{:?}", payload);
     while let Ok(Some(mut field)) = payload.try_next().await {
         let content_type = field.content_disposition().unwrap();
         let _filename = content_type.get_filename().unwrap();
         let filepath = format!("{}/{}", RUTA, _filename);
-
         // File::create is blocking operation, use threadpool
         let mut f = web::block(move || std::fs::File::create(filepath))
             .await
             .unwrap();
-
         // Field in turn is stream of *Bytes* object
         while let Some(chunk) = field.next().await {
             let data = chunk.unwrap();
@@ -37,16 +32,13 @@ async fn save_file(mut payload: Multipart) -> Result<HttpResponse, Error> {
     }
     Ok(HttpResponse::Ok().into())
 }
-
 async fn get_imagen(req: HttpRequest) -> Result<NamedFile> {
-
     let path: PathBuf = req.match_info()
         .query("filename")
         .parse()
         .unwrap();    
     Ok(NamedFile::open(path)?)
 }
-
 #[get("imagen/{filename:.*}")]
 async fn index(req: HttpRequest) -> Result<fs::NamedFile, Error> {
     
@@ -60,10 +52,8 @@ async fn index(req: HttpRequest) -> Result<fs::NamedFile, Error> {
             parameters: vec![],
         }))
 }
-
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-
     HttpServer::new( || {
         App::new() 
         .wrap(Cors::default()
@@ -79,7 +69,12 @@ async fn main() -> std::io::Result<()> {
         .route("/", web::post().to(save_file))
         //.route("/imagen/{filename:.*}", web::get().to(get_imagen))            
     })
-    .bind("127.0.0.1:8080")?
+    .bind("localhost:8080")?
     .run()
     .await
+}
+//Modelos
+#[derive(Deserialize)]
+struct InfoRuta {
+    ruta: String,
 }

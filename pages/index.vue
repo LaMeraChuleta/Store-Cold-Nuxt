@@ -3,9 +3,7 @@
     <div class="flex h-64 sm:h-32 max-w-6xl mx-auto">
       <img src="~/assets/img/Carusel1.jpg" />
     </div>
-    <div
-      class="border-black border-r-0 border-l-0 border-4 text-center md:text-blue-500 text-black font-mono text-4xl mt-2 sm:text-2xl max-w-6xl mx-auto"
-    >
+    <div class="border-black border-r-0 border-l-0 border-4 text-center md:text-blue-500 text-black font-mono text-4xl mt-2 sm:text-2xl max-w-6xl mx-auto">
       <p class="pt-1 pb-1">Cambios</p>
     </div>
     <div class="flex flex-auto flex-grow sm:flex-col md:flex-row max-w-6xl mx-auto mb-20">

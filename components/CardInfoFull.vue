@@ -4,7 +4,7 @@
       <div class="flex sm:inline-block md:inline-block lg:flex-auto sm:m-8">
         <div class="lg:w-1/3 xl:w-1/3 lg:ml-20">
           <div>
-            <img :src="`data:image/jpeg;base64,${ objectDatos.img_base64[0] }`" />
+            <img :src="`https://media.giphy.com/media/110YfuwtzXGaaI/giphy.gif`" />
           </div>
           <div class="grid grid-cols-3">
             <div
@@ -12,7 +12,7 @@
               v-for="(item, index) in objectDatos.img_base64"
               :key="index"
             >
-              <img :src="`data:image/jpeg;base64,${ item }`" />
+              <img :src="`https://media.giphy.com/media/110YfuwtzXGaaI/giphy.gif`" />
             </div>
           </div>
         </div>

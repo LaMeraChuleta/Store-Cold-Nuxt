@@ -334,25 +334,25 @@ export default {
       );
     },
     recibirImagenes: function (e) {
-      console.log('Primera Parte')
       var files = e.target.files || e.dataTransfer.files;
-      let arrya_files = []
+
       if (!files.length) return;
       else {
         for (let item of files) {
-          arrya_files.push(item)
           this.crearImage(item);
         }
-        console.log(arrya_files[0])
         var formData = new FormData();
-        formData.append("file", arrya_files[0]);
-        this.$axios.$post("http://127.0.0.1:8080/", formData, {'Content-Type': 'multipart/form-data' })
-          .then((data) => {
-            console.log(data)
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+            formData.append("file", files[0]);
+            this.$axios
+              .$post("http://127.0.0.1:8080/", formData , {
+                "Content-Type": "multipart/form-data",
+              })
+              .then((data) => {
+                console.log(data);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
         this.$nuxt.$emit("visualizar_img", this.imagenes);
       }
     },
@@ -364,8 +364,6 @@ export default {
         this.imagenes.push(e.target.result);
       };
       reader.readAsDataURL(file);
-     
-
     },
     editarCatalogo: function () {
       this.imagenes = this.imagenes.map(function (value) {
@@ -387,16 +385,37 @@ export default {
         });
     },
     subirServidor: function () {
-      this.imagenes = this.imagenes.map(function (value) {
-        return value.split(",")[1];
-      });
       this.$axios
         .$post("/api/catalogodiscos", {
           infoCatalogo: this.newItemCatalogo,
           artista: this.textartista,
-          img: this.imagenes,
         })
         .then((data) => {
+          for (let imgbase64 of this.imagenes) {
+            var arr = imgbase64.split(","),
+              mime = arr[0].match(/:(.*?);/)[1],
+              bstr = atob(arr[1]),
+              n = bstr.length,
+              u8arr = new Uint8Array(n);
+
+            while (n--) {
+              u8arr[n] = bstr.charCodeAt(n);
+            }
+            let _file = File([u8arr], filename, { type: mime });
+          
+            var formData = new FormData();
+            formData.append("file", _file);
+            this.$axios
+              .$post("http://127.0.0.1:8080/", formData, {
+                "Content-Type": "multipart/form-data",
+              })
+              .then((data) => {
+                console.log(data);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
           this.limpiar_campos();
         })
         .catch((err) => {
