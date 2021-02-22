@@ -41,19 +41,10 @@ function Catalogo() {
                             //     // disco.nombre.replace(/\s/g, '')
                             //     // console.log(disco.dir_imagenes)                                                                                                                                                                       
                             // })   
-                            let rowsFormato = []
-                            for(let disco of rows){
-                                fs.readdir(disco.dir_imagenes, (error, imagenes) => {                                                                                     
-                                    if(error) 
-                                        console.log(error)
-                                    else {
-                                        disco.arrayImagenes = imagenes
-                                        console.log(disco)
-                                        rowsFormato.push(disco)
-                                    }                                                  
-                                })                                  
-                            }                         
-                            resolve(rowsFormato)
+                            rows.forEach(disco => {                                                            
+                                disco.arrayFotos = fs.readdirSync(disco.dir_imagenes)                                                                   
+                            });                                                  
+                            resolve(rows)
                         })
                     conn.release()
                 })

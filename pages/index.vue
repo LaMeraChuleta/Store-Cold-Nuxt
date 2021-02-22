@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex h-64 sm:h-32 max-w-6xl mx-auto">
-      <img src="~/assets/img/Carusel1.jpg" />
+      <img src="~/assets/img/Carusel1.jpg" class="w-full" />
     </div>
     <div class="border-black border-r-0 border-l-0 border-4 text-center md:text-blue-500 text-black font-mono text-4xl mt-2 sm:text-2xl max-w-6xl mx-auto">
       <p class="pt-1 pb-1">Cambios</p>

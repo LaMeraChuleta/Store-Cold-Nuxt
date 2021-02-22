@@ -1,7 +1,7 @@
 <template>
   <div class="pt-3 pr-3 pl-3">
     <img
-      :src="`https://media.giphy.com/media/110YfuwtzXGaaI/giphy.gif`"
+      :src="`http://localhost:3000/api/catalogodiscos/imagen/${infoCard.artista}/${infoCard.id}/${infoCard.arrayFotos[0]}`"
       @mouseover="upImg = true"
       @mouseout="upImg = false"
       @click="irPaginaDetalle"
@@ -29,7 +29,6 @@ export default {
   data: function () {
     return {
       upImg: false,
-
     };
   },
   computed: {

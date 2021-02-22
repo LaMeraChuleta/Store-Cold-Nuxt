@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyparser = require('body-parser')
-
+require('dotenv').config();
 const app = express()
 const artistas = require('./routes/artistas.js')
 const generos = require('./routes/generos.js')
