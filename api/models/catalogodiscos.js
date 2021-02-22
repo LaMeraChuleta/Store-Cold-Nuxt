@@ -1,14 +1,14 @@
+
 function Catalogo() {
     //Constructor
     const pooldb = require('../mariadb/conexion')
+    const fs = require('fs');
     const { generar_ruta_id,
         generar_array_base64,
         editar_dir_imagenes,
         generar_array_base64_async } = require('../imagenes/lib/index.js')
     let mensaje = "hola encapsulado"
-
     this.obtener_todos = function () {
-
         return new Promise((resolve, reject) => {
             pooldb.getConnection()
                 .then(conn => {
@@ -30,17 +30,30 @@ function Catalogo() {
                         JOIN artistas ON catalogo.id_artista = artistas.id 
                         JOIN generos ON catalogo.id_genero = generos.id
                         JOIN formato ON catalogo.id_formato = formato.id
-                        JOIN presentacion ON catalogo.id_presentacion = presentacion.id    
-                                                
+                        JOIN presentacion ON catalogo.id_presentacion = presentacion.id                                                    
                 `)
-                        .then(rows => {
-                            delete rows['meta']
-                            rows.forEach(item => {
-                                item.img_path = item.artista.replace(/\s/g, '') + '\\' +
-                                    item.id + '\\' +
-                                    item.nombre.replace(/\s/g, '')
-                            })
-                            resolve(rows)
+                        .then(rows => {  
+                            
+                            delete rows['meta']                                                                                                                                                         
+                            // rows.forEach(async disco => {
+                            //     // disco.img_path = disco.artista.replace(/\s/g, '') + '\\' +
+                            //     // disco.id + '\\' +
+                            //     // disco.nombre.replace(/\s/g, '')
+                            //     // console.log(disco.dir_imagenes)                                                                                                                                                                       
+                            // })   
+                            let rowsFormato = []
+                            for(let disco of rows){
+                                fs.readdir(disco.dir_imagenes, (error, imagenes) => {                                                                                     
+                                    if(error) 
+                                        console.log(error)
+                                    else {
+                                        disco.arrayImagenes = imagenes
+                                        console.log(disco)
+                                        rowsFormato.push(disco)
+                                    }                                                  
+                                })                                  
+                            }                         
+                            resolve(rowsFormato)
                         })
                     conn.release()
                 })
@@ -50,8 +63,17 @@ function Catalogo() {
                 })
         })
     }
+    this.buscar_imagenes = function(disco){
+        return new Promise((resolve, reject) => {            
+            fs.readdir(disco.dir_imagenes, (error, imagenes) => {                                                                                     
+                if(error) 
+                    reject([])
+                else 
+                    resolve(imagenes)                
+            })  
+        })               
+    }
     this.insertar_catalogo = function (nuevo_catalogo) {
-
         // //MODULO NATIVO RUST
         let ruta_id = generar_ruta_id({
             "artista": nuevo_catalogo.artista,
@@ -59,7 +81,6 @@ function Catalogo() {
             "year": nuevo_catalogo.infoCatalogo.año
         })
         let datos_insertar = { ...ruta_id, ...nuevo_catalogo.infoCatalogo }
-
         return new Promise((resolve, reject) => {
             pooldb.getConnection()
                 .then(conn => {
@@ -99,17 +120,17 @@ function Catalogo() {
                     conn.query(`
                         UPDATE catalogo 
                         SET  nombre = ?,
-                             id_artista = ?,
-                             id_genero = ?,
-                             id_formato = ?,
-                             id_presentacion = ?,
-                             origen = ?,
-                             sello = ?,
-                             año = ?,
-                             estado_portada = ?,
-                             estado_disco = ?,
-                             precio = ?,
-                             dir_imagenes = ?
+                            id_artista = ?,
+                            id_genero = ?,
+                            id_formato = ?,
+                            id_presentacion = ?,
+                            origen = ?,
+                            sello = ?,
+                            año = ?,
+                            estado_portada = ?,
+                            estado_disco = ?,
+                            precio = ?,
+                            dir_imagenes = ?
                         WHERE id = ?                    
                     `, Object.values({ ...nuevoCatalogo, dir_imagen, id }))
                         .then(rows => {
@@ -126,13 +147,10 @@ function Catalogo() {
     }
     //METODOS PRIVADOS
     this.set_mensaje = function () {
-
         console.log('segunda funcion')
     }
 }
-
 let Instacia_Catalogo = (function () {
-
     let instancia;
     function crear() {
         var catalogo = new Catalogo();
