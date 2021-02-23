@@ -39,12 +39,7 @@
             </tr>
           </thead>
           <tbody class="text-gray-700 text-xs">
-            <tr
-              v-for="(item, key) in catalogo_productos_slice"
-              :key="key"
-              class="hover:bg-gray-200 focus:bg-gray-200 cursor-pointer"
-              @click="enviar_imagenes(key)"
-            >
+            <tr v-for="(item, key) in catalogo_productos_slice" :key="key" class="hover:bg-gray-200 focus:bg-gray-200 cursor-pointer" @click="enviar_imagenes(key)">
               <th class="border h-12 w-32">{{ item.nombre }}</th>
               <th class="border h-12 w-32">{{ item.artista }}</th>
               <th class="border h-12 w-20">{{ item.origen }}</th>
@@ -99,12 +94,13 @@ export default {
   },
   methods: {
     enviar_imagenes: function (index) {
-      let imagenes = this.array_catalogo_productos[index].img_base64.map(function (
-        base64
-      ) {
-        return `data:image/jpeg;base64,${base64}`;
+      let imagenes = this.array_catalogo_productos[index].arrayFotos
+      let { artista, id } = this.array_catalogo_productos[index]      
+      this.$nuxt.$emit("visualizar_img", {
+        'imagenes': imagenes,
+        'artista': artista.replace(/ /g, ""),
+        'id': id
       });
-      this.$nuxt.$emit("visualizar_img", imagenes);
     },
     editar_catalogo: function (id) {
       this.$router.push({
@@ -116,7 +112,7 @@ export default {
       let result = [];
       this.array_catalogo_productos.forEach((element) => {
         if (element.nombre.includes(this.busqueda)) {
-           result.push(element);
+          result.push(element);
         }
       });
       

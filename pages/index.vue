@@ -9,7 +9,7 @@
     <div class="flex flex-auto flex-grow sm:flex-col md:flex-row max-w-6xl mx-auto mb-20">
       <div class="grid grid-cols-4 sm:grid-cols-1 p-8">
         <div v-for="(item, index) in catalogo_discos" :key="index">
-          <cardInfo :infoCard="item"></cardInfo>
+          <cardInfo :infoDisco="item"></cardInfo>
         </div>
       </div>
     </div>

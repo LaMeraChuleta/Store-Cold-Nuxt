@@ -34,13 +34,7 @@ function Catalogo() {
                 `)
                         .then(rows => {  
                             
-                            delete rows['meta']                                                                                                                                                         
-                            // rows.forEach(async disco => {
-                            //     // disco.img_path = disco.artista.replace(/\s/g, '') + '\\' +
-                            //     // disco.id + '\\' +
-                            //     // disco.nombre.replace(/\s/g, '')
-                            //     // console.log(disco.dir_imagenes)                                                                                                                                                                       
-                            // })   
+                            delete rows['meta']                                                                                                                                                                      
                             rows.forEach(disco => {                                                            
                                 disco.arrayFotos = fs.readdirSync(disco.dir_imagenes)                                                                   
                             });                                                  

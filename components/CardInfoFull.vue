@@ -4,29 +4,29 @@
       <div class="flex sm:inline-block md:inline-block lg:flex-auto sm:m-8">
         <div class="lg:w-1/3 xl:w-1/3 lg:ml-20">
           <div>
-            <img :src="`https://media.giphy.com/media/110YfuwtzXGaaI/giphy.gif`" />
+            <img :src="`http://localhost:3000/api/catalogodiscos/imagen/${infoDisco.artista}/${infoDisco.id}/${infoDisco.arrayFotos[0]}` " />
           </div>
           <div class="grid grid-cols-3">
             <div
               class="inline-block m-2 p-2"
-              v-for="(item, index) in objectDatos.img_base64"
+              v-for="(discoFoto, index) in infoDisco.arrayFotos"
               :key="index"
             >
-              <img :src="`https://media.giphy.com/media/110YfuwtzXGaaI/giphy.gif`" />
+              <img :src="`http://localhost:3000/api/catalogodiscos/imagen/${infoDisco.artista}/${infoDisco.id}/${infoDisco.arrayFotos[index]}` " />
             </div>
           </div>
         </div>
         <div class="xl:w-2/3 lg:w-2/3 flex lg:flex-auto flex-col sm:inline-block">
           <div class="flex lg:flex-row sm:flex-col">
             <div class="xl:w-1/2 lg:w-1/2 ml-8 mt-8">
-              <p class="m-1 text-4xl font-extrabold">{{ objectDatos.nombre }}</p>
-              <p class="m-1 mb-3 text-lg font-mono">Artista: {{ objectDatos.artista }}</p>
-              <p class="m-1 text-lg">Sello: {{ objectDatos.sello }}</p>
-              <p class="m-1 text-lg">Formato: {{ objectDatos.formato }}</p>
-              <p class="m-1 text-lg">Formato: {{ objectDatos.presentacion }}</p>
-              <p class="m-1 text-lg">Pais: {{ objectDatos.origen }}</p>
-              <p class="m-1 text-lg">Genero: {{ objectDatos.genero }}</p>
-              <p class="m-1 text-lg">Precio: $ {{ objectDatos.precio }}</p>
+              <p class="m-1 text-4xl font-extrabold">{{ infoDisco.nombre }}</p>
+              <p class="m-1 mb-3 text-lg font-mono">Artista: {{ infoDisco.artista }}</p>
+              <p class="m-1 text-lg">Sello: {{ infoDisco.sello }}</p>
+              <p class="m-1 text-lg">Formato: {{ infoDisco.formato }}</p>
+              <p class="m-1 text-lg">Formato: {{ infoDisco.presentacion }}</p>
+              <p class="m-1 text-lg">Pais: {{ infoDisco.origen }}</p>
+              <p class="m-1 text-lg">Genero: {{ infoDisco.genero }}</p>
+              <p class="m-1 text-lg">Precio: $ {{ infoDisco.precio }}</p>
               <button  
                 :disabled="addButon"
                 class="sm:mt-2 mt-8 px-12 py-4 hover:bg-gray-800 rounded-lg text-white bg-gray-900"
@@ -77,18 +77,16 @@ export default {
   props: {},
   data: function () {
     return {
-      objectDatos: {},
+      infoDisco: {},
       arrayImg: [],
       addButon: false,
-
+      fotoActual: 0
     };
   },
-  beforeMount: function () {
-    
+  beforeMount: function () {    
     console.log(this.$route.params.id)
-
     if (this.$route.params.id) {
-      this.objectDatos = this.$store.state.catalogoProductos.array_catalogo_productos.find(item => item.id == this.$route.params.id)
+      this.infoDisco = this.$store.state.catalogoProductos.array_catalogo_productos.find(item => item.id == this.$route.params.id)
     }   
       
   },
