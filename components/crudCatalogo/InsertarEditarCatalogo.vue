@@ -1,91 +1,35 @@
 <template>
   <div>
-    <div
-      class="w-full h-72 sm:h-auto max-w-lg flex flex-col mt-3 sm:mt-0 sm:p-5 border p-6"
-    >
-      <h1
-        class="text-center mb-10 text-lg block uppercase tracking-wide text-gray-700 font-bold"
-      >
-        Agregar Nuevos Productos al Catalogo
-      </h1>
-
+    <div class="w-full h-72 sm:h-auto max-w-lg flex flex-col mt-3 sm:mt-0 sm:p-5 border p-6">
+      <h1 class="text-center mb-10 text-lg block uppercase tracking-wide text-gray-700 font-bold">Agregar Nuevos Productos al Catalogo</h1>
       <div class="inline-flex -mx-3 mb-3">
         <div class="w-full md:w-1/2 px-3 md:mb-0">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="titulo"
-            >Titulo</label
-          >
-          <input
-            v-model="newItemCatalogo.titulo"
-            class="appearance-none block w-full text-gray-700 border rounded py-2 px-1 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="titulo"
-            type="text"
-          />
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="titulo">Titulo</label>
+          <input v-model="newItemCatalogo.titulo" class="appearance-none block w-full text-gray-700 border rounded py-2 px-1 mb-3 leading-tight focus:outline-none focus:bg-white" id="titulo" type="text"/>
         </div>
         <div class="w-full md:w-1/2 px-3">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="artista"
-            >Artista</label
-          >
-          <input
-            v-model="textartista"
-            class="appearance-none block w-full text-gray-700 border rounded py-2 px-1 mb-3 leading-tight focus:outline-none focus:bg-white"
-            list="artistas"
-            name="artistas"
-            type="text"
-          />
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="artista">Artista</label>
+          <input v-model="textartista" class="appearance-none block w-full text-gray-700 border rounded py-2 px-1 mb-3 leading-tight focus:outline-none focus:bg-white" list="artistas" name="artistas" type="text"/>
           <datalist id="artistas">
-            <option
-              v-for="value in artistas"
-              :key="value.id"
-              :value="value.id"
-              class="appearance-none w-full text-xs text-gray-700 border border-gray-200 rounded py-3 px-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            >
+            <option v-for="value in artistas" :key="value.id" :value="value.id" class="appearance-none w-full text-xs text-gray-700 border border-gray-200 rounded py-3 px-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
               {{ value.nombre }}
             </option>
           </datalist>
         </div>
       </div>
-
       <div class="inline-flex -mx-3 mb-3">
         <div class="w-full px-3 mb-6 md:mb-0">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2"
-            for="genero"
-            >Genero</label
-          >
-          <input
-            v-model="textgenero"
-            class="appearance-none block w-full text-gray-700 border rounded py-2 px-1 mb-3 leading-tight focus:outline-none focus:bg-white"
-            list="genero"
-            name="genero"
-            type="text"
-          />
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2" for="genero">Genero</label>
+          <input v-model="textgenero" class="appearance-none block w-full text-gray-700 border rounded py-2 px-1 mb-3 leading-tight focus:outline-none focus:bg-white" list="genero" name="genero" type="text"/>
           <datalist id="genero">
-            <option
-              v-for="value in generos"
-              :key="value.id"
-              :value="value.id"
-              class="appearance-none w-full text-xs text-gray-700 border border-gray-200 rounded py-3 px-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            >
+            <option v-for="value in generos" :key="value.id" :value="value.id" class="appearance-none w-full text-xs text-gray-700 border border-gray-200 rounded py-3 px-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
               {{ value.nombre }}
             </option>
           </datalist>
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2"
-            for="formato"
-            >Formato</label
-          >
-          <select
-            @change="presentacion_cascada"
-            v-model="newItemCatalogo.idFormato"
-            class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="formato"
-          >
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2" for="formato">Formato</label>
+          <select @change="presentacion_cascada" v-model="newItemCatalogo.idFormato" class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white" id="formato">
             <option value>Seleccionar</option>
             <option v-for="value in formatos" :key="value.id" :value="value.id">
               {{ value.nombre }}
@@ -93,42 +37,19 @@
           </select>
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bl-2"
-            for="presentacion"
-            >Presentacion</label
-          >
-          <select
-            v-model="newItemCatalogo.idPresentacion"
-            class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="presentacion"
-          >
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bl-2" for="presentacion">Presentacion</label>
+          <select v-model="newItemCatalogo.idPresentacion" class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white" id="presentacion">
             <option value>Seleccionar</option>
-            <option
-              v-for="value in filtro_presentacion"
-              :key="value.id"
-              :value="value.id"
-            >
+            <option v-for="value in filtro_presentacion" :key="value.id" :value="value.id">
               {{ value.nombre }}
             </option>
           </select>
         </div>
       </div>
-
       <div class="inline-flex -mx-3 mb-3">
         <div class="w-full px-3 mb-6 md:mb-0">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2"
-            for="origen"
-            >Origen</label
-          >
-          <input
-            v-model="newItemCatalogo.origen"
-            class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
-            list="origen"
-            name="origen"
-            type="text"
-          />
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2" for="origen">Origen</label>
+          <input v-model="newItemCatalogo.origen" class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white" list="origen" name="origen" type="text"/>
           <datalist id="origen">
             <option value="Mexico" key="1"></option>
             <option value="EUA"></option>
@@ -138,86 +59,32 @@
           </datalist>
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2"
-            for="sello"
-            >Sello</label
-          >
-          <input
-            v-model="newItemCatalogo.sello"
-            class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="sello"
-          />
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2" for="sello">Sello</label>
+          <input v-model="newItemCatalogo.sello" class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white" id="sello"/>
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bl-2"
-            for="año"
-            >Año</label
-          >
-          <input
-            v-model="newItemCatalogo.año"
-            class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="año"
-            type="text"
-          />
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bl-2" for="año" >Año</label>
+          <input v-model="newItemCatalogo.año" class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white" id="año" type="text"/>
         </div>
       </div>
-
       <div class="inline-flex -mx-3 mb-3">
         <div class="w-full px-3 mb-6 md:mb-0">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2"
-            for="estadoPortada"
-            >Estado Portada</label
-          >
-          <input
-            v-model.number="newItemCatalogo.estadoPortada"
-            class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="estadoPortada"
-          />
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2" for="estadoPortada">Estado Portada</label>
+          <input v-model.number="newItemCatalogo.estadoPortada" class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white" id="estadoPortada" />
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2"
-            for="estadoDisco"
-            >Estado Disco</label
-          >
-          <input
-            v-model.number="newItemCatalogo.estadoDisco"
-            class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="estadoDisco"
-          />
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2" for="estadoDisco" >Estado Disco</label>
+          <input v-model.number="newItemCatalogo.estadoDisco" class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white" id="estadoDisco"/>
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bl-2"
-            for="precio"
-            >Precio</label
-          >
-          <input
-            v-model.number="newItemCatalogo.precio"
-            class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="precio"
-            type="text"
-          />
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bl-2" for="precio">Precio</label>
+          <input v-model.number="newItemCatalogo.precio" class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white" id="precio" type="text"/>
         </div>
       </div>
-
       <div class="inline-flex -mx-3">
         <div class="w-full md:w-1/2 px-3 md:mb-0">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="fotos"
-            >Fotos</label
-          >
-          <input
-            @change="recibirImagenes"
-            class="appearance-none block w-full text-gray-700 border rounded py-2 px-1 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="fotos"
-            type="file"
-            multiple
-          />
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="fotos">Fotos</label>
+          <input @change="recibirImagenes" class="appearance-none block w-full text-gray-700 border rounded py-2 px-1 mb-3 leading-tight focus:outline-none focus:bg-white" id="fotos" type="file" multiple/>
         </div>
         <div class="w-full md:w-1/2 px-3">
           <slot></slot>
@@ -226,14 +93,13 @@
     </div>
   </div>
 </template>
-
 <script>
 import { mapGetters } from "vuex";
 
 export default {
   name: "InsertarEditarCatalogo",
   props: {
-    catalogo_editar: {
+    discoEditar: {
       type: Object,
       required: false,
       default: () => {},
@@ -270,21 +136,27 @@ export default {
     this.$nuxt.$on("agregar_catalogo", () => {
       this.subirServidor();
     });
+    //Escucha la vista crudEditar/rditar/_id.vue
     this.$nuxt.$on("editar_catalogo", () => {
       this.editarCatalogo();
     });
   },
   mounted: function () {
-    if (JSON.stringify(this.catalogo_editar) != undefined) {
+    if (JSON.stringify(this.discoEditar) != undefined) {
       console.log("edicion");
-      this.newItemCatalogo = { ...this.catalogo_editar.general };
-      this.textartista = this.catalogo_editar.catalogos.artista;
-      this.textgenero = this.catalogo_editar.catalogos.genero;
-      this.newItemCatalogo.idFormato = this.catalogo_editar.catalogos.formato;
+      this.newItemCatalogo = { ...this.discoEditar.general };
+      this.textartista = this.discoEditar.catalogos.artista.nombre;
+      this.textgenero = this.discoEditar.catalogos.genero.nombre;
+      this.newItemCatalogo.idFormato = this.discoEditar.catalogos.formato.id;
       this.presentacion_cascada();
-      this.newItemCatalogo.idPresentacion = this.catalogo_editar.catalogos.presentacion;
-      this.imagenes = this.catalogo_editar.imagenes;
-      this.$nuxt.$emit("visualizar_img", this.imagenes);
+      this.newItemCatalogo.idPresentacion = this.discoEditar.catalogos.presentacion.id;       
+      this.imagenes = this.newItemCatalogo.imagenes   
+      console.log(this.textartista)   
+      this.$nuxt.$emit("visualizar_img", {
+        'imagenes': this.imagenes,
+        'artista': this.textartista.replace(/ /g, ""),
+        'id': this.$route.params.id
+      });
     }
   },
   destroyed: function () {
@@ -299,20 +171,7 @@ export default {
     }),
   },
   watch: {
-    textartista: function (newArtista, oldArtista) {
-      if (/^\d+$/.test(newArtista)) {
-        let artista = this.artistas.find((artista) => artista.id == newArtista);
-        this.textartista = artista.nombre;
-        this.newItemCatalogo.idArtista = artista.id;
-      }
-    },
-    textgenero: function (newGenero, oldGenero) {
-      if (/^\d+$/.test(newGenero)) {
-        let genero = this.generos.find((genero) => genero.id == newGenero);
-        this.textgenero = genero.nombre;
-        this.newItemCatalogo.idGenero = genero.id;
-      }
-    },
+    
   },
   methods: {
     actualizar_imagenes: function (index_cambio, index_recibir) {
@@ -342,17 +201,17 @@ export default {
           this.crearImage(item);
         }
         var formData = new FormData();
-            formData.append("file", files[0]);
-            this.$axios
-              .$post("http://127.0.0.1:8080/", formData , {
-                "Content-Type": "multipart/form-data",
-              })
-              .then((data) => {
-                console.log(data);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
+        formData.append("file", files[0]);
+        this.$axios
+          .$post("http://127.0.0.1:8080/", formData, {
+            "Content-Type": "multipart/form-data",
+          })
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
         this.$nuxt.$emit("visualizar_img", this.imagenes);
       }
     },
@@ -374,7 +233,7 @@ export default {
           id: this.$route.params.id,
           nuevoCatalogo: this.newItemCatalogo,
           imagenes: this.imagenes,
-          dir_imagenes: this.catalogo_editar.dir_imagenes,
+          dir_imagenes: this.discoEditar.dir_imagenes,
         })
         .then((data) => {
           this.limpiar_campos();
@@ -397,12 +256,11 @@ export default {
               bstr = atob(arr[1]),
               n = bstr.length,
               u8arr = new Uint8Array(n);
-
             while (n--) {
               u8arr[n] = bstr.charCodeAt(n);
             }
             let _file = File([u8arr], filename, { type: mime });
-          
+
             var formData = new FormData();
             formData.append("file", _file);
             this.$axios

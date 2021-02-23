@@ -22,6 +22,13 @@
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9"
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.20.0",
+    "eslint-config-prettier": "^8.0.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-vue": "^7.6.0",
+    "nodemon": "^1.18.9",
+    "prettier": "^2.2.1"
   }
 }
