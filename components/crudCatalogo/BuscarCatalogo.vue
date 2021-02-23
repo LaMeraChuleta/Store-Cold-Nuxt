@@ -52,7 +52,7 @@
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    <path
+                    <path                    
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"

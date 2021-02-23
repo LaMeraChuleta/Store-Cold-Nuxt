@@ -81,12 +81,8 @@
           <input v-model.number="newItemCatalogo.precio" class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white" id="precio" type="text"/>
         </div>
       </div>
-      <div class="inline-flex -mx-3">
-        <div class="w-full md:w-1/2 px-3 md:mb-0">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="fotos">Fotos</label>
-          <input @change="recibirImagenes" class="appearance-none block w-full text-gray-700 border rounded py-2 px-1 mb-3 leading-tight focus:outline-none focus:bg-white" id="fotos" type="file" multiple/>
-        </div>
-        <div class="w-full md:w-1/2 px-3">
+      <div class="inline-flex -mx-3">       
+        <div class="w-full md:w-full px-3">
           <slot></slot>
         </div>
       </div>
@@ -142,16 +138,14 @@ export default {
     });
   },
   mounted: function () {
-    if (JSON.stringify(this.discoEditar) != undefined) {
-      console.log("edicion");
+    if (JSON.stringify(this.discoEditar) != undefined) {      
       this.newItemCatalogo = { ...this.discoEditar.general };
       this.textartista = this.discoEditar.catalogos.artista.nombre;
       this.textgenero = this.discoEditar.catalogos.genero.nombre;
       this.newItemCatalogo.idFormato = this.discoEditar.catalogos.formato.id;
       this.presentacion_cascada();
       this.newItemCatalogo.idPresentacion = this.discoEditar.catalogos.presentacion.id;       
-      this.imagenes = this.newItemCatalogo.imagenes   
-      console.log(this.textartista)   
+      this.imagenes = this.newItemCatalogo.imagenes         
       this.$nuxt.$emit("visualizar_img", {
         'imagenes': this.imagenes,
         'artista': this.textartista.replace(/ /g, ""),
@@ -169,9 +163,6 @@ export default {
       formatos: "catalogos/GET_FORMATOS",
       presentaciones: "catalogos/GET_PRESENTACIONES",
     }),
-  },
-  watch: {
-    
   },
   methods: {
     actualizar_imagenes: function (index_cambio, index_recibir) {
@@ -191,39 +182,7 @@ export default {
         (presentacion) =>
           presentacion.id_formato == this.newItemCatalogo.idFormato
       );
-    },
-    recibirImagenes: function (e) {
-      var files = e.target.files || e.dataTransfer.files;
-
-      if (!files.length) return;
-      else {
-        for (let item of files) {
-          this.crearImage(item);
-        }
-        var formData = new FormData();
-        formData.append("file", files[0]);
-        this.$axios
-          .$post("http://127.0.0.1:8080/", formData, {
-            "Content-Type": "multipart/form-data",
-          })
-          .then((data) => {
-            console.log(data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        this.$nuxt.$emit("visualizar_img", this.imagenes);
-      }
-    },
-    crearImage(file) {
-      var image = new Image();
-      var reader = new FileReader();
-      let imagen = "";
-      reader.onload = (e) => {
-        this.imagenes.push(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    },
+    },  
     editarCatalogo: function () {
       this.imagenes = this.imagenes.map(function (value) {
         return value.split(",")[1];
@@ -287,9 +246,7 @@ export default {
       let _newItemCatalogo = this.newItemCatalogo;
       Object.keys(_newItemCatalogo).forEach(function (prop) {
         _newItemCatalogo[prop] = "";
-      });
-      this.textartista = "";
-      this.textgenero = "";
+      });            
       this.newItemCatalogo = _newItemCatalogo;
     },
   },
