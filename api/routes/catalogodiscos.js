@@ -1,8 +1,30 @@
 const { Router } = require('express')
 import classCatalogo from '../models/catalogodiscos.js'
 import path from 'path'
+import fs from 'fs'
 const router = Router()
 const RUTAIMAGENES = 'C:\\StoreCold'
+var multer  = require('multer')
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    console.log(req.params)
+    let pathSave = RUTAIMAGENES + '\\' + req.params.artista + '\\' + req.params.id    
+    if(!fs.existsSync(pathSave)){
+      fs.mkdirSync(pathSave, { recursive: true})
+    }    
+    cb(null, pathSave)
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, file.fieldname  + '-' + uniqueSuffix + '.png')
+  }
+})
+
+var upload = multer({ storage: storage })
+
+
+
 router.get('/catalogodiscos', (req, res) => {
   let instancia_catalogo = classCatalogo.getInstance()  
   instancia_catalogo.obtener_todos()
@@ -13,21 +35,22 @@ router.get('/catalogodiscos', (req, res) => {
       res.status(500).json(err)
     })
 })
-router.post('/catalogodiscos', (req, res) => {
-  try {
-    let instancia_catalogo = classCatalogo.getInstance()
-    instancia_catalogo.insertar_catalogo(req.body)
-      .then(data => {
-        console.log(data)                             
-        res.status(200).json(data)
-      })
-      .catch(err => {
-        res.status(500).json('error')
-      })
-  }
-  catch (err) {
-    console.log(err)
-  }
+router.post('/catalogodiscos/imagenes/:artista/:id', upload.single('imagenesDisco'), (req, res) => {        
+    res.status(200).json({})
+  // try {
+  //   let instancia_catalogo = classCatalogo.getInstance()
+  //   instancia_catalogo.insertar_catalogo(req.body)
+  //     .then(data => {
+  //       console.log(data)                             
+  //       res.status(200).json(data)
+  //     })
+  //     .catch(err => {
+  //       res.status(500).json('error')
+  //     })
+  // }
+  // catch (err) {
+  //   console.log(err)
+  // }
 })
 router.put('/catalogodiscos', (req, res) => {
   try {
