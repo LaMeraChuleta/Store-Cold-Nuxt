@@ -46,21 +46,21 @@ function Catalogo() {
                 })
         })
     }
-    this.generar_catalogo_id = function(disco){
+    this.generar_catalogo_id = function(disco){        
         let artistaClave = ''
-        if(disco.artista.length >= 8){
-            disco.artista.split(' ').forEach(item => {
+        if(Array.from(disco.titulo).length >= 8){
+            disco.titulo.split(' ').forEach(item => {
                 if(artistaClave.length < 4)
                     item.length >= 2 ? artistaClave += item.slice(0, 2) : artistaClave += item
             })
-        }
+        }        
         let tituloClave = ''
-        if(disco.titulo.length >= 4){
+        if(Array.from(disco.titulo).length >= 4){
             disco.titulo.split(' ').forEach(item => {
                 if(tituloClave.length < 4)
                     item.length >= 2 ? tituloClave += item.slice(0, 2) : tituloClave += item
             })
-        }   
+        }           
         return artistaClave + '-' + tituloClave             
     }
     this.insertar_catalogo = function (nuevo_catalogo) {

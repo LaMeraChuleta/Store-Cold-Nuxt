@@ -1,8 +1,8 @@
 import path from 'path'
 import fs from 'fs'
 import classCatalogo from '../models/catalogodiscos.js'
-const router = Router()
 const { Router } = require('express')
+const router = Router()
 const rutaImagenes = 'C:\\StoreCold'
 const multer  = require('multer')
 //Manejo de Imagenes
@@ -33,7 +33,7 @@ router.get('/catalogodiscos', (req, res) => {
     })
 })
 router.post('/catalogodiscos', (req, res) => {
-  try {
+  try {    
     let instancia_catalogo = classCatalogo.getInstance()
     let clave = instancia_catalogo.generar_catalogo_id(req.body)
     console.log(clave)
