@@ -32,8 +32,7 @@ function Catalogo() {
                         JOIN formato ON catalogo.id_formato = formato.id
                         JOIN presentacion ON catalogo.id_presentacion = presentacion.id                                                    
                 `)
-                        .then(rows => {  
-                            
+                        .then(rows => {                              
                             delete rows['meta']                                                                                                                                                                      
                             rows.forEach(disco => {                                                            
                                 disco.arrayFotos = fs.readdirSync(disco.dir_imagenes)                                                                   
@@ -42,21 +41,27 @@ function Catalogo() {
                         })
                     conn.release()
                 })
-                .catch(err => {
-                    reject('error')
-                    console.log("No se conecto: " + err);
+                .catch(error => {
+                    reject(error)                    
                 })
         })
     }
-    this.buscar_imagenes = function(disco){
-        return new Promise((resolve, reject) => {            
-            fs.readdir(disco.dir_imagenes, (error, imagenes) => {                                                                                     
-                if(error) 
-                    reject([])
-                else 
-                    resolve(imagenes)                
-            })  
-        })               
+    this.generar_catalogo_id = function(disco){
+        let artistaClave = ''
+        if(disco.artista.length >= 8){
+            disco.artista.split(' ').forEach(item => {
+                if(artistaClave.length < 4)
+                    item.length >= 2 ? artistaClave += item.slice(0, 2) : artistaClave += item
+            })
+        }
+        let tituloClave = ''
+        if(disco.titulo.length >= 4){
+            disco.titulo.split(' ').forEach(item => {
+                if(tituloClave.length < 4)
+                    item.length >= 2 ? tituloClave += item.slice(0, 2) : tituloClave += item
+            })
+        }   
+        return artistaClave + '-' + tituloClave             
     }
     this.insertar_catalogo = function (nuevo_catalogo) {
         // //MODULO NATIVO RUST

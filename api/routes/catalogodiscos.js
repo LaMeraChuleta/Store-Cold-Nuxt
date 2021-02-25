@@ -1,15 +1,14 @@
-const { Router } = require('express')
-import classCatalogo from '../models/catalogodiscos.js'
 import path from 'path'
 import fs from 'fs'
+import classCatalogo from '../models/catalogodiscos.js'
 const router = Router()
-const RUTAIMAGENES = 'C:\\StoreCold'
-var multer  = require('multer')
-
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    console.log(req.params)
-    let pathSave = RUTAIMAGENES + '\\' + req.params.artista + '\\' + req.params.id    
+const { Router } = require('express')
+const rutaImagenes = 'C:\\StoreCold'
+const multer  = require('multer')
+//Manejo de Imagenes
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {    
+    let pathSave = rutaImagenes + '\\' + req.params.artista + '\\' + req.params.id    
     if(!fs.existsSync(pathSave)){
       fs.mkdirSync(pathSave, { recursive: true})
     }    
@@ -18,13 +17,11 @@ var storage = multer.diskStorage({
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
     cb(null, file.fieldname  + '-' + uniqueSuffix + '.png')
-  }
+  }.
+  filter
 })
-
-var upload = multer({ storage: storage })
-
-
-
+const upload = multer({ storage: storage })
+//Rutas CatalogoDiscos
 router.get('/catalogodiscos', (req, res) => {
   let instancia_catalogo = classCatalogo.getInstance()  
   instancia_catalogo.obtener_todos()
@@ -34,6 +31,18 @@ router.get('/catalogodiscos', (req, res) => {
     .catch(err => {
       res.status(500).json(err)
     })
+})
+router.post('/catalogodiscos', (req, res) => {
+  try {
+    let instancia_catalogo = classCatalogo.getInstance()
+    let clave = instancia_catalogo.generar_catalogo_id(req.body)
+    console.log(clave)
+    res.status(200).json(clave)
+  }
+  catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
 })
 router.post('/catalogodiscos/imagenes/:artista/:id', upload.single('imagenesDisco'), (req, res) => {        
     res.status(200).json({})
@@ -68,12 +77,10 @@ router.put('/catalogodiscos', (req, res) => {
   }
 })
 router.get('/catalogodiscos/imagen/:artista/:id/:nombreImagen', (req,res) => {
-  console.log(req.params.artista.replace(/ /g, ""))
   let pathFotos = path.format({
-    dir: RUTAIMAGENES + '\\' + req.params.artista.replace(/ /g, "") + '\\' + req.params.id,
+    dir: rutaImagenes + '\\' + req.params.artista.replace(/ /g, "") + '\\' + req.params.id,
     base: req.params.nombreImagen
   });
-  console.log(pathFotos)
   res.download(pathFotos)
 })
 router.get('/example', (req, res, next) => {

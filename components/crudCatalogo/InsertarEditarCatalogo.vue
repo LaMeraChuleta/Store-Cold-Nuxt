@@ -203,7 +203,15 @@ export default {
         });
     },
     subirServidor: function () {
-      this.$nuxt.$emit("enviar-imagenes-servidor")
+      // console.log(this.newItemCatalogo)
+      // this.$axios.$post('api/catalogodiscos', this.newItemCatalogo)
+      // .then((response) => {
+      //   console.log(response)        
+      // })
+      // .catch((error) => {
+      //   console.log(error)
+      // }) 
+      this.$nuxt.$emit("enviar-imagenes-servidor")     
     },
     limpiar_campos: function () {
       this.imagenes = [];
