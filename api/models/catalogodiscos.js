@@ -46,22 +46,28 @@ function Catalogo() {
                 })
         })
     }
-    this.generar_catalogo_id = function(disco){        
+    this.generar_catalogo_id = function(disco){         
+        const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'        
+        var randomString = '';
+        for (var i = 0; i < 3; i++) {
+            var randomPoz = Math.floor(Math.random() * letras.length);
+            randomString += letras.substring(randomPoz,randomPoz + 1);
+        }        
         let artistaClave = ''
         if(Array.from(disco.titulo).length >= 8){
             disco.titulo.split(' ').forEach(item => {
                 if(artistaClave.length < 4)
-                    item.length >= 2 ? artistaClave += item.slice(0, 2) : artistaClave += item
+                    item.length >= 2 ? artistaClave += item.toUpperCase().slice(0, 2) : artistaClave += item.toUpperCase()
             })
         }        
         let tituloClave = ''
         if(Array.from(disco.titulo).length >= 4){
             disco.titulo.split(' ').forEach(item => {
                 if(tituloClave.length < 4)
-                    item.length >= 2 ? tituloClave += item.slice(0, 2) : tituloClave += item
+                    item.length >= 2 ? tituloClave += item.toUpperCase().slice(0, 2) : tituloClave += item.toUpperCase()
             })
         }           
-        return artistaClave + '-' + tituloClave             
+        return artistaClave + '-' + tituloClave + '-' + disco.año.slice(2) +  '-' + randomString       
     }
     this.insertar_catalogo = function (nuevo_catalogo) {
         // //MODULO NATIVO RUST
