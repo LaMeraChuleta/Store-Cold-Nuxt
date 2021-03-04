@@ -47,20 +47,21 @@ function Catalogo() {
                 })
         })
     }
-    this.generar_catalogo_id = async function(disco){         
-        const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'            
+    this.generar_catalogo_id_ruta = async function(disco){ 
+        try{ 
+            console.log('inicio generacion id')             
+        const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'      
+        const ruta = 'C://StoreCold//'      
         let instancia_artistas = classArtista.getInstance()    
         var randomString = '';
         for (var i = 0; i < 3; i++) {
             var randomPoz = Math.floor(Math.random() * letras.length);
             randomString += letras.substring(randomPoz,randomPoz + 1);
         }        
-        let artistaClave = ''
-        console.log(disco.artista)
-        let artista = await instancia_artistas.obtener_por_id(disco.artista)
-        console.log(artista)    
-        if(Array.from(artista).length >= 8){
-            artista.split(' ').forEach(item => {
+        let artistaClave = ''        
+        let artista = await instancia_artistas.obtener_por_id(disco.idArtista)              
+        if(Array.from(artista[0].nombre).length >= 8){
+            artista[0].nombre.split(' ').forEach(item => {
                 if(artistaClave.length < 4)
                     item.length >= 2 ? artistaClave += item.toUpperCase().slice(0, 2) : artistaClave += item.toUpperCase()
             })
@@ -72,12 +73,21 @@ function Catalogo() {
                     item.length >= 2 ? tituloClave += item.toUpperCase().slice(0, 2) : tituloClave += item.toUpperCase()
             })
         }            
-        return artistaClave + '-' + tituloClave + '-' + disco.año.slice(2) +  '-' + randomString       
+        let id = artistaClave + '-' + tituloClave + '-' + disco.año.slice(2) +  '-' + randomString    
+        let ruta = ruta + '//' + artista.nombre.replace(/ /g, "")
+        console.log('termine de crear id')
+        return { 'id': id, 'ruta': ruta }
     }
-    this.insertar_catalogo = function (nuevo_catalogo) {
-        let id = this.generar_catalogo_id(nuevo_catalogo)
-        let ruta = 'C://StoreCold//'
-        let datos_insertar = { id, ruta, ...nuevo_catalogo.infoCatalogo }
+    catch(ex) {
+        console.log(ex)
+    }
+    }
+    this.insertar_catalogo = async function (nuevo_catalogo) {
+        console.log('modelo')
+        let idRuta = await this.generar_catalogo_id_ruta(nuevo_catalogo)        
+        console.log(id)        
+        let datosInsertar = { ...idRuta, ...nuevo_catalogo }
+        console.log(datosInsertar)
         return new Promise((resolve, reject) => {
             pooldb.getConnection()
                 .then(conn => {
@@ -97,9 +107,9 @@ function Catalogo() {
                         estado_disco, 
                         precio) 
                     VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-                        Object.values(datos_insertar))
+                        Object.values(datosInsertar))
                         .then(rows => {
-                            resolve(ruta_id.ruta)
+                            resolve(rows)
                         })
                     conn.release()
                 })

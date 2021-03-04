@@ -20,15 +20,13 @@ function Artistas() {
                 })
         })
     }
-    this.obtener_por_id = function(idArtista){
-        console.log(idArtista)
+    this.obtener_por_id = function(idArtista){        
         return new Promise((resolve, reject) => {
             pooldb.getConnection()
                 .then(conn => {
-                    conn.query("SELECT * FROM artistas WHERE id == ?", idArtista)
+                    conn.query("SELECT * FROM artistas WHERE id = ?", [idArtista])
                         .then(rows => {
-                            delete rows['meta']
-                            console.log(rows)
+                            delete rows['meta']                            
                             resolve(rows)
                         })
                     conn.release()
