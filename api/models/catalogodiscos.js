@@ -1,8 +1,9 @@
 
+import classArtista from '../models/catalogos/artistas' 
 function Catalogo() {
-    //Constructor
+    //Constructor       
     const pooldb = require('../mariadb/conexion')
-    const fs = require('fs');
+    const fs = require('fs');    
     const { generar_ruta_id,
         generar_array_base64,
         editar_dir_imagenes,
@@ -46,16 +47,20 @@ function Catalogo() {
                 })
         })
     }
-    this.generar_catalogo_id = function(disco){         
-        const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'        
+    this.generar_catalogo_id = async function(disco){         
+        const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'            
+        let instancia_artistas = classArtista.getInstance()    
         var randomString = '';
         for (var i = 0; i < 3; i++) {
             var randomPoz = Math.floor(Math.random() * letras.length);
             randomString += letras.substring(randomPoz,randomPoz + 1);
         }        
         let artistaClave = ''
-        if(Array.from(disco.titulo).length >= 8){
-            disco.titulo.split(' ').forEach(item => {
+        console.log(disco.artista)
+        let artista = await instancia_artistas.obtener_por_id(disco.artista)
+        console.log(artista)    
+        if(Array.from(artista).length >= 8){
+            artista.split(' ').forEach(item => {
                 if(artistaClave.length < 4)
                     item.length >= 2 ? artistaClave += item.toUpperCase().slice(0, 2) : artistaClave += item.toUpperCase()
             })
@@ -66,17 +71,13 @@ function Catalogo() {
                 if(tituloClave.length < 4)
                     item.length >= 2 ? tituloClave += item.toUpperCase().slice(0, 2) : tituloClave += item.toUpperCase()
             })
-        }           
+        }            
         return artistaClave + '-' + tituloClave + '-' + disco.año.slice(2) +  '-' + randomString       
     }
     this.insertar_catalogo = function (nuevo_catalogo) {
-        // //MODULO NATIVO RUST
-        let ruta_id = generar_ruta_id({
-            "artista": nuevo_catalogo.artista,
-            "titulo": nuevo_catalogo.infoCatalogo.titulo,
-            "year": nuevo_catalogo.infoCatalogo.año
-        })
-        let datos_insertar = { ...ruta_id, ...nuevo_catalogo.infoCatalogo }
+        let id = this.generar_catalogo_id(nuevo_catalogo)
+        let ruta = 'C://StoreCold//'
+        let datos_insertar = { id, ruta, ...nuevo_catalogo.infoCatalogo }
         return new Promise((resolve, reject) => {
             pooldb.getConnection()
                 .then(conn => {

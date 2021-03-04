@@ -156,6 +156,22 @@ export default {
   destroyed: function () {
     this.$nuxt.$emit("visualizar_img", []);
   },
+  watch:{
+    textartista: function (newArtista, oldArtista) {
+      if (/^\d+$/.test(newArtista)) {
+        let artista = this.artistas.find((artista) => artista.id == newArtista);
+        this.textartista = artista.nombre;
+        this.newItemCatalogo.idArtista = artista.id;
+      }
+    },
+    textgenero: function (newGenero, oldGenero) {
+      if (/^\d+$/.test(newGenero)) {
+        let genero = this.generos.find((genero) => genero.id == newGenero);
+        this.textgenero = genero.nombre;
+        this.newItemCatalogo.idGenero = genero.id;
+      }
+    },
+  },
   computed: {
     ...mapGetters({
       artistas: "catalogos/GET_ARTISTAS",

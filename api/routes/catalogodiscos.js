@@ -17,8 +17,7 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
     cb(null, file.fieldname  + '-' + uniqueSuffix + '.png')
-  }.
-  filter
+  }
 })
 const upload = multer({ storage: storage })
 //Rutas CatalogoDiscos
@@ -28,21 +27,22 @@ router.get('/catalogodiscos', (req, res) => {
     .then(data => {
       res.status(200).json(data)
     })
-    .catch(err => {
-      res.status(500).json(err)
+    .catch(error => {
+      res.status(500).json(error)
     })
 })
 router.post('/catalogodiscos', (req, res) => {
-  try {    
+
     let instancia_catalogo = classCatalogo.getInstance()
-    let clave = instancia_catalogo.generar_catalogo_id(req.body)
-    console.log(clave)
-    res.status(200).json(clave)
-  }
-  catch (error) {
-    console.log(error)
-    res.status(500).json(error)
-  }
+    instancia_catalogo.insertar_catalogo(req.body)
+      .then(data => {
+        res.status(200).json(data)
+      })    
+      .catch(error => {
+        res.status(500).json(error)
+      })    
+  
+  
 })
 router.post('/catalogodiscos/imagenes/:artista/:id', upload.single('imagenesDisco'), (req, res) => {        
     res.status(200).json({})
