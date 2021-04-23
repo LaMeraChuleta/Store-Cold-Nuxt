@@ -8,7 +8,8 @@ const multer  = require('multer')
 //Manejo de Imagenes
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {    
-    let pathSave = rutaImagenes + '\\' + req.params.artista + '\\' + req.params.id    
+    let pathSave = rutaImagenes + '\\' + req.params.artista + '\\' + req.params.id
+    console.log(pathSave)    
     if(!fs.existsSync(pathSave)){
       fs.mkdirSync(pathSave, { recursive: true})
     }    
@@ -33,34 +34,23 @@ router.get('/catalogodiscos', (req, res) => {
     })
 })
 router.post('/catalogodiscos', (req, res) => {
-
     let instancia_catalogo = classCatalogo.getInstance()
     instancia_catalogo.insertar_catalogo(req.body)
       .then(data => {
         res.status(200).json(data)
       })    
       .catch(error => {
+        console.log(error)
         res.status(500).json(error)
       })    
-  
-  
 })
-router.post('/catalogodiscos/imagenes/:artista/:id', upload.single('imagenesDisco'), (req, res) => {        
-    res.status(200).json({})
-  // try {
-  //   let instancia_catalogo = classCatalogo.getInstance()
-  //   instancia_catalogo.insertar_catalogo(req.body)
-  //     .then(data => {
-  //       console.log(data)                             
-  //       res.status(200).json(data)
-  //     })
-  //     .catch(err => {
-  //       res.status(500).json('error')
-  //     })
-  // }
-  // catch (err) {
-  //   console.log(err)
-  // }
+router.post('/catalogodiscos/imagenes/:artista/:id', upload.single('imagenesDisco'), (req, res) => {            
+  try {    
+    res.status(200).json({})    
+  }
+  catch (err) {
+    res.status(500).json(error)
+  }
 })
 router.put('/catalogodiscos', (req, res) => {
   try {

@@ -218,12 +218,10 @@ export default {
           console.log(error);
         });
     },
-    subirServidor: function () {
-      console.log(this.newItemCatalogo)
+    subirServidor: function () {      
       this.$axios.$post('api/catalogodiscos', this.newItemCatalogo)
-      .then((response) => {
-        console.log(response)
-        this.$nuxt.$emit("enviar-imagenes-servidor")
+      .then((response) => {        
+        this.$nuxt.$emit("enviar-imagenes-servidor", response)
       })
       .catch((error) => {
         console.log(error)

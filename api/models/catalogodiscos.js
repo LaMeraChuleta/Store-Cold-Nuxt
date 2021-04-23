@@ -47,11 +47,9 @@ function Catalogo() {
                 })
         })
     }
-    this.generar_catalogo_id_ruta = async function(disco){ 
-        try{ 
-            console.log('inicio generacion id')             
-        const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'      
-        const ruta = 'C://StoreCold//'      
+    this.generar_catalogo_id_ruta = async function(disco){                     
+        const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';      
+        const rutaRaiz = 'C:\\StoreCold\\';      
         let instancia_artistas = classArtista.getInstance()    
         var randomString = '';
         for (var i = 0; i < 3; i++) {
@@ -59,35 +57,28 @@ function Catalogo() {
             randomString += letras.substring(randomPoz,randomPoz + 1);
         }        
         let artistaClave = ''        
-        let artista = await instancia_artistas.obtener_por_id(disco.idArtista)              
+        let artista = await instancia_artistas.obtener_por_id(disco.idArtista)        
         if(Array.from(artista[0].nombre).length >= 8){
             artista[0].nombre.split(' ').forEach(item => {
                 if(artistaClave.length < 4)
                     item.length >= 2 ? artistaClave += item.toUpperCase().slice(0, 2) : artistaClave += item.toUpperCase()
             })
-        }        
+        }          
         let tituloClave = ''
         if(Array.from(disco.titulo).length >= 4){
             disco.titulo.split(' ').forEach(item => {
                 if(tituloClave.length < 4)
                     item.length >= 2 ? tituloClave += item.toUpperCase().slice(0, 2) : tituloClave += item.toUpperCase()
             })
-        }            
+        }              
         let id = artistaClave + '-' + tituloClave + '-' + disco.año.slice(2) +  '-' + randomString    
-        let ruta = ruta + '//' + artista.nombre.replace(/ /g, "")
-        console.log('termine de crear id')
-        return { 'id': id, 'ruta': ruta }
+        let rutaCompleta = rutaRaiz + artista[0].nombre.replace(/ /g, "") + '\\' + id//.replace(/ /g, "")        
+        fs.mkdirSync(rutaCompleta, { recursive: true })
+        return { 'id': id, 'ruta': rutaCompleta }                              
     }
-    catch(ex) {
-        console.log(ex)
-    }
-    }
-    this.insertar_catalogo = async function (nuevo_catalogo) {
-        console.log('modelo')
-        let idRuta = await this.generar_catalogo_id_ruta(nuevo_catalogo)        
-        console.log(id)        
-        let datosInsertar = { ...idRuta, ...nuevo_catalogo }
-        console.log(datosInsertar)
+    this.insertar_catalogo = async function (nuevo_catalogo) {        
+        let idRuta = await this.generar_catalogo_id_ruta(nuevo_catalogo)                
+        let datosInsertar = { ...idRuta, ...nuevo_catalogo }        
         return new Promise((resolve, reject) => {
             pooldb.getConnection()
                 .then(conn => {
@@ -108,8 +99,8 @@ function Catalogo() {
                         precio) 
                     VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)`,
                         Object.values(datosInsertar))
-                        .then(rows => {
-                            resolve(rows)
+                        .then(() => {                            
+                            resolve({ id: idRuta.id, artista: idRuta.ruta.split('\\')[2] })
                         })
                     conn.release()
                 })
