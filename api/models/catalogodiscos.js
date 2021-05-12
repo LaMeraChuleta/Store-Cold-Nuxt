@@ -54,8 +54,7 @@ function Catalogo() {
             randomString += letras.substring(randomPoz,randomPoz + 1);
         }        
         let artistaClave = ''        
-        let artista = await instancia_artistas.obtener_por_id(disco.idArtista)  
-        console.log(artista)      
+        let artista = await instancia_artistas.obtener_por_id(disco.idArtista)              
         if(Array.from(artista[0].nombre).length >= 8){
             artista[0].nombre.split(' ').forEach(item => {
                 if(artistaClave.length < 4)

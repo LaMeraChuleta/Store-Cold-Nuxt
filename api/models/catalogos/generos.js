@@ -4,7 +4,6 @@ function Generos() {
     let mensaje = "hola encapsulado"
 
     this.obtener_todos = function () {
-
         return new Promise((resolve, reject) => {
             pooldb.getConnection()
                 .then(conn => {
@@ -22,7 +21,6 @@ function Generos() {
         })
     }
     this.insertar_genero = function (genero) {
-
         return new Promise((resolve, reject) => {
             pooldb.getConnection()
                 .then(conn => {
@@ -44,14 +42,11 @@ function Generos() {
 }
 
 let Instacia_Generos = (function () {
-
     let instancia;
-
     function crear() {
         var generos = new Generos();
         return generos;
     }
-
     return {
         getInstance: function () {
             if (!instancia) {

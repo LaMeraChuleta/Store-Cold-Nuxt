@@ -4,7 +4,6 @@ function Presentacion() {
     let mensaje = "hola encapsulado"
 
     this.obtener_todos = function () {
-
         return new Promise((resolve, reject) => {
             pooldb.getConnection()
                 .then(conn => {
@@ -22,7 +21,6 @@ function Presentacion() {
         })
     }
     this.insertar_presentacion = function (presentacion) {
-
         return new Promise((resolve, reject) => {
             pooldb.getConnection()
                 .then(conn => {
@@ -44,9 +42,7 @@ function Presentacion() {
 }
 
 let Instacia_Presentacion = (function () {
-
     let instancia;
-
     function crear() {
         var presentacion = new Presentacion();
         return presentacion;

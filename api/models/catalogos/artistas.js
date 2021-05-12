@@ -2,7 +2,6 @@ function Artistas() {
     //Constructor
     const pooldb = require('../../mariadb/conexion.js')
     let mensaje = "hola encapsulado"
-
     this.obtener_todos = function() {
         return new Promise((resolve, reject) => {
             pooldb.getConnection()

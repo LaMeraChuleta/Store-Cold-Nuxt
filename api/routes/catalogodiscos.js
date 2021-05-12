@@ -37,29 +37,18 @@ router.post('/catalogodiscos', (req, res) => {
       .catch(error => res.status(500).json(error))  
 })
 router.post('/catalogodiscos/imagenes/:artista/:id', (req, res) => {            
-  upload(req,res,function(err) {
-    //console.log(req.body);
-    //console.log(req.files);
+  upload(req,res,function(err) {        
     if(err) {
         return res.end("Error uploading file.");
     }
     res.end("File is uploaded");
   });
 })
-router.put('/catalogodiscos', (req, res) => {
-  try {
-    let instancia_catalogo = classCatalogo.getInstance()
-    instancia_catalogo.editar_catalogo(req.body.id, req.body.nuevoCatalogo, req.body.imagenes, req.body.dir_imagenes)
-      .then(data => {      
-        res.status(200).json(data)
-      })
-      .catch(err => {
-        res.status(500).json(err)
-      })
-  }
-  catch (err) {
-    console.log(err)
-  }
+router.put('/catalogodiscos', (req, res) => {  
+  classCatalogo.getInstance()
+    .editar_catalogo(req.body.id, req.body.nuevoCatalogo, req.body.imagenes, req.body.dir_imagenes)
+      .then(data => res.status(200).json(data))
+      .catch(err => res.status(500).json(err))
 })
 router.get('/catalogodiscos/imagen/:artista/:id/:nombreImagen', (req,res) => {
   let pathFotos = path.format({
@@ -67,10 +56,6 @@ router.get('/catalogodiscos/imagen/:artista/:id/:nombreImagen', (req,res) => {
     base: req.params.nombreImagen
   });
   res.download(pathFotos)
-})
-router.get('/example', (req, res, next) => {
-  let instancia_catalogo = classCatalogo.getInstance()
-  instancia_catalogo.get_mensaje()
 })
 module.exports = router
 

@@ -1,12 +1,9 @@
-
-
 function Formato() {
     //Constructor
     const pooldb = require('../../mariadb/conexion.js')
     let mensaje = "hola encapsulado"
 
     this.obtener_todos = function () {
-
         return new Promise((resolve, reject) => {
             pooldb.getConnection()
                 .then(conn => {
@@ -24,7 +21,6 @@ function Formato() {
         })
     }
     this.insertar_formato = function (formato) {
-
         return new Promise((resolve, reject) => {
             pooldb.getConnection()
                 .then(conn => {
@@ -46,9 +42,7 @@ function Formato() {
 }
 
 let Instacia_Formato = (function () {
-
     let instancia;
-
     function crear() {
         var formato = new Formato();
         return formato;
