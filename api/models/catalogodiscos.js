@@ -4,10 +4,6 @@ function Catalogo() {
     //Constructor       
     const pooldb = require('../mariadb/conexion')
     const fs = require('fs');    
-    const { generar_ruta_id,
-        generar_array_base64,
-        editar_dir_imagenes,
-        generar_array_base64_async } = require('../imagenes/lib/index.js')
     let mensaje = "hola encapsulado"
     this.obtener_todos = function () {
         return new Promise((resolve, reject) => {
@@ -34,7 +30,8 @@ function Catalogo() {
                         JOIN presentacion ON catalogo.id_presentacion = presentacion.id                                                    
                 `)
                         .then(rows => {                              
-                            delete rows['meta']                                                                                                                                                                      
+                            delete rows['meta']   
+                            console.log(rows);                                                                                                                                                                   
                             rows.forEach(disco => {                                                            
                                 disco.arrayFotos = fs.readdirSync(disco.dir_imagenes)                                                                   
                             });                                                  
@@ -57,7 +54,8 @@ function Catalogo() {
             randomString += letras.substring(randomPoz,randomPoz + 1);
         }        
         let artistaClave = ''        
-        let artista = await instancia_artistas.obtener_por_id(disco.idArtista)        
+        let artista = await instancia_artistas.obtener_por_id(disco.idArtista)  
+        console.log(artista)      
         if(Array.from(artista[0].nombre).length >= 8){
             artista[0].nombre.split(' ').forEach(item => {
                 if(artistaClave.length < 4)
@@ -131,8 +129,7 @@ function Catalogo() {
                             dir_imagenes = ?
                         WHERE id = ?                    
                     `, Object.values({ ...nuevoCatalogo, dir_imagen, id }))
-                        .then(rows => {
-                            console.log(editar_dir_imagenes(dir_imagen, imagenes, nuevoCatalogo.titulo))
+                        .then(rows => {                            
                             resolve(rows)
                         })
                     conn.release()

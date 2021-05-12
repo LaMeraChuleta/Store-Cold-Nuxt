@@ -1,10 +1,7 @@
 <template>
   <div>
     <InsertarCatalogo>
-      <button
-        @click="subirServidor"
-        class="appearance-none block w-full text-gray-700 border rounded py-3 px-1 mb-3 leading-tight focus:outline-none focus:bg-white mt-6 border-green-600"
-      >Agregar Disco</button>
+      <button @click="subirServidor" class="appearance-none block w-full text-gray-700 border rounded py-3 px-1 mb-3 leading-tight focus:outline-none focus:bg-white mt-6 border-green-600">Agregar Disco</button>
     </InsertarCatalogo>
   </div>
 </template>

@@ -1,10 +1,7 @@
 <template>
   <div>
     <InsertarCatalogo :discoEditar="newItemCatalogo">
-      <button
-        @click="editar_catalogo"
-        class="appearance-none block w-full text-gray-700 border rounded py-3 px-1 mb-3 leading-tight focus:outline-none focus:bg-white mt-6 border-yellow-600"
-      >Editar Disco</button>
+      <button @click="editar_catalogo" class="appearance-none block w-full text-gray-700 border rounded py-3 px-1 mb-3 leading-tight focus:outline-none focus:bg-white mt-6 border-yellow-600">Editar Disco</button>
     </InsertarCatalogo>
   </div>
 </template>

@@ -203,8 +203,7 @@ export default {
       this.imagenes = this.imagenes.map(function (value) {
         return value.split(",")[1];
       });
-      this.$axios
-        .put("api/catalogodiscos", {
+      this.$axios.put("api/catalogodiscos", {
           id: this.$route.params.id,
           nuevoCatalogo: this.newItemCatalogo,
           imagenes: this.imagenes,
@@ -220,12 +219,8 @@ export default {
     },
     subirServidor: function () {      
       this.$axios.$post('api/catalogodiscos', this.newItemCatalogo)
-      .then((response) => {        
-        this.$nuxt.$emit("enviar-imagenes-servidor", response)
-      })
-      .catch((error) => {
-        console.log(error)
-      })      
+      .then((response) => this.$nuxt.$emit("enviar-imagenes-servidor", response))
+      .catch((error) => console.log(error))      
     },
     limpiar_campos: function () {
       this.imagenes = [];

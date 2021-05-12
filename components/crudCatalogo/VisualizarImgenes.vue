@@ -6,7 +6,7 @@
       </h1>
       <button @click="enviar_imagenes">+</button>
       <div class="overflow-y-auto sm:overflow-auto appearance-none p-5 h-full">
-        <div class="inline-block sm:inline-flex rounded-md w-64 sm:w-screen m-1">
+        <div class="inline-block sm:inline-flex rounded-md w-64 sm:w-screen m-1">          
           <div v-for="(imagen, key) in imagenes" :key="key" @drop="onDrop($event, key)"  @dragover.prevent @dragenter.prevent>
             <div draggable @dragstart="startDrag($event, key)" class="border object-contain mb-4 mr-3 sm:m-1 sm:w-56 text-gray-100 static">
               <div class="w-8 relative">
@@ -68,20 +68,15 @@ export default {
           reader.onerror = (error) => reject(error);
         });
       toBase64(this.files)
-        .then((base64) => {
-          this.imagenes.push(base64);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        .then((base64) => this.imagenes.push(base64))
+        .catch((error) => console.log(error));
     },
     enviar_imagenes: async function (objInsertaImg) {      
       let formData = new FormData();
       formData.append("imagenesDisco", this.files);
       await this.$axios.$post(`/api/catalogodiscos/imagenes/${objInsertaImg.artista}/${objInsertaImg.id}`, formData)
-      .then((response) => {
-        console.log(response)
-      }).catch((error) => console.log(error));
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error));
       
     },
     quitar_imagen: function (value) {

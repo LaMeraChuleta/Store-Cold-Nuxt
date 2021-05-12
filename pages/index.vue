@@ -18,7 +18,6 @@
 
 <script>
 import cardInfo from "~/components/CardInfoDisco.vue";
-
 export default {
   middleware: "catalogoProductos",
   components: {
