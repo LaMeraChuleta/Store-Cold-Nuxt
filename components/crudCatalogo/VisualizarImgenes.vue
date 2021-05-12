@@ -1,9 +1,7 @@
 <template>
   <div>
     <div class="w-full max-w-lg flex flex-col mt-3 border h-72 sm:h-auto">
-      <h1 class="text-center p-3 text-lg block uppercase tracking-wide text-gray-700 font-bold">
-        Imagenes
-      </h1>
+      <h1 class="text-center p-3 text-lg block uppercase tracking-wide text-gray-700 font-bold">Imagenes</h1>
       <button @click="enviar_imagenes">+</button>
       <div class="overflow-y-auto sm:overflow-auto appearance-none p-5 h-full">
         <div class="inline-block sm:inline-flex rounded-md w-64 sm:w-screen m-1">          
@@ -24,8 +22,8 @@
       </div>
       <div class="border border-dotted">
         <div class="relative top-0">
-          <input @change="recibir_imagenes" type="file" class="absolute h-full w-full opacity-0"/>
-          <span class="">
+          <input @change="recibir_imagenes" type="file" multiple class="absolute h-full w-full opacity-0"/>
+          <span>
             <svg xmlns="http://www.w3.org/2000/svg" class="relative pointer-events-none h-32 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
             </svg>
@@ -42,9 +40,9 @@ export default {
     return {
       index_moviendo: "",
       imagenes: [],
+      imagenesFile: [],
       artista: "",
-      id: "",
-      files: "",
+      id: "",      
     };
   },
   created: function () {
@@ -58,22 +56,28 @@ export default {
     });
   },
   methods: {
-    recibir_imagenes: function (event) {
-      this.files = event.target.files[0];
-      const toBase64 = (file) =>
+    recibir_imagenes: function (event) {   
+      console.log(event.target.files)   
+      const toBase64 = (file) => 
         new Promise((resolve, reject) => {
           const reader = new FileReader();
           reader.readAsDataURL(file);
           reader.onload = () => resolve(reader.result);
           reader.onerror = (error) => reject(error);
-        });
-      toBase64(this.files)
-        .then((base64) => this.imagenes.push(base64))
-        .catch((error) => console.log(error));
+        });      
+      Array.from(event.target.files).forEach((imageFile) => {
+        this.imagenesFile.push(imageFile)
+        toBase64(imageFile)
+          .then((base64) => this.imagenes.push(base64)) 
+          .catch((error) => console.log(error));
+      }) 
     },
     enviar_imagenes: async function (objInsertaImg) {      
       let formData = new FormData();
-      formData.append("imagenesDisco", this.files);
+      this.imagenesFile.forEach((file) => {
+        console.log(file)
+        formData.append("imagenesDisco", file)
+      })  
       await this.$axios.$post(`/api/catalogodiscos/imagenes/${objInsertaImg.artista}/${objInsertaImg.id}`, formData)
         .then((response) => console.log(response))
         .catch((error) => console.log(error));

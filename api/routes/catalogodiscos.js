@@ -17,46 +17,34 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    console.log(req.params);
     cb(null, file.fieldname  + '-' + uniqueSuffix + '.png')
   }
 })
-const upload = multer({ storage: storage })
+const upload = multer({ storage: storage }).array('imagenesDisco', 20)
 //Rutas CatalogoDiscos
-router.get('/catalogodiscos', (req, res) => {
-  try {
-  let instancia_catalogo = classCatalogo.getInstance()  
-  console.log(instancia_catalogo)
-  instancia_catalogo.obtener_todos()
-    .then(data => {
-      res.status(200).json(data)
-    })
-    .catch(error => {
-      console.log(error)
-      res.status(500).json(error)
-    })
-  }
-  catch(error){
-    console.log(error);
-  }
+router.get('/catalogodiscos', (req, res) => {    
+  classCatalogo
+    .getInstance()
+    .obtener_todos()
+    .then(data => res.status(200).json(data))
+    .catch(error => res.status(500).json(error))
+  
 })
 router.post('/catalogodiscos', (req, res) => {
-    let instancia_catalogo = classCatalogo.getInstance()
-    instancia_catalogo.insertar_catalogo(req.body)
-      .then(data => {
-        res.status(200).json(data)
-      })    
-      .catch(error => {
-        console.log(error)
-        res.status(500).json(error)
-      })    
+    classCatalogo.getInstance().insertar_catalogo(req.body)
+      .then(data => res.status(200).json(data))    
+      .catch(error => res.status(500).json(error))  
 })
-router.post('/catalogodiscos/imagenes/:artista/:id', upload.single('imagenesDisco'), (req, res) => {            
-  try {    
-    res.status(200).json({})    
-  }
-  catch (err) {
-    res.status(500).json(error)
-  }
+router.post('/catalogodiscos/imagenes/:artista/:id', (req, res) => {            
+  upload(req,res,function(err) {
+    //console.log(req.body);
+    //console.log(req.files);
+    if(err) {
+        return res.end("Error uploading file.");
+    }
+    res.end("File is uploaded");
+  });
 })
 router.put('/catalogodiscos', (req, res) => {
   try {

@@ -104,7 +104,7 @@ export default {
       array_catalogo_productos: (state) => state.array_catalogo_productos,
     }),
     catalogo_productos_slice: function () {
-      return this.array_catalogo_productos.slice(0, 9);
+      return this.array_catalogo_productos;
     },
   },
 };
