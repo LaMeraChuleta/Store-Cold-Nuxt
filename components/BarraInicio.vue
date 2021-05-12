@@ -26,15 +26,9 @@
         <Buscador></Buscador>
       </div>
       <div @click="navIsOpen = false" :class="navIsOpen ? 'block' : 'hidden'" class="bg-white text-center border">
-        <router-link to="/crudCatalogo/agregar">
-          <a href="#" class="block w-full borde text-lg hover:text-gray-800 rounded">Agregar</a>
-        </router-link>
-        <router-link to="/crudCatalogo/buscar">
-          <a href="#" class="block border text-lg hover:text-gray-800 rounded pb-1">Buscar</a>
-        </router-link>
-        <router-link to="/">
-          <a href="#" class="block border text-lg hover:text-gray-800 rounded pb-1" >Blog</a>
-        </router-link>
+        <router-link to="/crudCatalogo/agregar"><a href="#" class="block w-full borde text-lg hover:text-gray-800 rounded">Agregar</a></router-link>
+        <router-link to="/crudCatalogo/buscar"><a href="#" class="block border text-lg hover:text-gray-800 rounded pb-1">Buscar</a></router-link>
+        <router-link to="/"><a href="#" class="block border text-lg hover:text-gray-800 rounded pb-1" >Blog</a></router-link>
       </div>
     </header>
   </div>

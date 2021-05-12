@@ -7,11 +7,7 @@
             <img :src="`http://localhost:3000/api/catalogodiscos/imagen/${infoDisco.artista}/${infoDisco.id}/${infoDisco.arrayFotos[0]}` " />
           </div>
           <div class="grid grid-cols-3">
-            <div
-              class="inline-block m-2 p-2"
-              v-for="(discoFoto, index) in infoDisco.arrayFotos"
-              :key="index"
-            >
+            <div v-for="(discoFoto, index) in infoDisco.arrayFotos" :key="index" class="inline-block m-2 p-2" >
               <img :src="`http://localhost:3000/api/catalogodiscos/imagen/${infoDisco.artista}/${infoDisco.id}/${infoDisco.arrayFotos[index]}` " />
             </div>
           </div>
@@ -27,10 +23,7 @@
               <p class="m-1 text-lg">Pais: {{ infoDisco.origen }}</p>
               <p class="m-1 text-lg">Genero: {{ infoDisco.genero }}</p>
               <p class="m-1 text-lg">Precio: $ {{ infoDisco.precio }}</p>
-              <button  
-                :disabled="addButon"
-                class="sm:mt-2 mt-8 px-12 py-4 hover:bg-gray-800 rounded-lg text-white bg-gray-900"
-              >Add To Card</button>
+              <button :disabled="addButon" class="sm:mt-2 mt-8 px-12 py-4 hover:bg-gray-800 rounded-lg text-white bg-gray-900">Add To Card</button>
               <!-- <p class="ml-3 text-green-700">Se agrego al carrito</p> -->
               <router-link v-if="addButon" to="/">
                 <div class="text-green-800 ml-2 font-hairline w-40">Se agrego al carrito.</div>
@@ -54,14 +47,11 @@
           <div class="flex lg:flex-row sm:flex-col">
             <div class="xl:w-1/2 lg:w-2/2 ml-10 mt-8">
               <p class="text-lg font-mono font-extrabold">Descripcion</p>
-              <p
-                class="text-justify"
+              <p class="text-justify"
               >Brand New! Latest sealed and unopened run/issue from the Manufacturer/Label that has never seen a needle. Runout Matrix cannot be confirmed. Color variance cannot be confirmed and may vary from issue to issue. Ships from the USA within 2 business days. Tracking included on all domestic orders.</p>
             </div>
             <div class="xl:w-1/2 lg:w-2/2 ml-10 mt-8">
-              <p
-                class="text-lg font-mono font-extrabold"
-              >Pendiente de designar espacio {{ $route.params.id }}</p>
+              <p class="text-lg font-mono font-extrabold">Pendiente de designar espacio {{ $route.params.id }}</p>
             </div>
           </div>
         </div>

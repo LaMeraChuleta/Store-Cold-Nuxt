@@ -10,10 +10,7 @@
     />
     <p class="text-gray-900 font-extrabold  text-left text-md">{{ infoDisco.artista }}</p>
     <p class="text-gray-900 text-left text-sm">{{ infoDisco.nombre }}</p>
-    <p
-      :class="colorFormato"
-      class="text-gray-900  text-left text-sm rounded-lg w-40"
-    >Formato: {{ infoDisco.formato }}</p>
+    <p class="text-gray-900  text-left text-sm rounded-lg w-40" :class="colorFormato" >Formato: {{ infoDisco.formato }}</p>
     <p class="text-gray-900  text-left text-sm">$ {{ infoDisco.precio }}</p>
   </div>
 </template>

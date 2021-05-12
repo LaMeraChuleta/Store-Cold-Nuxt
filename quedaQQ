@@ -1,0 +1,305 @@
+[33mcommit 279d12829c702592fc0b2d27954107e465bac01e[m[33m ([m[1;36mHEAD -> [m[1;32mapi-fotos[m[33m, [m[1;31morigin/api-fotos[m[33m)[m
+Author: unknown <geoffreyytorres25@gmail.com>
+Date:   Tue May 11 23:39:10 2021 -0500
+
+    Multi Files CAtalogo
+
+[33mcommit 26a307a318eb39c7da84dab7835bfad991531482[m
+Author: unknown <geoffreyytorres25@gmail.com>
+Date:   Tue May 11 22:28:41 2021 -0500
+
+    Beta Antes Insercion multiple
+
+[33mcommit 14529986d2c8d83d0a05eb37716e5941663290b8[m
+Author: unknown <geoffreyytorres25@gmail.com>
+Date:   Thu Apr 22 20:35:58 2021 -0500
+
+    Nuevo Formato Insercion Catalogo
+
+[33mcommit e35435f1da36d80be6921d2360a273ce0851d785[m
+Author: unknown <geoffreyytorres25@gmail.com>
+Date:   Thu Mar 4 08:57:59 2021 -0600
+
+    Insercion Nuevo Id
+
+[33mcommit ac70b964b3a6e82da063acbfa6bb3a1da7e2b6ef[m
+Author: unknown <geoffreyytorres25@gmail.com>
+Date:   Thu Mar 4 07:47:04 2021 -0600
+
+    input_id_to_text
+
+[33mcommit 564b0a074ce4a4c2c83851294c0ec93c6e67cad5[m
+Author: unknown <geoffreyytorres25@gmail.com>
+Date:   Mon Mar 1 19:44:56 2021 -0600
+
+    Generador ID Js
+
+[33mcommit 6051efc7a1cac9fc57f0f971b2fd4b4100f6c73c[m
+Author: unknown <geoffreyytorres25@gmail.com>
+Date:   Wed Feb 24 22:46:03 2021 -0600
+
+    Generador id Avances
+
+[33mcommit ea1e43a6fd8e5437a011e6df982fed99ed1c3f1c[m
+Author: unknown <geoffreyytorres25@gmail.com>
+Date:   Wed Feb 24 21:59:32 2021 -0600
+
+    Generador Id
+
+[33mcommit 690fe1e4d93524a62308fbe17caab426f4dd040f[m
+Author: unknown <geoffreyytorres25@gmail.com>
+Date:   Wed Feb 24 20:46:55 2021 -0600
+
+    Implemetacion Multer Beta
+
+[33mcommit 79b623fb8e4dd487701fb286b0fb90ccb6437378[m
+Author: unknown <geoffreyytorres25@gmail.com>
+Date:   Tue Feb 23 16:24:50 2021 -0600
+
+    Add Img Componete
+
+[33mcommit 398110f4d4cc47259d153913d3db0b86a06db8a0[m
+Author: unknown <geoffreyytorres25@gmail.com>
+Date:   Tue Feb 23 08:53:21 2021 -0600
+
+    Fotos Disco Edicion
+
+[33mcommit d20ece1e1c92cbaeb2dc4063a7b8f8cab58e659c[m
+Author: unknown <geoffreyytorres25@gmail.com>
+Date:   Mon Feb 22 19:34:43 2021 -0600
+
+    Imagenes Buscador Catalogo
+
+[33mcommit 05c3982e361285b5102e273be6723e76ac82e2e4[m
+Author: unknown <geoffreyytorres25@gmail.com>
+Date:   Mon Feb 22 08:27:53 2021 -0600
+
+    Fotos Node API
+
+[33mcommit 90673fe152caa8e93b4b2fb8fd4a73e1696b810a[m
+Author: unknown <geoffreyytorres25@gmail.com>
+Date:   Sun Feb 21 23:09:08 2021 -0600
+
+    Cambios Menores
+
+[33mcommit 502e23ed4136edf8d9019be6cdf4bc86a545f424[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: unknown <geoffreyytorres25@gmail.com>
+Date:   Sat Feb 20 10:39:37 2021 -0600
+
+    Revision Ultimos Cambios
+
+[33mcommit dfd27a0ca4dacea87740784086af03f494721e9f[m
+Author: unknown <geoffreyytorres25@gmail.com>
+Date:   Wed Oct 21 00:33:59 2020 -0500
+
+    Cors-CMS-Actix
+
+[33mcommit 3229a517d9720deed6324e412d55f4bf0bc9c322[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Thu Oct 15 18:51:46 2020 -0500
+
+    Api-Imagenes-Estaticas
+
+[33mcommit 99335b117e068686b8c4a412e25306ec67437585[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Sat Sep 26 00:28:34 2020 -0500
+
+    DiseñoBuscadorNavBar
+
+[33mcommit 0719d3522d09b58d43598383dbce523bcaf23d31[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Thu Sep 24 12:53:47 2020 -0500
+
+    State_Busqueda
+
+[33mcommit 57e168f8d61a3cd0b10a653d328a1f9d068f955b[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Sun Sep 13 23:09:27 2020 -0500
+
+    Remplazo_Iconos_svg
+
+[33mcommit a6c3f113e9d6aa0284e45344969a2b624010384e[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Sun Sep 13 21:52:49 2020 -0500
+
+    CardFull
+
+[33mcommit 735d3860cfe8e8b4a879ff4ee8b03d65f9c74604[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Thu Sep 10 14:13:09 2020 -0500
+
+    Rust_Img_Aync
+
+[33mcommit 4cfe8e2a197ee0893d7f40868f53414be465ed0b[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Tue Sep 8 23:54:37 2020 -0500
+
+    Edicion_Dir_Neon_Module
+
+[33mcommit 6292bbf9244a260cc4f78b209f75df06e2db3db0[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Tue Sep 8 22:20:30 2020 -0500
+
+    Api_Update_Catalogo_DB
+
+[33mcommit 5ede77ed911167eb953b626a257f32cda18e4b28[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Tue Sep 8 18:05:31 2020 -0500
+
+    Formateando_Api
+
+[33mcommit fe29acab53562e8d90e01559003a1e4a8906463c[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Tue Sep 8 13:47:04 2020 -0500
+
+    InfoCatalogoEditar
+
+[33mcommit c25e57e6918de58a8eaa05b66a465716793fc8aa[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Mon Sep 7 11:18:43 2020 -0500
+
+    Route_Editar_Id
+
+[33mcommit ef3b3030b45a9205a3b87252a0597d1eb1c88a68[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Sat Sep 5 00:47:22 2020 -0500
+
+    Tabla_Busqueda_Catalogo
+
+[33mcommit e9ac5af5ca0b22cc71f3d9fe0db5bf429360eea7[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Fri Sep 4 12:35:49 2020 -0500
+
+    Catalogos_Store_Middleware
+
+[33mcommit d63124c01f82aa4d9a75028405ad0d75d5c46c2e[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Wed Sep 2 12:36:34 2020 -0500
+
+    DragandDropImagenesCrud
+
+[33mcommit 3e909f880c46634c2d2d55fcab7eff044259102b[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Tue Sep 1 00:27:46 2020 -0500
+
+    PostCatalogo_Index
+
+[33mcommit d93dcb9d585259d3e84f957b2b9432aba8a32711[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Mon Aug 31 23:14:33 2020 -0500
+
+    Generar_Vec_base64
+
+[33mcommit 848643d894fc4a41825d880e4bf6ac4eedd67bff[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Mon Aug 31 01:22:07 2020 -0500
+
+    PostCatalogoDiscos
+
+[33mcommit cdca93328bb6cbfe8a776890eb6fdbe8aee6609c[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Sun Aug 30 13:21:44 2020 -0500
+
+    EventBusEliminarImagenPre
+
+[33mcommit d62e676c8287b3a1d0c10440cb4d3868d1959634[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Sat Aug 29 23:35:03 2020 -0500
+
+    ModoResponsiveCrudCatalogo
+
+[33mcommit 8f6711883f5148259f38f1b555409091e1564554[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Sat Aug 29 19:45:18 2020 -0500
+
+    ComponentePreImagenes
+
+[33mcommit 1b4afff26080be90fea17e38e74a5c133c44223c[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Fri Aug 28 00:34:30 2020 -0500
+
+    insercionMiniCatalogoListo
+
+[33mcommit 60512e5ea46e65f9a3444050c5ef0ac4082e2e50[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Thu Aug 27 14:40:35 2020 -0500
+
+    Optimizazcion-Slot-Catalogo
+
+[33mcommit 8e08709fc7f56306c81d02311a484cca4f131e4f[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Thu Aug 27 01:59:54 2020 -0500
+
+    FormsParaCatalogosInsert
+
+[33mcommit 06dea285b2fc03e2b82713f085faa0895616dbf1[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Wed Aug 26 23:49:20 2020 -0500
+
+    Modelos_Clases_Insert
+
+[33mcommit d0991229fdfd0c783add730ea287e2f53f714a68[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Mon Aug 24 23:27:46 2020 -0500
+
+    SavaImgDirId
+
+[33mcommit 5e14a5037f402f6592609900cdb5654a7b1b38c3[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Mon Aug 24 01:50:42 2020 -0500
+
+    GeneradorID
+
+[33mcommit d93bbd7a450997553c4905f963e3990fade1db3c[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Sun Aug 23 18:15:41 2020 -0500
+
+    creacionDirImg
+
+[33mcommit a63ffa3193726d747f0147e764b69d7453c407cf[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Sun Aug 23 02:20:50 2020 -0500
+
+    VecImagToBlob
+
+[33mcommit 0815098f1d09a01c9d5581d82afb55b6bb5ca69d[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Fri Aug 21 01:44:15 2020 -0500
+
+    comprimirImg
+
+[33mcommit d150cec4936e15dec78afa27c2f41e4368773646[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Mon Aug 17 01:25:35 2020 -0500
+
+    objetoItemNuevoCatalogo
+
+[33mcommit 3d0f679cb651441eea6409194d5efaa920d902d1[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Sun Aug 16 21:42:26 2020 -0500
+
+    MetodoGetPostCatalogos
+
+[33mcommit f56f6edaf81ffc03793560e112cd925d54226311[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Sat Aug 15 01:23:12 2020 -0500
+
+    backend_ConexionMariaDB
+
+[33mcommit d23276faf597344e5d40f0bceb287b343036fefd[m
+Author: Ernesto Palma <geoffreyytorres25@gmail.com>
+Date:   Fri Aug 7 16:40:27 2020 -0500
+
+    FormatoLimpieza
+
+[33mcommit 15c5b6623ad22174544b7ef7921af3e89eccb3a4[m
+Author: Ernesto Palma <geoffreyytorres25@gmail.com>
+Date:   Thu Aug 6 11:26:20 2020 -0500
+
+    FormularioParaInsrtarCatalogo
+
+[33mcommit 465bbbe4bfc9a475f032b963c478bb967858e472[m
+Author: LaMeraChuleta <geoffreyytorres25@gmail.com>
+Date:   Thu Jul 23 13:53:28 2020 -0500
+
+    CambiosdeProyectoNuxt
