@@ -29,7 +29,7 @@
         </div>
         <div class="w-full px-3 mb-6 md:mb-0">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2" for="formato">Formato</label>
-          <select @change="presentacion_cascada" v-model="newItemCatalogo.idFormato" class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white" id="formato">
+          <select v-model="newItemCatalogo.idFormato" class="appearance-none text-xs block w-full text-gray-700 border rounded py-3 mb-3 leading-tight focus:outline-none focus:bg-white" id="formato">
             <option value>Seleccionar</option>
             <option v-for="value in formatos" :key="value.id" :value="value.id">
               {{ value.nombre }}
@@ -124,8 +124,7 @@ export default {
       },
       imagenes: [],
       textartista: "",
-      textgenero: "",
-      filtro_presentacion: [],
+      textgenero: "",      
     };
   },
   created: function () {
@@ -142,8 +141,7 @@ export default {
       this.newItemCatalogo = { ...this.discoEditar.general };
       this.textartista = this.discoEditar.catalogos.artista.nombre;
       this.textgenero = this.discoEditar.catalogos.genero.nombre;
-      this.newItemCatalogo.idFormato = this.discoEditar.catalogos.formato.id;
-      this.presentacion_cascada();
+      this.newItemCatalogo.idFormato = this.discoEditar.catalogos.formato.id;      
       this.newItemCatalogo.idPresentacion = this.discoEditar.catalogos.presentacion.id;       
       this.imagenes = this.newItemCatalogo.imagenes         
       this.$nuxt.$emit("visualizar_img", {
@@ -156,7 +154,7 @@ export default {
   destroyed: function () {
     this.$nuxt.$emit("visualizar_img", []);
   },
-  watch:{
+  watch:{  
     textartista: function (newArtista, oldArtista) {
       if (/^\d+$/.test(newArtista)) {
         let artista = this.artistas.find((artista) => artista.id == newArtista);
@@ -179,6 +177,11 @@ export default {
       formatos: "catalogos/GET_FORMATOS",
       presentaciones: "catalogos/GET_PRESENTACIONES",
     }),
+    filtro_presentacion(){
+      if(this.newItemCatalogo.idFormato != "")
+        return this.presentaciones.filter((presentacion) => presentacion.id_formato == this.newItemCatalogo.idFormato);      
+    }
+
   },
   methods: {
     actualizar_imagenes: function (index_cambio, index_recibir) {
@@ -192,13 +195,7 @@ export default {
     quitar_imagenes: function (index) {
       this.imagenes.splice(index, 1);
       this.$nuxt.$emit("visualizar_img", this.imagenes);
-    },
-    presentacion_cascada: function () {
-      this.filtro_presentacion = this.presentaciones.filter(
-        (presentacion) =>
-          presentacion.id_formato == this.newItemCatalogo.idFormato
-      );
-    },  
+    },    
     editar_disco_catalogo: function () {
       this.imagenes = this.imagenes.map(function (value) {
         return value.split(",")[1];
@@ -224,12 +221,9 @@ export default {
     },
     limpiar_campos: function () {
       this.imagenes = [];
-      this.$nuxt.$emit("visualizar_img", this.imagenes);
-      this.filtro_presentacion = [];
+      this.$nuxt.$emit("visualizar_img", this.imagenes);      
       let _newItemCatalogo = this.newItemCatalogo;
-      Object.keys(_newItemCatalogo).forEach(function (prop) {
-        _newItemCatalogo[prop] = "";
-      });            
+      Object.keys(_newItemCatalogo).forEach(function (prop) { _newItemCatalogo[prop] = "" });            
       this.newItemCatalogo = _newItemCatalogo;
     },
   },
