@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div>    
     <div class="w-full h-72 sm:h-auto max-w-lg flex flex-col mt-3 sm:mt-0 sm:p-5 border p-6">
       <h1 class="text-center mb-10 text-lg block uppercase tracking-wide text-gray-700 font-bold">Agregar Nuevos Productos al Catalogo</h1>
       <div class="inline-flex -mx-3 mb-3">
@@ -138,6 +138,7 @@ export default {
     });
   },
   mounted: function () {
+    console.log(this.$route);
     if (JSON.stringify(this.discoEditar) != undefined) {      
       this.newItemCatalogo = { ...this.discoEditar.general };
       this.textartista = this.discoEditar.catalogos.artista.nombre;
