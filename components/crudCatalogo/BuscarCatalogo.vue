@@ -10,7 +10,7 @@
           </svg>
         </button>
       </div>
-      <div class>
+      <div class=" overflow-y-auto">
         <table class>
           <thead class="text-gray-700 text-xs">
             <tr class="border h-10">

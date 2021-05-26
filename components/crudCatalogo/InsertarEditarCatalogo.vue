@@ -83,8 +83,8 @@
       </div>
       <div class="inline-flex -mx-3">       
         <div class="w-full md:w-full px-3">
-          <button v-if="tipoCreacion" @click="subirServidor" class="appearance-none block w-full text-gray-700 border rounded py-3 px-1 mb-3 leading-tight focus:outline-none focus:bg-white mt-6 border-green-600">Agregar Disco</button>
-          <button v-else @click="editar_catalogo" class="appearance-none block w-full text-gray-700 border rounded py-3 px-1 mb-3 leading-tight focus:outline-none focus:bg-white mt-6 border-yellow-600">Editar Disco</button>          
+          <button v-if="tipoCreacion" @click="agregar_disco_catalogo" class="appearance-none block w-full text-gray-700 border rounded py-3 px-1 mb-3 leading-tight focus:outline-none focus:bg-white mt-6 border-green-600">Agregar Disco</button>
+          <button v-else @click="editar_disco_catalogo" class="appearance-none block w-full text-gray-700 border rounded py-3 px-1 mb-3 leading-tight focus:outline-none focus:bg-white mt-6 border-yellow-600">Editar Disco</button>          
         </div>
       </div>
     </div>
@@ -134,13 +134,6 @@ export default {
     });
     this.$nuxt.$on("actualizar_imagenes", (index_cambio, index_recibir) => {
       this.actualizar_imagenes(index_cambio, index_recibir);
-    });
-    this.$nuxt.$on("agregar_catalogo", () => {
-      this.subirServidor();
-    });
-    //Escucha la vista crudEditar/editar/_id.vue
-    this.$nuxt.$on("editar_catalogo", () => {
-      this.editarCatalogo();
     });
   },
   mounted: function () {
@@ -206,7 +199,7 @@ export default {
           presentacion.id_formato == this.newItemCatalogo.idFormato
       );
     },  
-    editarCatalogo: function () {
+    editar_disco_catalogo: function () {
       this.imagenes = this.imagenes.map(function (value) {
         return value.split(",")[1];
       });
@@ -224,7 +217,7 @@ export default {
           console.log(error);
         });
     },
-    subirServidor: function () {      
+    agregar_disco_catalogo: function () {      
       this.$axios.$post('api/catalogodiscos', this.newItemCatalogo)
       .then((response) => this.$nuxt.$emit("enviar-imagenes-servidor", response))
       .catch((error) => console.log(error))      

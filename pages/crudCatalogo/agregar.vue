@@ -8,8 +8,8 @@
 
 <script>
 import InsertarCatalogo from "~/components/crudCatalogo/InsertarEditarCatalogo.vue";
-import MiniCatalogos from "~/components/crudCatalogo/MiniCatalogos.vue";
 import VisualizarImagenes from "~/components/crudCatalogo/VisualizarImgenes.vue";
+import MiniCatalogos from "~/components/crudCatalogo/MiniCatalogos.vue";
 export default {
   components: {
     InsertarCatalogo,
