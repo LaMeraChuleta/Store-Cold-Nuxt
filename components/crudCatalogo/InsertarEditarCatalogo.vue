@@ -83,7 +83,8 @@
       </div>
       <div class="inline-flex -mx-3">       
         <div class="w-full md:w-full px-3">
-          <slot></slot>
+          <button v-if="tipoCreacion" @click="subirServidor" class="appearance-none block w-full text-gray-700 border rounded py-3 px-1 mb-3 leading-tight focus:outline-none focus:bg-white mt-6 border-green-600">Agregar Disco</button>
+          <button v-else @click="editar_catalogo" class="appearance-none block w-full text-gray-700 border rounded py-3 px-1 mb-3 leading-tight focus:outline-none focus:bg-white mt-6 border-yellow-600">Editar Disco</button>          
         </div>
       </div>
     </div>
@@ -100,6 +101,11 @@ export default {
       required: false,
       default: () => {},
     },
+    tipoCreacion: {
+      type: Boolean,
+      require: true,
+      default: () => true
+    }
   },
   data: function () {
     return {
