@@ -32,15 +32,15 @@ function Catalogo() {
                         JOIN generos ON catalogo.id_genero = generos.id
                         JOIN formato ON catalogo.id_formato = formato.id
                         JOIN presentacion ON catalogo.id_presentacion = presentacion.id                                                    
-                `)
-                        .then(rows => {                              
-                            delete rows['meta']   
-                            console.log(rows);                                                                                                                                                                   
-                            rows.forEach(disco => {                                                            
-                                disco.arrayFotos = fs.readdirSync(disco.dir_imagenes)                                                                   
-                            });                                                  
-                            resolve(rows)
-                        })
+                    `)
+                    .then(rows => {                              
+                        delete rows['meta']   
+                        console.log(rows);                                                                                                                                                                   
+                        rows.forEach(disco => {                                                            
+                            disco.arrayFotos = fs.readdirSync(disco.dir_imagenes)                                                                   
+                        });                                                  
+                        resolve(rows)
+                    })
                     conn.release()
                 })
                 .catch(error => {

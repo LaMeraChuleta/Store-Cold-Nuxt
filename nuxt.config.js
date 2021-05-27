@@ -58,7 +58,6 @@ module.exports = {
     '@nuxtjs/pwa',
   ],
   serverMiddleware:[
-
     { path:'/api', handler: '~/api/index.js'}
   ],
   /*

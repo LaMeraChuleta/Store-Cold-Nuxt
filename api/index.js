@@ -14,7 +14,6 @@ app.use(bodyparser.urlencoded({     // to support URL-encoded bodies
   extended: true,
   parameterLimit: 50000,
 }))
-
 app.use(artistas)
 app.use(generos)
 app.use(formato)
@@ -23,7 +22,6 @@ app.use(catalogodiscos)
 module.exports = app
 
 if (require.main === module) {
-
   const port = process.env.PORT || 3001
   app.listen(port, () => {
     console.log(`API server listening on port ${port}`)

@@ -20,7 +20,7 @@
           </div>
         </div>
       </div>
-      <div class="border border-dotted">
+      <div class="border-2 border-dotted">
         <div class="relative top-0">
           <input @change="recibir_imagenes" type="file" multiple class="absolute h-full w-full opacity-0"/>
           <span>
@@ -56,8 +56,7 @@ export default {
     });
   },
   methods: {
-    recibir_imagenes: function (event) {   
-      console.log(event.target.files)   
+    recibir_imagenes: function (event) {           
       const toBase64 = (file) => 
         new Promise((resolve, reject) => {
           const reader = new FileReader();
@@ -66,7 +65,7 @@ export default {
           reader.onerror = (error) => reject(error);
         });      
       Array.from(event.target.files).forEach((imageFile) => {
-        this.imagenesFile.push(imageFile)
+        this.imagenesFile.push(imageFile);
         toBase64(imageFile)
           .then((base64) => this.imagenes.push(base64)) 
           .catch((error) => console.log(error));
@@ -74,14 +73,10 @@ export default {
     },
     enviar_imagenes: async function (objInsertaImg) {      
       let formData = new FormData();
-      this.imagenesFile.forEach((file) => {
-        console.log(file)
-        formData.append("imagenesDisco", file)
-      })  
+      this.imagenesFile.forEach((file) => formData.append("imagenesDisco", file))  
       await this.$axios.$post(`/api/catalogodiscos/imagenes/${objInsertaImg.artista}/${objInsertaImg.id}`, formData)
         .then((response) => console.log(response))
-        .catch((error) => console.log(error));
-      
+        .catch((error) => console.log(error));      
     },
     quitar_imagen: function (value) {
       this.$nuxt.$emit("quitar_imagenes", value);
