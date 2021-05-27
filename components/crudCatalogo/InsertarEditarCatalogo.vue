@@ -135,24 +135,16 @@ export default {
       this.actualizar_imagenes(index_cambio, index_recibir);
     });
   },
-  mounted: function () {
-    console.log(this.$route);
-    if (JSON.stringify(this.discoEditar) != undefined) {      
-      this.newItemCatalogo = { ...this.discoEditar.general };
-      this.textartista = this.discoEditar.catalogos.artista.nombre;
-      this.textgenero = this.discoEditar.catalogos.genero.nombre;
-      this.newItemCatalogo.idFormato = this.discoEditar.catalogos.formato.id;      
-      this.newItemCatalogo.idPresentacion = this.discoEditar.catalogos.presentacion.id;       
-      this.imagenes = this.newItemCatalogo.imagenes         
-      this.$nuxt.$emit("visualizar_img", {
-        'imagenes': this.imagenes,
-        'artista': this.textartista.replace(/ /g, ""),
-        'id': this.$route.params.id
-      });
+  mounted: function () {    
+    if(!this.tipoCreacion) {  
+      console.log(this.formatos)    
+      this.newItemCatalogo = { ...this.discoEditar };
+      this.textartista = this.discoEditar.artista;
+      this.textgenero = this.discoEditar.genero;          
     }
-  },
+  },  
   destroyed: function () {
-    this.$nuxt.$emit("visualizar_img", []);
+    this.$nuxt.$off(['quitar_imagenes', 'actualizar_imagenes'])
   },
   watch:{  
     textartista: function (newArtista, oldArtista) {

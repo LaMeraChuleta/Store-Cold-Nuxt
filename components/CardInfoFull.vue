@@ -15,7 +15,7 @@
         <div class="xl:w-2/3 lg:w-2/3 flex lg:flex-auto flex-col sm:inline-block">
           <div class="flex lg:flex-row sm:flex-col">
             <div class="xl:w-1/2 lg:w-1/2 ml-8 mt-8">
-              <p class="m-1 text-4xl font-extrabold">{{ infoDisco.nombre }}</p>
+              <p class="m-1 text-4xl font-extrabold">{{ infoDisco.titulo }}</p>
               <p class="m-1 mb-3 text-lg font-mono">Artista: {{ infoDisco.artista }}</p>
               <p class="m-1 text-lg">Sello: {{ infoDisco.sello }}</p>
               <p class="m-1 text-lg">Formato: {{ infoDisco.formato }}</p>

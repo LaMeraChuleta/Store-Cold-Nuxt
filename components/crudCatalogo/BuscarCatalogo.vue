@@ -23,7 +23,7 @@
           </thead>
           <tbody class="text-gray-700 text-xs">
             <tr v-for="(item, key) in catalogo_productos_slice" :key="key" class="hover:bg-gray-200 focus:bg-gray-200 cursor-pointer" @click="enviar_imagenes(key)">
-              <th class="border h-12 w-32">{{ item.nombre }}</th>
+              <th class="border h-12 w-32">{{ item.titulo }}</th>
               <th class="border h-12 w-32">{{ item.artista }}</th>
               <th class="border h-12 w-20">{{ item.origen }}</th>
               <th class="border h-12 w-16">{{ item.año }}</th>

@@ -22,12 +22,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).array('imagenesDisco', 20)
 //Rutas CatalogoDiscos
 router.get('/catalogodiscos', (req, res) => {    
-  classCatalogo
-    .getInstance()
-    .obtener_todos()
+  classCatalogo.getInstance().obtener_todos()
     .then(data => res.status(200).json(data))
-    .catch(error => res.status(500).json(error))
-  
+    .catch(error => res.status(500).json(error))  
 })
 router.post('/catalogodiscos', (req, res) => {
     classCatalogo.getInstance().insertar_catalogo(req.body)

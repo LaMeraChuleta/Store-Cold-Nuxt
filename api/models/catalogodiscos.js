@@ -11,21 +11,21 @@ function Catalogo() {
                 .then(conn => {
                     conn.query(`
                         SELECT catalogo.id, 
-                            catalogo.nombre,
+                            catalogo.nombre AS titulo,
                             artistas.nombre AS artista,
-                            catalogo.id_artista AS artistasId,
+                            catalogo.id_artista AS idArtista,
                             generos.nombre AS genero,
-                            catalogo.id_genero AS generosId,
+                            catalogo.id_genero AS idGenero,
                             formato.nombre AS formato,
-                            catalogo.id_formato AS formatoId,
+                            catalogo.id_formato AS idFormato,
                             presentacion.nombre AS presentacion, 
-                            catalogo.id_presentacion AS presentacionId,                            
+                            catalogo.id_presentacion AS idPresentacion,                            
                             catalogo.origen,
                             catalogo.sello,
                             catalogo.año,
                             catalogo.precio,
-                            catalogo.estado_disco,
-                            catalogo.estado_portada,
+                            catalogo.estado_disco AS estadoDisco,
+                            catalogo.estado_portada AS estadoPortada,
                             catalogo.dir_imagenes
                         FROM catalogo 
                         JOIN artistas ON catalogo.id_artista = artistas.id 
