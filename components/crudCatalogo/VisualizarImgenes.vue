@@ -1,8 +1,7 @@
 <template>
   <div>
     <div class="w-full max-w-lg flex flex-col mt-3 border h-72 sm:h-auto">
-      <h1 class="text-center p-3 text-lg block uppercase tracking-wide text-gray-700 font-bold">Imagenes</h1>
-      <button @click="enviar_imagenes">+</button>
+      <h1 class="text-center p-3 text-lg block uppercase tracking-wide text-gray-700 font-bold">Imagenes</h1>      
       <div class="overflow-y-auto sm:overflow-auto appearance-none p-5 h-full">
         <div class="inline-block sm:inline-flex rounded-md w-64 sm:w-screen m-1">          
           <div v-for="(imagen, key) in imagenes" :key="key" @drop="onDrop($event, key)"  @dragover.prevent @dragenter.prevent>
@@ -13,9 +12,8 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
                 </button>
-              </div>
-              <img v-if="imagen.length > 100" class="w-full" :src="imagen" />
-              <img v-else class="w-full" :src="`${imagen}`"/>
+              </div>              
+              <img class="w-full" :src="`${imagen}`"/>
             </div>
           </div>
         </div>
