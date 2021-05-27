@@ -15,7 +15,7 @@
                 </button>
               </div>
               <img v-if="imagen.length > 100" class="w-full" :src="imagen" />
-              <img v-else class="w-full" :src="`http://localhost:3000/api/catalogodiscos/imagen/${artista}/${id}/${imagen}`"/>
+              <img v-else class="w-full" :src="`${imagen}`"/>
             </div>
           </div>
         </div>
@@ -36,6 +36,13 @@
 </template>
 <script>
 export default {
+  props:{
+    idCatalogo:{
+      type: String,
+      require: false,
+      default: () => undefined
+    }
+  },
   data: function () {
     return {
       index_moviendo: "",
@@ -54,6 +61,14 @@ export default {
     this.$nuxt.$on("enviar-imagenes-servidor", (objInsertaImg) => {
       this.enviar_imagenes(objInsertaImg);
     });
+  },
+  mounted(){
+    if(this.idCatalogo != undefined){
+     const { artista, arrayFotos } = this.$store.getters["catalogoProductos/GET_CATALOGO_ID"](this.idCatalogo)
+     this.imagenes = arrayFotos.map(foto => {
+        return `http://localhost:3000/api/catalogodiscos/imagen/${artista}/${this.idCatalogo}/${foto}`
+     })     
+    }
   },
   methods: {
     recibir_imagenes: function (event) {           

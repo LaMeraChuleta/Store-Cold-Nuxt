@@ -136,8 +136,7 @@ export default {
     });
   },
   mounted: function () {    
-    if(!this.tipoCreacion) {  
-      console.log(this.formatos)    
+    if(!this.tipoCreacion) {           
       this.newItemCatalogo = { ...this.discoEditar };
       this.textartista = this.discoEditar.artista;
       this.textgenero = this.discoEditar.genero;          
