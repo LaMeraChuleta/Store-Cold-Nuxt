@@ -172,7 +172,6 @@ export default {
       if(this.newItemCatalogo.idFormato != "")
         return this.presentaciones.filter((presentacion) => presentacion.id_formato == this.newItemCatalogo.idFormato);      
     }
-
   },
   methods: {
     actualizar_imagenes: function (index_cambio, index_recibir) {
